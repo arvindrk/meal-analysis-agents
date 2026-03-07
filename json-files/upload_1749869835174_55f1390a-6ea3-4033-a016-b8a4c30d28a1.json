@@ -1,0 +1,49 @@
+{
+  "title": "Tuna Avocado Tartare",
+  "fileName": "upload_1749869835174_55f1390a-6ea3-4033-a016-b8a4c30d28a1.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal is rich in healthy fats and proteins with a relatively low carbohydrate content, making it suitable for people with diabetes. However, portion control and attention to the sauces, which may contain sugars, is important. Always check if there are hidden sugars or high-sodium sauces added.",
+    "meal_title": "Tuna Avocado Tartare",
+    "meal_description": "A portion of tuna and avocado tartare, finished with a sauce and garnished with fish roe.",
+    "macros": {
+      "calories": 260,
+      "carbohydrates": 7,
+      "fats": 16,
+      "proteins": 18
+    },
+    "ingredients": [
+      {
+        "name": "Tuna",
+        "impact": "green"
+      },
+      {
+        "name": "Avocado",
+        "impact": "green"
+      },
+      {
+        "name": "Fish roe",
+        "impact": "green"
+      },
+      {
+        "name": "Soy-based sauce or dressing",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

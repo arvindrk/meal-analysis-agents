@@ -1,0 +1,45 @@
+{
+  "title": "Eggs and Tomatoes",
+  "fileName": "upload_1753053088887_e0087c65-7b21-4e50-9878-19401e3fbe93.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": false,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal contains simple, whole ingredients with minimal carbohydrates—primarily from the tomatoes. The eggs provide high-quality protein and healthy fats, which help manage blood sugar. It is suitable for a diabetic patient when consumed as part of a balanced diet.",
+    "meal_title": "Eggs and Tomatoes",
+    "meal_description": "A simple dish of sunny side up eggs served with fresh tomato slices topped with a sprinkle of grated cheese or nutritional yeast.",
+    "macros": {
+      "calories": 250,
+      "carbohydrates": 9,
+      "fats": 17,
+      "proteins": 15
+    },
+    "ingredients": [
+      {
+        "name": "Eggs (2)",
+        "impact": "green"
+      },
+      {
+        "name": "Tomatoes (1 medium)",
+        "impact": "green"
+      },
+      {
+        "name": "Grated cheese or nutritional yeast (small sprinkle)",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "title": "Rice and Bean Bowl",
+  "fileName": "upload_1749841037102_96ccbf66-4c05-45dc-8920-fd6ef54fcd0d.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal contains white rice, beans, salsa, and possibly sour cream or cheese. The white rice gives it a moderate to high carbohydrate load, which can spike blood sugar. However, the beans add fiber and protein which help to moderate the blood glucose effect. For diabetics, it's best to limit the portion size of the rice, focus on beans and vegetables, and go easy on any creamy toppings. Consider switching to brown rice for lower glycemic load.",
+    "meal_title": "Rice and Bean Bowl",
+    "meal_description": "A bowl of white rice topped with black beans, salsa, vegetables, and a creamy sauce.",
+    "macros": {
+      "calories": 340,
+      "carbohydrates": 57,
+      "fats": 6,
+      "proteins": 10
+    },
+    "ingredients": [
+      {
+        "name": "White rice",
+        "impact": "orange"
+      },
+      {
+        "name": "Black beans",
+        "impact": "green"
+      },
+      {
+        "name": "Salsa (tomato, onion, pepper)",
+        "impact": "green"
+      },
+      {
+        "name": "Sour cream or cheese",
+        "impact": "yellow"
+      },
+      {
+        "name": "Cilantro/Herbs",
+        "impact": "green"
+      }
+    ]
+  }
+}

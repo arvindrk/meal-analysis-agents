@@ -1,0 +1,41 @@
+{
+  "title": "Plain White Rice",
+  "fileName": "upload_1750097945898_eefbeb4b-8dda-4ced-a7df-7e653d5c471b.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "This serving of white rice is high in carbohydrates and has a high glycemic index, which can cause rapid spikes in blood sugar levels. People with diabetes should minimize or avoid white rice, opting instead for whole grains or high-fiber alternatives to better manage blood glucose.",
+    "meal_title": "Plain White Rice",
+    "meal_description": "A serving of cooked plain white rice served on a decorative plate.",
+    "macros": {
+      "calories": 205,
+      "carbohydrates": 45,
+      "fats": 0,
+      "proteins": 4
+    },
+    "ingredients": [
+      {
+        "name": "White rice",
+        "impact": "orange"
+      },
+      {
+        "name": "Water",
+        "impact": "green"
+      }
+    ]
+  }
+}

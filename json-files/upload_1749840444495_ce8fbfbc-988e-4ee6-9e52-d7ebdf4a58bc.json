@@ -1,0 +1,57 @@
+{
+  "title": "Plain Bread Rolls",
+  "fileName": "upload_1749840444495_ce8fbfbc-988e-4ee6-9e52-d7ebdf4a58bc.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "These are plain bread rolls, which are high in simple carbohydrates and have a high glycemic index. Consuming meals like this may cause a spike in blood sugar levels for someone with diabetes. It is best to avoid or strictly limit this meal, opting for whole grain or high-fiber alternatives instead.",
+    "meal_title": "Plain Bread Rolls",
+    "meal_description": "Three soft, plain white bread rolls served on a tray, typically made from refined flour.",
+    "macros": {
+      "calories": 270,
+      "carbohydrates": 54,
+      "fats": 3,
+      "proteins": 7
+    },
+    "ingredients": [
+      {
+        "name": "Refined wheat flour",
+        "impact": "orange"
+      },
+      {
+        "name": "Sugar",
+        "impact": "orange"
+      },
+      {
+        "name": "Butter or oil",
+        "impact": "yellow"
+      },
+      {
+        "name": "Yeast",
+        "impact": "green"
+      },
+      {
+        "name": "Salt",
+        "impact": "green"
+      },
+      {
+        "name": "Water",
+        "impact": "green"
+      }
+    ]
+  }
+}

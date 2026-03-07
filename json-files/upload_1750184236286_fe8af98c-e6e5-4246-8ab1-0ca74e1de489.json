@@ -1,0 +1,53 @@
+{
+  "title": "Classic Burger",
+  "fileName": "upload_1750184236286_fe8af98c-e6e5-4246-8ab1-0ca74e1de489.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": false,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": false
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "This burger contains a high amount of refined carbohydrates and fats from the bun and patty, making it problematic for diabetes management. The bread will quickly raise blood sugar levels. If you have diabetes, it's best to avoid, or substitute the bun with a whole grain or lettuce wrap, and choose a lean protein patty. Limit sauces and opt for extra vegetables.",
+    "meal_title": "Classic Burger",
+    "meal_description": "A sesame seed hamburger bun with a beef patty, lettuce, tomato, and sauce.",
+    "macros": {
+      "calories": 420,
+      "carbohydrates": 40,
+      "fats": 22,
+      "proteins": 18
+    },
+    "ingredients": [
+      {
+        "name": "Sesame seed hamburger bun",
+        "impact": "orange"
+      },
+      {
+        "name": "Beef patty",
+        "impact": "yellow"
+      },
+      {
+        "name": "Lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Tomato",
+        "impact": "green"
+      },
+      {
+        "name": "Sauce (ketchup/mayo)",
+        "impact": "orange"
+      }
+    ]
+  }
+}

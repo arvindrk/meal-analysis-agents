@@ -1,0 +1,53 @@
+{
+  "title": "Italian Breakfast Plate",
+  "fileName": "upload_1750263222856_8d684828-73ea-4ad9-9259-39c31e29f465.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal contains a moderate amount of protein and fat, with a small serving of whole grain bread that adds some carbohydrates. The cheeses and cured meats are low in carbs but higher in fat and sodium. For diabetic patients, portion control of the bread is important to avoid spikes in blood sugar, and high-sodium meats should be limited. This meal is generally safe if bread quantities are closely monitored and the meats are not consumed frequently.",
+    "meal_title": "Italian Breakfast Plate",
+    "meal_description": "A continental-style plate with assorted cured meats, cheeses, and a slice of whole grain bread.",
+    "macros": {
+      "calories": 420,
+      "carbohydrates": 22,
+      "fats": 26,
+      "proteins": 28
+    },
+    "ingredients": [
+      {
+        "name": "Whole grain bread slice",
+        "impact": "yellow"
+      },
+      {
+        "name": "Mozzarella cheese ball",
+        "impact": "green"
+      },
+      {
+        "name": "Ricotta cheese",
+        "impact": "green"
+      },
+      {
+        "name": "Semi-hard cheese (possibly peppered)",
+        "impact": "green"
+      },
+      {
+        "name": "Cured ham (prosciutto, mortadella or similar)",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

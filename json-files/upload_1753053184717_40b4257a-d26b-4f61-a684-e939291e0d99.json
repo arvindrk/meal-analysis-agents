@@ -1,0 +1,37 @@
+{
+  "title": "Whole Red Apple",
+  "fileName": "upload_1753053184717_40b4257a-d26b-4f61-a684-e939291e0d99.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This is a whole apple, which is a healthy fruit choice but does contain natural sugars and a moderate amount of carbohydrates. For a person with diabetes, apples can be included in the diet in moderate amounts, but portion control is important to help manage blood sugar levels. Pairing with protein or fiber-rich foods may help reduce the glycemic impact.",
+    "meal_title": "Whole Red Apple",
+    "meal_description": "A fresh whole red apple, unpeeled and raw.",
+    "macros": {
+      "calories": 95,
+      "carbohydrates": 25,
+      "fats": 0,
+      "proteins": 0
+    },
+    "ingredients": [
+      {
+        "name": "Apple",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

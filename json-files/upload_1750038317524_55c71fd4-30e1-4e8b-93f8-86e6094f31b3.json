@@ -1,0 +1,53 @@
+{
+  "title": "Baked Macaroni and Cheese",
+  "fileName": "upload_1750038317524_55c71fd4-30e1-4e8b-93f8-86e6094f31b3.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "This meal is high in carbohydrates and fats due to the pasta and cheese, making it less suitable for people with diabetes. Such dishes can cause blood sugar spikes and should be eaten only in very small portions, if at all. Consider a whole grain or lower-carb pasta variety and add non-starchy vegetables to make it more suitable for diabetes.",
+    "meal_title": "Baked Macaroni and Cheese",
+    "meal_description": "A baked pasta casserole with creamy cheese sauce, topped with croutons or bread crumbs.",
+    "macros": {
+      "calories": 410,
+      "carbohydrates": 55,
+      "fats": 15,
+      "proteins": 15
+    },
+    "ingredients": [
+      {
+        "name": "Pasta (rigatoni or ziti)",
+        "impact": "orange"
+      },
+      {
+        "name": "Cheese (likely cheddar and/or mozzarella)",
+        "impact": "yellow"
+      },
+      {
+        "name": "Milk/cream",
+        "impact": "yellow"
+      },
+      {
+        "name": "Butter",
+        "impact": "yellow"
+      },
+      {
+        "name": "Bread crumbs/croutons",
+        "impact": "orange"
+      }
+    ]
+  }
+}

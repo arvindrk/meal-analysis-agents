@@ -1,0 +1,38 @@
+{
+  "title": "Mixed Fruit Plate",
+  "fileName": "upload_1753053277090_02101e96-ba76-4f39-8980-65db616ad82f.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {},
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This small fruit platter contains apple, pear, and banana slices. While these fruits offer fiber, vitamins, and minerals, they are still moderately high in carbohydrates and natural sugars which can elevate blood glucose. For people with diabetes, portion control is important. This serving is relatively small and can generally be included in a diabetic diet if balanced with lower-carb foods during the day.",
+    "meal_title": "Mixed Fruit Plate",
+    "meal_description": "A small assortment of fresh apple, pear, and banana slices.",
+    "macros": {
+      "calories": 85,
+      "carbohydrates": 21,
+      "fats": 0,
+      "proteins": 1
+    },
+    "ingredients": [
+      {
+        "name": "Apple",
+        "impact": "yellow"
+      },
+      {
+        "name": "Banana",
+        "impact": "yellow"
+      },
+      {
+        "name": "Pear",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

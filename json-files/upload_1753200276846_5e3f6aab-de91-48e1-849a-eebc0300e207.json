@@ -1,0 +1,53 @@
+{
+  "title": "Chicken Salad Bowl",
+  "fileName": "upload_1753200276846_5e3f6aab-de91-48e1-849a-eebc0300e207.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This chicken salad with greens, cucumbers, feta cheese, and a creamy dressing is low in carbohydrates and high in protein, which is beneficial for maintaining stable blood sugar levels. Diabetic patients can safely enjoy this meal, especially if the dressing is used in moderation to keep saturated fat and calories in check.",
+    "meal_title": "Chicken Salad Bowl",
+    "meal_description": "A salad made with grilled chicken, lettuce, cucumbers, feta cheese, and creamy dressing.",
+    "macros": {
+      "calories": 350,
+      "carbohydrates": 10,
+      "fats": 18,
+      "proteins": 32
+    },
+    "ingredients": [
+      {
+        "name": "Grilled chicken breast",
+        "impact": "green"
+      },
+      {
+        "name": "Romaine lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Cucumbers",
+        "impact": "green"
+      },
+      {
+        "name": "Feta cheese",
+        "impact": "yellow"
+      },
+      {
+        "name": "Creamy salad dressing",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

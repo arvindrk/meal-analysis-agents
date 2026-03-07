@@ -1,0 +1,57 @@
+{
+  "title": "Vegetable Quiche Slice",
+  "fileName": "upload_1750185016838_9f1b1b2d-edab-473c-8a09-a7ade40c25a4.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This vegetarian quiche slice contains a moderate amount of carbohydrates due to the crust, which can cause blood sugar spikes. The vegetables and eggs provide fiber and protein, helping to slow carbohydrate absorption, but portion control is essential. Diabetics should enjoy this in moderation, pairing with a side salad for additional fiber, and avoid eating large amounts of pastry crust.",
+    "meal_title": "Vegetable Quiche Slice",
+    "meal_description": "A slice of baked quiche with a flaky pastry crust, filled with eggs, cheese, bell peppers, mushrooms, and possibly onions.",
+    "macros": {
+      "calories": 230,
+      "carbohydrates": 18,
+      "fats": 13,
+      "proteins": 9
+    },
+    "ingredients": [
+      {
+        "name": "Pie crust (pastry)",
+        "impact": "orange"
+      },
+      {
+        "name": "Eggs",
+        "impact": "green"
+      },
+      {
+        "name": "Cheese",
+        "impact": "yellow"
+      },
+      {
+        "name": "Bell peppers",
+        "impact": "green"
+      },
+      {
+        "name": "Mushrooms",
+        "impact": "green"
+      },
+      {
+        "name": "Onions",
+        "impact": "green"
+      }
+    ]
+  }
+}

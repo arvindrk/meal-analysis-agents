@@ -1,0 +1,46 @@
+{
+  "title": "Chicken, Zucchini, and Eggs",
+  "fileName": "upload_1753053995329_8844fe76-9209-488e-adf3-7a13fe0c6f81.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {},
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal is low in carbohydrates, moderate in protein, and contains healthy fats. The ingredients are all generally safe for people with diabetes, and the glycemic load is low. This makes it a good meal option for blood sugar control. However, be cautious with any sauces or added salt, and ensure the chicken is not marinated in sugary sauces.",
+    "meal_title": "Chicken, Zucchini, and Eggs",
+    "meal_description": "A plate with grilled or sautéed chicken breast, cooked zucchini, and scrambled eggs.",
+    "macros": {
+      "calories": 320,
+      "carbohydrates": 6,
+      "fats": 15,
+      "proteins": 38
+    },
+    "ingredients": [
+      {
+        "name": "Chicken breast",
+        "impact": "green"
+      },
+      {
+        "name": "Zucchini",
+        "impact": "green"
+      },
+      {
+        "name": "Eggs",
+        "impact": "green"
+      },
+      {
+        "name": "Olive oil (possible for cooking)",
+        "impact": "green"
+      },
+      {
+        "name": "Spices/seasoning",
+        "impact": "green"
+      }
+    ]
+  }
+}

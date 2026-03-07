@@ -1,0 +1,34 @@
+{
+  "title": "Fish with Sauerkraut",
+  "fileName": "upload_1753211882695_715dc254-cac3-4122-a437-3f9d756e85b7.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {},
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal is very suitable for people with diabetes. It contains baked or steamed white fish and sauerkraut, both of which are low in carbohydrates and do not cause significant spikes in blood sugar levels. This meal is high in protein and fiber, making it an excellent choice for blood sugar control.",
+    "meal_title": "Fish with Sauerkraut",
+    "meal_description": "A fillet of white fish served with a generous portion of sauerkraut.",
+    "macros": {
+      "calories": 220,
+      "carbohydrates": 6,
+      "fats": 6,
+      "proteins": 35
+    },
+    "ingredients": [
+      {
+        "name": "white fish fillet",
+        "impact": "green"
+      },
+      {
+        "name": "sauerkraut",
+        "impact": "green"
+      }
+    ]
+  }
+}

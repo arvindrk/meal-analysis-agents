@@ -1,0 +1,50 @@
+{
+  "title": "Vegetable Pizza Slice",
+  "fileName": "upload_1753053311667_d3574386-8d95-4b91-b5c6-0ee2fecb639a.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {},
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "This pizza slice is high in carbohydrates and fats, which can cause a rapid increase in blood sugar levels. For diabetics, pizza should generally be avoided or consumed in very small portions, ideally accompanied by a salad or lean protein to slow glucose absorption. If you choose to eat pizza, opt for thin crust and extra veggies, and limit portion size.",
+    "meal_title": "Vegetable Pizza Slice",
+    "meal_description": "A slice of pizza topped with cheese, tomatoes, and assorted vegetables, on a standard crust.",
+    "macros": {
+      "calories": 220,
+      "carbohydrates": 30,
+      "fats": 8,
+      "proteins": 8
+    },
+    "ingredients": [
+      {
+        "name": "Pizza crust (white flour)",
+        "impact": "orange"
+      },
+      {
+        "name": "Mozzarella cheese",
+        "impact": "yellow"
+      },
+      {
+        "name": "Tomato sauce",
+        "impact": "yellow"
+      },
+      {
+        "name": "Bell peppers",
+        "impact": "green"
+      },
+      {
+        "name": "Black olives",
+        "impact": "yellow"
+      },
+      {
+        "name": "Herbs",
+        "impact": "green"
+      }
+    ]
+  }
+}

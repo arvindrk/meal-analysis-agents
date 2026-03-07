@@ -1,0 +1,37 @@
+{
+  "title": "Fresh Black Grapes",
+  "fileName": "upload_1750185057801_517dd09d-f8aa-4e48-93d1-820958817b61.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "Grapes are a healthy fruit choice, offering vitamins and antioxidants, but they are quite high in natural sugars and carbohydrates. Diabetics should consume grapes in moderation and watch portion size as they can quickly raise blood glucose levels. Pairing with a protein or fat source can help blunt the sugar spike.",
+    "meal_title": "Fresh Black Grapes",
+    "meal_description": "A small bunch of fresh black grapes, typically served as a snack or dessert.",
+    "macros": {
+      "calories": 60,
+      "carbohydrates": 15,
+      "fats": 0,
+      "proteins": 1
+    },
+    "ingredients": [
+      {
+        "name": "Black grapes",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

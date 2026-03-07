@@ -1,0 +1,61 @@
+{
+  "title": "Vegetable Pizza Slice",
+  "fileName": "upload_1750386301376_71400aa0-7658-40cd-9027-9a62f8489da7.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "Pizza typically contains a high amount of refined carbohydrates due to the crust, as well as saturated fats from the cheese and processed meats. For people with diabetes, consuming this meal can cause a rapid rise in blood sugar and should be limited or avoided. If eaten, pair with a side salad to increase fiber and watch portion size closely. Whole grain/crust alternatives and reduced cheese/topping amounts are better choices.",
+    "meal_title": "Vegetable Pizza Slice",
+    "meal_description": "Thin-crust pizza topped with tomato sauce, cheese, red onions, mushrooms, and leafy greens.",
+    "macros": {
+      "calories": 400,
+      "carbohydrates": 55,
+      "fats": 14,
+      "proteins": 15
+    },
+    "ingredients": [
+      {
+        "name": "Pizza dough (refined flour)",
+        "impact": "orange"
+      },
+      {
+        "name": "Tomato sauce",
+        "impact": "yellow"
+      },
+      {
+        "name": "Mozzarella cheese",
+        "impact": "yellow"
+      },
+      {
+        "name": "Red onions",
+        "impact": "green"
+      },
+      {
+        "name": "Mushrooms",
+        "impact": "green"
+      },
+      {
+        "name": "Leafy greens (spinach or similar)",
+        "impact": "green"
+      },
+      {
+        "name": "Olive oil",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

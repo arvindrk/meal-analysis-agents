@@ -1,0 +1,53 @@
+{
+  "title": "Burger and Fries",
+  "fileName": "upload_1752265287016_4c47aab8-77a8-42e6-a937-2a4b5be3c7d8.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "This meal is high in carbohydrates, especially from the fries and burger bun, which can cause significant spikes in blood sugar levels for diabetic individuals. High-fat content from fries and potential sauces can also add unhealthy calories. It is advised for diabetics to avoid or significantly limit this type of meal, opting for whole grain buns, more vegetables, and alternative sides such as salad.",
+    "meal_title": "Burger and Fries",
+    "meal_description": "A classic hamburger with lettuce, tomato, and a side of French fries.",
+    "macros": {
+      "calories": 650,
+      "carbohydrates": 75,
+      "fats": 28,
+      "proteins": 19
+    },
+    "ingredients": [
+      {
+        "name": "Burger bun",
+        "impact": "orange"
+      },
+      {
+        "name": "Hamburger patty",
+        "impact": "yellow"
+      },
+      {
+        "name": "Lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Tomato",
+        "impact": "green"
+      },
+      {
+        "name": "French fries",
+        "impact": "orange"
+      }
+    ]
+  }
+}

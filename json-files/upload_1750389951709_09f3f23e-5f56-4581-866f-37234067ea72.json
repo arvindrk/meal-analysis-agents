@@ -1,0 +1,53 @@
+{
+  "title": "Egg White Cocktail",
+  "fileName": "upload_1750389951709_09f3f23e-5f56-4581-866f-37234067ea72.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "This appears to be an egg white cocktail, which typically contains alcohol, sugar syrup, and possibly citrus juice. Cocktails are best avoided by people with diabetes due to their high sugar content and potential for rapid increases in blood glucose. If you are diabetic, it is safest to avoid this drink.",
+    "meal_title": "Egg White Cocktail",
+    "meal_description": "A frothy cocktail made with egg white, usually mixed with alcohol, citrus juice, and simple syrup, garnished with an edible flower.",
+    "macros": {
+      "calories": 180,
+      "carbohydrates": 18,
+      "fats": 0,
+      "proteins": 3
+    },
+    "ingredients": [
+      {
+        "name": "Egg white",
+        "impact": "green"
+      },
+      {
+        "name": "Simple syrup (sugar)",
+        "impact": "orange"
+      },
+      {
+        "name": "Lemon or lime juice",
+        "impact": "yellow"
+      },
+      {
+        "name": "Alcohol (gin, vodka, etc.)",
+        "impact": "orange"
+      },
+      {
+        "name": "Edible flower",
+        "impact": "green"
+      }
+    ]
+  }
+}

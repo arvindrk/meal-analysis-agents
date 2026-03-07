@@ -1,0 +1,57 @@
+{
+  "title": "Sugar Cookies",
+  "fileName": "upload_1750091798026_6bfd2714-28cc-4f8e-9df2-8ceb92a5a071.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "These cookies are high in carbohydrates and likely contain added sugars, making them a poor choice for diabetics. Consuming foods like this can cause sudden spikes in blood sugar levels. It is best for diabetics to avoid such snacks or only have them in very small quantities after consulting with a healthcare provider.",
+    "meal_title": "Sugar Cookies",
+    "meal_description": "A jar of sugar cookies, likely made from flour, butter, sugar, and eggs.",
+    "macros": {
+      "calories": 150,
+      "carbohydrates": 22,
+      "fats": 6,
+      "proteins": 2
+    },
+    "ingredients": [
+      {
+        "name": "Refined flour",
+        "impact": "orange"
+      },
+      {
+        "name": "Sugar",
+        "impact": "orange"
+      },
+      {
+        "name": "Butter",
+        "impact": "yellow"
+      },
+      {
+        "name": "Eggs",
+        "impact": "green"
+      },
+      {
+        "name": "Baking powder",
+        "impact": "green"
+      },
+      {
+        "name": "Vanilla extract",
+        "impact": "green"
+      }
+    ]
+  }
+}

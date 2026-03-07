@@ -1,0 +1,45 @@
+{
+  "title": "Berry Yogurt Bowl",
+  "fileName": "upload_1749841435404_d2ac9183-048d-4cec-9b9b-a878628e4b30.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal is a healthy option for people with diabetes. It’s low in added sugars and high in fiber, antioxidants, and protein, which help moderate blood sugar spikes. Choose unsweetened yogurt and keep fruit portions reasonable.",
+    "meal_title": "Berry Yogurt Bowl",
+    "meal_description": "A bowl of plain yogurt topped with fresh blueberries and red currants.",
+    "macros": {
+      "calories": 150,
+      "carbohydrates": 18,
+      "fats": 2,
+      "proteins": 9
+    },
+    "ingredients": [
+      {
+        "name": "Plain Yogurt (unsweetened, low-fat)",
+        "impact": "green"
+      },
+      {
+        "name": "Blueberries",
+        "impact": "green"
+      },
+      {
+        "name": "Red Currants",
+        "impact": "green"
+      }
+    ]
+  }
+}

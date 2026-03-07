@@ -1,0 +1,49 @@
+{
+  "title": "Tofu Pesto Pasta",
+  "fileName": "upload_1750184519401_0a00994e-1755-4b0c-993b-3fce1d692ca1.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This dish features pasta with tofu and pesto, providing protein and some healthy fats, but the pasta is fairly high in carbohydrates and can raise blood sugar levels. Diabetics should monitor their portion size and pair with non-starchy vegetables if possible. Whole wheat pasta would be a better alternative.",
+    "meal_title": "Tofu Pesto Pasta",
+    "meal_description": "Penne pasta tossed with pesto sauce and grilled tofu pieces.",
+    "macros": {
+      "calories": 400,
+      "carbohydrates": 60,
+      "fats": 14,
+      "proteins": 17
+    },
+    "ingredients": [
+      {
+        "name": "Penne pasta",
+        "impact": "yellow"
+      },
+      {
+        "name": "Pesto sauce",
+        "impact": "yellow"
+      },
+      {
+        "name": "Tofu",
+        "impact": "green"
+      },
+      {
+        "name": "Olive oil (in pesto)",
+        "impact": "green"
+      }
+    ]
+  }
+}

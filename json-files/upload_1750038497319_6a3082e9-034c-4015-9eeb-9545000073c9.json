@@ -1,0 +1,53 @@
+{
+  "title": "Bacon & Gouda Egg Bites",
+  "fileName": "upload_1750038497319_6a3082e9-034c-4015-9eeb-9545000073c9.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": false,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "These sous vide egg bites are high in protein and low in carbohydrates, making them a diabetes-friendly choice. Their carb content per serving is minimal, helping to prevent large blood sugar spikes. They can be enjoyed as part of a balanced meal. However, those with high blood pressure or cholesterol should watch overall sodium and saturated fat intake from bacon and cheese.",
+    "meal_title": "Bacon & Gouda Egg Bites",
+    "meal_description": "Sous vide egg bites with uncured bacon and Gouda cheese, high in protein and low in carbs.",
+    "macros": {
+      "calories": 310,
+      "carbohydrates": 4,
+      "fats": 23,
+      "proteins": 17
+    },
+    "ingredients": [
+      {
+        "name": "Eggs",
+        "impact": "green"
+      },
+      {
+        "name": "Uncured bacon",
+        "impact": "yellow"
+      },
+      {
+        "name": "Gouda cheese",
+        "impact": "yellow"
+      },
+      {
+        "name": "Milk/cream",
+        "impact": "yellow"
+      },
+      {
+        "name": "Seasoning",
+        "impact": "green"
+      }
+    ]
+  }
+}

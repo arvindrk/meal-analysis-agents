@@ -1,0 +1,54 @@
+{
+  "title": "Turkish Flatbread Pizza",
+  "fileName": "upload_1753054028270_f5833fb2-5b4f-45b5-9da8-a2cd7b10c97d.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {},
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This Turkish-style flatbread pizza (likely 'Lahmacun' or similar) is high in carbohydrates due to the dough base, which can spike blood sugar levels. For diabetic individuals, portion control is important, and it is best paired with a fiber-rich salad. Monitor blood glucose after eating and limit to a small portion.",
+    "meal_title": "Turkish Flatbread Pizza",
+    "meal_description": "A Turkish-style flatbread topped with ground meat, herbs, and spices, baked until crispy.",
+    "macros": {
+      "calories": 350,
+      "carbohydrates": 45,
+      "fats": 13,
+      "proteins": 15
+    },
+    "ingredients": [
+      {
+        "name": "Flatbread/Pizza dough",
+        "impact": "orange"
+      },
+      {
+        "name": "Ground meat (beef or lamb)",
+        "impact": "green"
+      },
+      {
+        "name": "Onions",
+        "impact": "green"
+      },
+      {
+        "name": "Tomatoes",
+        "impact": "green"
+      },
+      {
+        "name": "Parsley",
+        "impact": "green"
+      },
+      {
+        "name": "Olive oil",
+        "impact": "yellow"
+      },
+      {
+        "name": "Spices (paprika, black pepper, etc.)",
+        "impact": "green"
+      }
+    ]
+  }
+}

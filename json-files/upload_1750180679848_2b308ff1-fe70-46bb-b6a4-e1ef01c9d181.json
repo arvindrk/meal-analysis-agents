@@ -1,0 +1,53 @@
+{
+  "title": "Cheeseburger with Veggies",
+  "fileName": "upload_1750180679848_2b308ff1-fe70-46bb-b6a4-e1ef01c9d181.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This burger contains a moderate to high amount of carbohydrates, mainly from the bun, which can raise blood sugar levels in diabetic patients. The presence of vegetables adds fiber, and the protein and fat from the patty and cheese help slow glucose absorption. If you have diabetes, enjoy this meal in moderation, consider removing part of the bun, and pair it with non-starchy sides. Monitor your blood glucose levels after consumption.",
+    "meal_title": "Cheeseburger with Veggies",
+    "meal_description": "A classic cheeseburger served with lettuce, tomato, arugula, cheese, and a burger patty on a sesame seed bun.",
+    "macros": {
+      "calories": 550,
+      "carbohydrates": 45,
+      "fats": 28,
+      "proteins": 28
+    },
+    "ingredients": [
+      {
+        "name": "Sesame seed bun",
+        "impact": "orange"
+      },
+      {
+        "name": "Beef patty",
+        "impact": "green"
+      },
+      {
+        "name": "Cheese",
+        "impact": "yellow"
+      },
+      {
+        "name": "Tomato",
+        "impact": "green"
+      },
+      {
+        "name": "Arugula/lettuce",
+        "impact": "green"
+      }
+    ]
+  }
+}

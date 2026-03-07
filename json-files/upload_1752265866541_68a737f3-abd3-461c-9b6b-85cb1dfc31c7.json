@@ -1,0 +1,37 @@
+{
+  "title": "Fresh Mandarin Segments",
+  "fileName": "upload_1752265866541_68a737f3-abd3-461c-9b6b-85cb1dfc31c7.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": false,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "Mandarins are a healthy fruit choice, providing fiber, vitamins, and hydration. However, they have natural sugars and moderate carbohydrate content, so portion control is important for people with diabetes. Enjoy in moderation and monitor blood glucose response.",
+    "meal_title": "Fresh Mandarin Segments",
+    "meal_description": "Peeled and segmented mandarin, ready to eat.",
+    "macros": {
+      "calories": 45,
+      "carbohydrates": 11,
+      "fats": 0,
+      "proteins": 1
+    },
+    "ingredients": [
+      {
+        "name": "Mandarin",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

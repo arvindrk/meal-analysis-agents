@@ -1,0 +1,65 @@
+{
+  "title": "Indian Thali Plate",
+  "fileName": "upload_1749843287038_40cbba8a-21fa-447a-88ce-54e9d8f8708a.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal contains a moderate to high amount of carbohydrates from chapati, rice, and dal which can increase blood sugar levels, especially if consumed in large portions. Diabetics should limit the portion size, avoid extra ghee or butter, and emphasize the lentils, yogurt, and vegetable curry. Opt for whole wheat chapati, a small serving of rice, and fill up on the vegetables for better blood sugar control.",
+    "meal_title": "Indian Thali Plate",
+    "meal_description": "A traditional Indian thali featuring chapati, rice, dal, vegetable curry, yogurt, pickle, papad, and a portion of ghee.",
+    "macros": {
+      "calories": 600,
+      "carbohydrates": 90,
+      "fats": 18,
+      "proteins": 18
+    },
+    "ingredients": [
+      {
+        "name": "Chapati (wheat flatbread)",
+        "impact": "yellow"
+      },
+      {
+        "name": "Steamed white rice",
+        "impact": "orange"
+      },
+      {
+        "name": "Dal (lentil soup)",
+        "impact": "green"
+      },
+      {
+        "name": "Vegetable curry",
+        "impact": "green"
+      },
+      {
+        "name": "Yogurt",
+        "impact": "green"
+      },
+      {
+        "name": "Papad (poppadom)",
+        "impact": "yellow"
+      },
+      {
+        "name": "Ghee (clarified butter)",
+        "impact": "orange"
+      },
+      {
+        "name": "Pickle",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

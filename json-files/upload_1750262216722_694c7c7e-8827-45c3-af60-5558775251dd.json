@@ -1,0 +1,49 @@
+{
+  "title": "Simple Green Salad",
+  "fileName": "upload_1750262216722_694c7c7e-8827-45c3-af60-5558775251dd.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": false,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal is safe for diabetics due to its low carbohydrate content. Lettuce and seeds provide fiber and healthy fats, which help control blood sugar. It is advisable to monitor the type and amount of dressing used to prevent hidden sugars or unhealthy fats.",
+    "meal_title": "Simple Green Salad",
+    "meal_description": "A fresh green salad with lettuce, seeds, and a light dressing.",
+    "macros": {
+      "calories": 70,
+      "carbohydrates": 6,
+      "fats": 4,
+      "proteins": 2
+    },
+    "ingredients": [
+      {
+        "name": "Lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Sunflower seeds",
+        "impact": "green"
+      },
+      {
+        "name": "Light salad dressing",
+        "impact": "yellow"
+      },
+      {
+        "name": "Seasonings (pepper, herbs)",
+        "impact": "green"
+      }
+    ]
+  }
+}

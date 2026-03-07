@@ -1,0 +1,37 @@
+{
+  "title": "Raw Carrot Stick",
+  "fileName": "upload_1750709512018_7cb970d1-5843-42fe-9f82-10279f27a01a.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "Carrots are low in calories and have a low glycemic index, making them a safe and healthy snack for people with diabetes. They can be enjoyed raw or cooked and provide fiber, vitamins, and antioxidants without causing sharp blood sugar spikes. Enjoy in moderate amounts.",
+    "meal_title": "Raw Carrot Stick",
+    "meal_description": "A simple raw carrot stick, crisp and fresh, commonly eaten as a low-calorie snack or healthy side.",
+    "macros": {
+      "calories": 10,
+      "carbohydrates": 2,
+      "fats": 0,
+      "proteins": 0
+    },
+    "ingredients": [
+      {
+        "name": "Carrot",
+        "impact": "green"
+      }
+    ]
+  }
+}

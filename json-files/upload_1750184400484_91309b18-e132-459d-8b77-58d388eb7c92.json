@@ -1,0 +1,37 @@
+{
+  "title": "Watermelon Chunks",
+  "fileName": "upload_1750184400484_91309b18-e132-459d-8b77-58d388eb7c92.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "Watermelon is high in water and low in calories, making it generally safe in moderation for people with diabetes. However, it contains natural sugars and has a higher glycemic index, so portion control is important. It's advisable to consume small servings and pair it with a source of protein or fat to reduce blood sugar spikes.",
+    "meal_title": "Watermelon Chunks",
+    "meal_description": "Three small chunks of fresh watermelon placed on a paper towel.",
+    "macros": {
+      "calories": 30,
+      "carbohydrates": 7,
+      "fats": 0,
+      "proteins": 0
+    },
+    "ingredients": [
+      {
+        "name": "Watermelon",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

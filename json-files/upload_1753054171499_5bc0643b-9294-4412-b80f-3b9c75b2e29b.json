@@ -1,0 +1,42 @@
+{
+  "title": "Simple Green Salad",
+  "fileName": "upload_1753054171499_5bc0643b-9294-4412-b80f-3b9c75b2e29b.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {},
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This salad is low in carbohydrates and contains plenty of fiber and vitamins, making it an excellent choice for diabetes management. It is unlikely to cause blood sugar spikes. For extra nutrition, adding lean proteins like grilled chicken or boiled eggs is a good idea.",
+    "meal_title": "Simple Green Salad",
+    "meal_description": "A fresh salad with leafy greens, tomatoes, and possibly a light vinaigrette.",
+    "macros": {
+      "calories": 60,
+      "carbohydrates": 8,
+      "fats": 2,
+      "proteins": 2
+    },
+    "ingredients": [
+      {
+        "name": "Lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Spinach",
+        "impact": "green"
+      },
+      {
+        "name": "Tomato",
+        "impact": "green"
+      },
+      {
+        "name": "Light Vinaigrette (optional)",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

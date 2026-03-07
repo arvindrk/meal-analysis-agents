@@ -1,0 +1,49 @@
+{
+  "title": "Strawberry Burrata Dessert",
+  "fileName": "upload_1749875264239_2a7fbe6a-e779-46e6-ac22-82d88a66ea3c.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This dessert appears to have moderate carbohydrates and sugar from strawberries and possibly sweetened granita. The burrata provides protein and fat, which can help lower the dish's glycemic impact, and pistachios add healthy fats. Diabetics can enjoy this in moderation, but it's important to account for the overall carbohydrate intake. Measuring portion size and pairing with a low-carb meal is advised.",
+    "meal_title": "Strawberry Burrata Dessert",
+    "meal_description": "A dessert featuring fresh strawberries, creamy burrata cheese, sweet granita (crushed ice dessert), and a sprinkle of chopped pistachios.",
+    "macros": {
+      "calories": 220,
+      "carbohydrates": 25,
+      "fats": 10,
+      "proteins": 8
+    },
+    "ingredients": [
+      {
+        "name": "Strawberries",
+        "impact": "yellow"
+      },
+      {
+        "name": "Burrata cheese",
+        "impact": "green"
+      },
+      {
+        "name": "Granita (sweetened ice)",
+        "impact": "orange"
+      },
+      {
+        "name": "Pistachios",
+        "impact": "green"
+      }
+    ]
+  }
+}

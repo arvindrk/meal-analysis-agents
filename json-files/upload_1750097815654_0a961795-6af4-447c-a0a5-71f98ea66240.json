@@ -1,0 +1,37 @@
+{
+  "title": "Fresh Kiwi",
+  "fileName": "upload_1750097815654_0a961795-6af4-447c-a0a5-71f98ea66240.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "Kiwi is a low-calorie, fiber-rich fruit with a moderate carbohydrate content and a low glycemic index. It can be safely included in a diabetic diet, especially when eaten in moderation. Its fiber helps slow sugar absorption and its vitamin C content adds nutritional value. Enjoy as part of a balanced meal or snack.",
+    "meal_title": "Fresh Kiwi",
+    "meal_description": "Sliced fresh kiwi fruit with green flesh and small edible seeds.",
+    "macros": {
+      "calories": 42,
+      "carbohydrates": 10,
+      "fats": 0,
+      "proteins": 1
+    },
+    "ingredients": [
+      {
+        "name": "Kiwi",
+        "impact": "green"
+      }
+    ]
+  }
+}

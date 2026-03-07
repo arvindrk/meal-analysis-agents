@@ -1,0 +1,53 @@
+{
+  "title": "Vegetable Salad Bowl",
+  "fileName": "upload_1753052864483_2e9f35f0-e28e-4cb0-9e0e-161c00ce4e6d.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This salad is a healthy choice for diabetics. It is low in carbohydrates, high in fiber, and provides healthy fats and protein, which can help with blood sugar control. Be mindful if a creamy dressing is used, as it may contain added sugars or extra calories.",
+    "meal_title": "Vegetable Salad Bowl",
+    "meal_description": "A fresh salad with lettuce, tomatoes, cucumber, possibly cheese, and a creamy dressing.",
+    "macros": {
+      "calories": 180,
+      "carbohydrates": 14,
+      "fats": 10,
+      "proteins": 6
+    },
+    "ingredients": [
+      {
+        "name": "Lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Tomato",
+        "impact": "green"
+      },
+      {
+        "name": "Cucumber",
+        "impact": "green"
+      },
+      {
+        "name": "Cheese",
+        "impact": "yellow"
+      },
+      {
+        "name": "Creamy Dressing",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

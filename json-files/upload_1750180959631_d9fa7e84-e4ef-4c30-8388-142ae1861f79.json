@@ -1,0 +1,37 @@
+{
+  "title": "Glass of White Wine",
+  "fileName": "upload_1750180959631_d9fa7e84-e4ef-4c30-8388-142ae1861f79.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "This appears to be a glass of white wine. Alcoholic beverages, especially wine, can affect blood sugar levels. Wine contains carbohydrates that can raise blood glucose, and alcohol itself can cause blood sugar to drop unpredictably. For diabetics, it is best to consume alcohol in moderation and with food, monitoring their blood glucose levels closely. This drink should generally be avoided if blood sugar control is difficult.",
+    "meal_title": "Glass of White Wine",
+    "meal_description": "A standard glass of white wine, pale yellow in color, served in a wine glass.",
+    "macros": {
+      "calories": 120,
+      "carbohydrates": 4,
+      "fats": 0,
+      "proteins": 0
+    },
+    "ingredients": [
+      {
+        "name": "White wine",
+        "impact": "orange"
+      }
+    ]
+  }
+}

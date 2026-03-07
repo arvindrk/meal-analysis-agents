@@ -1,0 +1,41 @@
+{
+  "title": "Grapes and Fig",
+  "fileName": "upload_1753203870259_fa36a429-304f-4b3c-b6e0-3519beaece88.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal is primarily composed of fresh fruit (grapes and a fig), both of which are high in natural sugars and carbohydrates. For someone with diabetes, portion control is important since grapes and figs can raise blood sugar quickly. It's safe in moderation, ideally paired with a protein or fat source to minimize blood sugar spikes.",
+    "meal_title": "Grapes and Fig",
+    "meal_description": "A small bowl containing green grapes and a single fresh fig.",
+    "macros": {
+      "calories": 70,
+      "carbohydrates": 17,
+      "fats": 0,
+      "proteins": 1
+    },
+    "ingredients": [
+      {
+        "name": "Green grapes",
+        "impact": "yellow"
+      },
+      {
+        "name": "Fig",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

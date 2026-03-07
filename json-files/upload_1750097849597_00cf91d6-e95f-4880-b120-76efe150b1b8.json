@@ -1,0 +1,41 @@
+{
+  "title": "Mixed Leafy Salad",
+  "fileName": "upload_1750097849597_00cf91d6-e95f-4880-b120-76efe150b1b8.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": false,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This is a very low-carbohydrate meal, making it an excellent choice for someone with diabetes. Leafy greens and peppers are low in sugar and high in fiber, helping to control blood glucose levels. Enjoy freely, just be cautious if adding high-sugar dressings.",
+    "meal_title": "Mixed Leafy Salad",
+    "meal_description": "A simple salad made with various leafy greens and chopped yellow bell peppers.",
+    "macros": {
+      "calories": 40,
+      "carbohydrates": 7,
+      "fats": 0,
+      "proteins": 2
+    },
+    "ingredients": [
+      {
+        "name": "Leafy Greens (lettuce, romaine, etc.)",
+        "impact": "green"
+      },
+      {
+        "name": "Yellow Bell Pepper",
+        "impact": "green"
+      }
+    ]
+  }
+}

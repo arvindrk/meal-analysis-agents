@@ -1,0 +1,57 @@
+{
+  "title": "Sausage with Grilled Vegetables",
+  "fileName": "upload_1750184275147_d931eee9-5024-4f89-94e5-64dc9a094c5a.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal is suitable for diabetics as it is balanced in protein and fiber-rich vegetables, with a moderate carbohydrate content. The sausage provides protein and fat, while the vegetables like carrots, peas, and eggplant offer fiber and nutrients to help moderate blood sugar spikes. Opt for leaner sausages if reducing saturated fat intake is a concern, and check for any added sugars in sauces.",
+    "meal_title": "Sausage with Grilled Vegetables",
+    "meal_description": "A grilled sausage served with a medley of sautéed and roasted vegetables including carrots, peas, eggplant, and possibly a light sauce.",
+    "macros": {
+      "calories": 320,
+      "carbohydrates": 21,
+      "fats": 18,
+      "proteins": 16
+    },
+    "ingredients": [
+      {
+        "name": "Grilled sausage",
+        "impact": "yellow"
+      },
+      {
+        "name": "Eggplant",
+        "impact": "green"
+      },
+      {
+        "name": "Carrots",
+        "impact": "yellow"
+      },
+      {
+        "name": "Green peas",
+        "impact": "yellow"
+      },
+      {
+        "name": "Onions",
+        "impact": "green"
+      },
+      {
+        "name": "Light cream sauce",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

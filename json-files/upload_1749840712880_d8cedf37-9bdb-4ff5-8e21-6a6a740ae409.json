@@ -1,0 +1,57 @@
+{
+  "title": "Veggie Couscous Plate",
+  "fileName": "upload_1749840712880_d8cedf37-9bdb-4ff5-8e21-6a6a740ae409.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal is well-balanced and diabetes-friendly, as it features mostly non-starchy vegetables (broccoli, spinach, cauliflower) and whole grains (couscous). It is relatively low in simple carbohydrates and high in fiber, which helps support stable blood sugar levels. The presence of a fried onion ring may add some refined carbs and fats, but consumed in moderation, the overall impact on blood sugar should be manageable. This meal is suitable for people with diabetes, especially with portion control.",
+    "meal_title": "Veggie Couscous Plate",
+    "meal_description": "A plate featuring couscous, fried onion ring, steamed broccoli, cauliflower, spinach, and a small serving of sauce or dip.",
+    "macros": {
+      "calories": 400,
+      "carbohydrates": 56,
+      "fats": 10,
+      "proteins": 12
+    },
+    "ingredients": [
+      {
+        "name": "Broccoli",
+        "impact": "green"
+      },
+      {
+        "name": "Spinach",
+        "impact": "green"
+      },
+      {
+        "name": "Cauliflower",
+        "impact": "green"
+      },
+      {
+        "name": "Couscous",
+        "impact": "yellow"
+      },
+      {
+        "name": "Fried onion ring",
+        "impact": "orange"
+      },
+      {
+        "name": "Dip/Sauce (likely hummus)",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

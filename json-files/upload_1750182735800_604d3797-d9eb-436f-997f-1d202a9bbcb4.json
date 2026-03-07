@@ -1,0 +1,61 @@
+{
+  "title": "Mixed Green Salad",
+  "fileName": "upload_1750182735800_604d3797-d9eb-436f-997f-1d202a9bbcb4.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This salad is low in carbohydrates and high in fiber, making it a safe and healthy choice for people with diabetes. The greens and assorted vegetables provide essential vitamins and minerals, and the protein from beans or peas is beneficial. Avoid adding high-sugar dressings or croutons.",
+    "meal_title": "Mixed Green Salad",
+    "meal_description": "A fresh mixed green salad with spinach, lettuce, cabbage, peas, and possibly apple, dressed lightly.",
+    "macros": {
+      "calories": 120,
+      "carbohydrates": 18,
+      "fats": 4,
+      "proteins": 6
+    },
+    "ingredients": [
+      {
+        "name": "Spinach",
+        "impact": "green"
+      },
+      {
+        "name": "Romaine lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Red cabbage",
+        "impact": "green"
+      },
+      {
+        "name": "Peas",
+        "impact": "green"
+      },
+      {
+        "name": "Apple (small pieces)",
+        "impact": "yellow"
+      },
+      {
+        "name": "Parmesan or hard cheese shavings",
+        "impact": "green"
+      },
+      {
+        "name": "Light vinaigrette dressing",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

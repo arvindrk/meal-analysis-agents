@@ -1,0 +1,53 @@
+{
+  "title": "Eggs, Hash Brown & Coffee",
+  "fileName": "upload_1750176632186_7794b8b1-1eec-489d-a7d2-8ff1d8e94e22.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal contains moderate carbohydrates, fats, and protein. The scrambled eggs and sausage patty are good sources of protein and fats, while the hash brown and ketchup add carbohydrates. The black coffee is fine for diabetics if unsweetened. Monitor the portion of hash brown and ketchup to avoid excessive carb intake. Suitable in moderation with portion control.",
+    "meal_title": "Eggs, Hash Brown & Coffee",
+    "meal_description": "A breakfast plate with scrambled eggs, a sausage patty with hash brown, a small serving of ketchup, and a cup of black coffee.",
+    "macros": {
+      "calories": 350,
+      "carbohydrates": 20,
+      "fats": 22,
+      "proteins": 17
+    },
+    "ingredients": [
+      {
+        "name": "Scrambled eggs",
+        "impact": "green"
+      },
+      {
+        "name": "Sausage patty",
+        "impact": "yellow"
+      },
+      {
+        "name": "Hash brown",
+        "impact": "orange"
+      },
+      {
+        "name": "Ketchup",
+        "impact": "orange"
+      },
+      {
+        "name": "Black coffee",
+        "impact": "green"
+      }
+    ]
+  }
+}

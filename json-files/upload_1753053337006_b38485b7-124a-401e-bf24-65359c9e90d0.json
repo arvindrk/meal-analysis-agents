@@ -1,0 +1,30 @@
+{
+  "title": "Boiled Potatoes",
+  "fileName": "upload_1753053337006_b38485b7-124a-401e-bf24-65359c9e90d0.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {},
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "Boiled potatoes are high in carbohydrates, which can raise blood sugar levels. Diabetics should consume in moderation and ideally balance them with protein and fiber sources. Portion size is important to help manage blood glucose.",
+    "meal_title": "Boiled Potatoes",
+    "meal_description": "Four peeled and boiled potatoes, served plain.",
+    "macros": {
+      "calories": 320,
+      "carbohydrates": 72,
+      "fats": 0,
+      "proteins": 8
+    },
+    "ingredients": [
+      {
+        "name": "Potato",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

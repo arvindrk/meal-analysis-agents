@@ -1,0 +1,37 @@
+{
+  "title": "Peeled Orange Wedge",
+  "fileName": "upload_1750097681033_c71afe76-f144-4a19-9dd3-19a1178957f4.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal is a serving of orange, which contains natural sugars and carbohydrates that can raise blood glucose levels. For people with diabetes, it is best to consume oranges in moderation and account for the carbohydrate content within their meal plan. Whole fruit is preferable to juice due to the presence of fiber, which slows sugar absorption.",
+    "meal_title": "Peeled Orange Wedge",
+    "meal_description": "A serving of peeled orange, including one whole orange with visible wedge and partially peeled skin.",
+    "macros": {
+      "calories": 60,
+      "carbohydrates": 15,
+      "fats": 0,
+      "proteins": 1
+    },
+    "ingredients": [
+      {
+        "name": "Orange",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

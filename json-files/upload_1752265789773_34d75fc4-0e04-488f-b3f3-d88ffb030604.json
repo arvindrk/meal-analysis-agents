@@ -1,0 +1,37 @@
+{
+  "title": "Glass of Water",
+  "fileName": "upload_1752265789773_34d75fc4-0e04-488f-b3f3-d88ffb030604.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "Water has no calories, carbohydrates, fats, or proteins, making it the safest and most recommended beverage for people with diabetes. It hydrates without affecting blood sugar levels. Diabetics can safely consume this without restriction.",
+    "meal_title": "Glass of Water",
+    "meal_description": "A clear glass filled with plain water.",
+    "macros": {
+      "calories": 0,
+      "carbohydrates": 0,
+      "fats": 0,
+      "proteins": 0
+    },
+    "ingredients": [
+      {
+        "name": "Water",
+        "impact": "green"
+      }
+    ]
+  }
+}

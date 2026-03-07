@@ -1,0 +1,53 @@
+{
+  "title": "Whole Grain Bread Slice",
+  "fileName": "upload_1752265818634_e1c146f8-2cbf-4033-ac9f-9b4869fd1d4f.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This slice of whole grain bread contains a moderate amount of carbohydrates and fiber, which can raise blood sugar but less sharply than white bread. Diabetics can include it in their diet, but portion control is essential and it should be paired with protein or healthy fat to minimize blood sugar spikes.",
+    "meal_title": "Whole Grain Bread Slice",
+    "meal_description": "A rustic slice of whole grain bread, likely made with mixed grains and seeds.",
+    "macros": {
+      "calories": 70,
+      "carbohydrates": 13,
+      "fats": 1,
+      "proteins": 3
+    },
+    "ingredients": [
+      {
+        "name": "Whole grain flour",
+        "impact": "yellow"
+      },
+      {
+        "name": "Water",
+        "impact": "green"
+      },
+      {
+        "name": "Yeast",
+        "impact": "green"
+      },
+      {
+        "name": "Salt",
+        "impact": "green"
+      },
+      {
+        "name": "Seeds (optional)",
+        "impact": "green"
+      }
+    ]
+  }
+}

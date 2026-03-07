@@ -1,0 +1,41 @@
+{
+  "title": "Glass of Water",
+  "fileName": "upload_1753053145042_b9a83e6d-33f1-46f0-a73f-cd7f73e5c3c0.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "Water is highly recommended for people with diabetes as it contains no calories, carbohydrates, or sugar and helps regulate hydration without affecting blood glucose levels. It's a safe and ideal beverage choice.",
+    "meal_title": "Glass of Water",
+    "meal_description": "A plain glass of cold water with ice cubes.",
+    "macros": {
+      "calories": 0,
+      "carbohydrates": 0,
+      "fats": 0,
+      "proteins": 0
+    },
+    "ingredients": [
+      {
+        "name": "Water",
+        "impact": "green"
+      },
+      {
+        "name": "Ice",
+        "impact": "green"
+      }
+    ]
+  }
+}

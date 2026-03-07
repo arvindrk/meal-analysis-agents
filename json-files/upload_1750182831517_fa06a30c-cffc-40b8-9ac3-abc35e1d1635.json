@@ -1,0 +1,73 @@
+{
+  "title": "Supergreen Edamame Salad",
+  "fileName": "upload_1750182831517_fa06a30c-cffc-40b8-9ac3-abc35e1d1635.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": false,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This salad is packed with fiber-rich greens, plant protein, and healthy fats, making it a good choice for people with diabetes. The carbohydrate content is moderate, with most coming from apples, beets, chickpeas, and edamame. Dressing on the side helps control calorie and carb intake. Limit the amount of apples, beets, and vinaigrette to avoid a spike in blood sugar. Enjoy the salad in moderation and focus on the protein and veggie components.",
+    "meal_title": "Supergreen Edamame Salad",
+    "meal_description": "A vibrant salad featuring romaine, kale, spinach, cabbage, edamame, beets, chickpeas, apples, pumpkin seeds, and parmesan crisps, dressed with a lemon basil vinaigrette.",
+    "macros": {
+      "calories": 420,
+      "carbohydrates": 38,
+      "fats": 21,
+      "proteins": 16
+    },
+    "ingredients": [
+      {
+        "name": "Romaine lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Supergreen blend (kale, spinach, red cabbage)",
+        "impact": "green"
+      },
+      {
+        "name": "Edamame",
+        "impact": "green"
+      },
+      {
+        "name": "Tajin spiced pumpkin seeds",
+        "impact": "green"
+      },
+      {
+        "name": "Roasted beets",
+        "impact": "yellow"
+      },
+      {
+        "name": "Regenerative organic chickpeas",
+        "impact": "yellow"
+      },
+      {
+        "name": "Lemon basil vinaigrette (on the side)",
+        "impact": "yellow"
+      },
+      {
+        "name": "Sliced apples",
+        "impact": "yellow"
+      },
+      {
+        "name": "Parmesan crisp",
+        "impact": "yellow"
+      },
+      {
+        "name": "Shaved parmesan",
+        "impact": "green"
+      }
+    ]
+  }
+}

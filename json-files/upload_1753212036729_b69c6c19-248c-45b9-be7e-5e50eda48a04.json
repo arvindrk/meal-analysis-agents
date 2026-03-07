@@ -1,0 +1,53 @@
+{
+  "title": "Classic Oatmeal Bowl",
+  "fileName": "upload_1753212036729_b69c6c19-248c-45b9-be7e-5e50eda48a04.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "Oatmeal is a healthy breakfast option with whole grains and fiber, which helps manage blood sugar. However, it can have a moderate amount of carbohydrates that might raise blood sugar. Diabetic individuals should keep portions small, avoid added sugars, and opt for unsweetened or lightly sweetened options. Adding nuts and seeds can help slow sugar absorption.",
+    "meal_title": "Classic Oatmeal Bowl",
+    "meal_description": "A bowl of oatmeal, possibly topped with nuts and seeds, providing a fiber-rich breakfast option.",
+    "macros": {
+      "calories": 250,
+      "carbohydrates": 40,
+      "fats": 6,
+      "proteins": 7
+    },
+    "ingredients": [
+      {
+        "name": "Oats",
+        "impact": "yellow"
+      },
+      {
+        "name": "Milk or Water",
+        "impact": "green"
+      },
+      {
+        "name": "Nuts (almonds, walnuts)",
+        "impact": "green"
+      },
+      {
+        "name": "Seeds (chia, flaxseed)",
+        "impact": "green"
+      },
+      {
+        "name": "Sweetener (if any)",
+        "impact": "orange"
+      }
+    ]
+  }
+}

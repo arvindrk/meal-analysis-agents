@@ -1,0 +1,53 @@
+{
+  "title": "Whole Grain Bread Slices",
+  "fileName": "upload_1753053107804_3f319949-c893-46d1-b54e-378b675e43f8.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "Whole grain bread can be consumed in moderation by people with diabetes due to its lower glycemic index compared to white bread. However, it still contains carbohydrates that can impact blood sugar levels, so portion control is essential. Pairing it with proteins or healthy fats can help reduce blood sugar spikes.",
+    "meal_title": "Whole Grain Bread Slices",
+    "meal_description": "Two slices of whole grain bread, typically made from whole wheat flour and grains.",
+    "macros": {
+      "calories": 160,
+      "carbohydrates": 28,
+      "fats": 2,
+      "proteins": 6
+    },
+    "ingredients": [
+      {
+        "name": "Whole wheat flour",
+        "impact": "yellow"
+      },
+      {
+        "name": "Water",
+        "impact": "green"
+      },
+      {
+        "name": "Yeast",
+        "impact": "green"
+      },
+      {
+        "name": "Salt",
+        "impact": "green"
+      },
+      {
+        "name": "Grains/Seeds (varies)",
+        "impact": "green"
+      }
+    ]
+  }
+}

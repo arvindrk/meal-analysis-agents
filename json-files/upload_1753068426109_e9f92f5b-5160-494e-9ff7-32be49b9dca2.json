@@ -1,0 +1,61 @@
+{
+  "title": "Balanced Veggie Plate",
+  "fileName": "upload_1753068426109_e9f92f5b-5160-494e-9ff7-32be49b9dca2.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal contains a healthy balance of vegetables, lean protein (likely chicken or turkey), and a modicum of carbohydrates from pasta and corn. The high fiber and nutrient diversity are beneficial for blood glucose management. Diabetic individuals can enjoy this meal, but portion control for pasta and corn is advisable.",
+    "meal_title": "Balanced Veggie Plate",
+    "meal_description": "A bowl with assorted cooked and raw vegetables, sweetcorn, a small serving of pasta with shredded chicken or turkey, and a light Greek-style salad.",
+    "macros": {
+      "calories": 350,
+      "carbohydrates": 45,
+      "fats": 7,
+      "proteins": 18
+    },
+    "ingredients": [
+      {
+        "name": "Sweetcorn",
+        "impact": "yellow"
+      },
+      {
+        "name": "Cooked root vegetables (carrots, peas, potatoes)",
+        "impact": "yellow"
+      },
+      {
+        "name": "Steamed greens (spinach/broccoli)",
+        "impact": "green"
+      },
+      {
+        "name": "Pasta",
+        "impact": "yellow"
+      },
+      {
+        "name": "Shredded chicken or turkey",
+        "impact": "green"
+      },
+      {
+        "name": "Cucumber and tomato salad (possibly with feta cheese)",
+        "impact": "green"
+      },
+      {
+        "name": "Beetroot",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Butter on White Bread",
+  "fileName": "upload_1753053053316_3dad93e8-c0b5-4fb7-8155-80469e473fe9.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "This meal is composed primarily of white bread and butter. White bread is high in carbohydrates and has a high glycemic index, which can cause rapid increases in blood sugar. Butter is high in saturated fat, potentially contributing to cardiovascular risk. Diabetic individuals should avoid or minimize this type of meal, especially with this portion size, to manage blood sugar and overall health.",
+    "meal_title": "Butter on White Bread",
+    "meal_description": "Five slices of white bread, each topped with a spread of butter.",
+    "macros": {
+      "calories": 700,
+      "carbohydrates": 110,
+      "fats": 32,
+      "proteins": 14
+    },
+    "ingredients": [
+      {
+        "name": "White bread",
+        "impact": "orange"
+      },
+      {
+        "name": "Butter",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

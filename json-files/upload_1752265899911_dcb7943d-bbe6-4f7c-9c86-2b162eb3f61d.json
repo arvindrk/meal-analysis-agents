@@ -1,0 +1,61 @@
+{
+  "title": "Ham and Mushroom Pizza",
+  "fileName": "upload_1752265899911_dcb7943d-bbe6-4f7c-9c86-2b162eb3f61d.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "Pizza is typically high in carbohydrates due to its crust and may spike blood sugar levels. It also contains processed meats and cheese, which can add saturated fat and sodium. For someone with diabetes, it's best to avoid or consume a very small portion with careful blood glucose monitoring. Opt for thin crust and add more vegetables if possible.",
+    "meal_title": "Ham and Mushroom Pizza",
+    "meal_description": "Thin crust pizza topped with tomato sauce, cheese, ham, mushrooms, olives, and bell peppers. Portion shown is part of a whole pizza.",
+    "macros": {
+      "calories": 350,
+      "carbohydrates": 40,
+      "fats": 13,
+      "proteins": 16
+    },
+    "ingredients": [
+      {
+        "name": "Pizza crust",
+        "impact": "orange"
+      },
+      {
+        "name": "Tomato sauce",
+        "impact": "yellow"
+      },
+      {
+        "name": "Mozzarella cheese",
+        "impact": "yellow"
+      },
+      {
+        "name": "Ham",
+        "impact": "yellow"
+      },
+      {
+        "name": "Mushrooms",
+        "impact": "green"
+      },
+      {
+        "name": "Olive",
+        "impact": "green"
+      },
+      {
+        "name": "Bell pepper",
+        "impact": "green"
+      }
+    ]
+  }
+}

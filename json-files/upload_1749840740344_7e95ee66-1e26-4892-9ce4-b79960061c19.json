@@ -1,0 +1,57 @@
+{
+  "title": "Vegetable Stir-Fry Plate",
+  "fileName": "upload_1749840740344_7e95ee66-1e26-4892-9ce4-b79960061c19.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal is primarily composed of non-starchy vegetables, which are low in carbohydrates and have a minimal impact on blood sugar levels, making it a safe choice for people with diabetes. The small portion of minced meat adds protein, which further stabilizes blood sugar. This meal can be enjoyed freely, but as always, portion size and overall dietary balance should be considered.",
+    "meal_title": "Vegetable Stir-Fry Plate",
+    "meal_description": "A partially eaten plate of sautéed carrots, mushrooms, and zucchini with a small portion of minced meat.",
+    "macros": {
+      "calories": 80,
+      "carbohydrates": 9,
+      "fats": 2,
+      "proteins": 5
+    },
+    "ingredients": [
+      {
+        "name": "Carrots",
+        "impact": "yellow"
+      },
+      {
+        "name": "Zucchini",
+        "impact": "green"
+      },
+      {
+        "name": "Mushrooms",
+        "impact": "green"
+      },
+      {
+        "name": "Onion",
+        "impact": "yellow"
+      },
+      {
+        "name": "Minced Meat",
+        "impact": "green"
+      },
+      {
+        "name": "Herbs/Seasoning",
+        "impact": "green"
+      }
+    ]
+  }
+}

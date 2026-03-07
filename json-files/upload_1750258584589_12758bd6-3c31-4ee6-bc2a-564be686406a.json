@@ -1,0 +1,53 @@
+{
+  "title": "Chicken Oat Sandwich",
+  "fileName": "upload_1750258584589_12758bd6-3c31-4ee6-bc2a-564be686406a.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This sandwich contains whole grain bread, which is better for blood sugar control than white bread, but the carbohydrate content may still be significant. The filling seems to include a lean protein (possibly chicken), pickles, and some salad greens, which help balance the meal. Diabetics should monitor portion size, limit additional high-carb items, and consider pairing with non-starchy vegetables to further blunt blood sugar spikes.",
+    "meal_title": "Chicken Oat Sandwich",
+    "meal_description": "A whole grain oat baguette sandwich with chicken, pickles, and greens.",
+    "macros": {
+      "calories": 320,
+      "carbohydrates": 45,
+      "fats": 7,
+      "proteins": 18
+    },
+    "ingredients": [
+      {
+        "name": "Whole grain oat baguette",
+        "impact": "yellow"
+      },
+      {
+        "name": "Chicken breast",
+        "impact": "green"
+      },
+      {
+        "name": "Pickles",
+        "impact": "green"
+      },
+      {
+        "name": "Leafy greens",
+        "impact": "green"
+      },
+      {
+        "name": "Mayonnaise or spread",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

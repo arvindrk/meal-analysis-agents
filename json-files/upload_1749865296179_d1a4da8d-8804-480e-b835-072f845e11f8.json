@@ -1,0 +1,53 @@
+{
+  "title": "Egg & Bean Quesadilla",
+  "fileName": "upload_1749865296179_d1a4da8d-8804-480e-b835-072f845e11f8.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal provides protein and some healthy fats from the eggs, but also includes carbohydrates from the tortilla which can affect blood sugar. Diabetics should monitor portion size, consider using a whole wheat or lower carb option, and pair with non-starchy vegetables if possible.",
+    "meal_title": "Egg & Bean Quesadilla",
+    "meal_description": "A flour tortilla topped with scrambled eggs, black beans, and chopped onions.",
+    "macros": {
+      "calories": 320,
+      "carbohydrates": 34,
+      "fats": 13,
+      "proteins": 16
+    },
+    "ingredients": [
+      {
+        "name": "Flour tortilla",
+        "impact": "orange"
+      },
+      {
+        "name": "Egg",
+        "impact": "green"
+      },
+      {
+        "name": "Black beans",
+        "impact": "yellow"
+      },
+      {
+        "name": "Onion",
+        "impact": "green"
+      },
+      {
+        "name": "Oil or butter",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "title": "Fresh Orange Slices",
+  "fileName": "upload_1750709492155_4ebddef6-d4df-46cd-9649-4a335bdbef6b.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "Oranges are a healthy fruit choice and provide vitamins and fiber, but they are also a source of natural sugars and carbohydrates, which can impact blood glucose levels. Portion control is important for people with diabetes. Enjoy in moderation and check your blood sugar response.",
+    "meal_title": "Fresh Orange Slices",
+    "meal_description": "Slices of fresh orange arranged on a plate, ready for a healthy snack.",
+    "macros": {
+      "calories": 60,
+      "carbohydrates": 15,
+      "fats": 0,
+      "proteins": 1
+    },
+    "ingredients": [
+      {
+        "name": "Orange",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

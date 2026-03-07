@@ -1,0 +1,57 @@
+{
+  "title": "Slice of Pizza",
+  "fileName": "upload_1753200023630_697c8163-ee91-4c75-85b8-ad4a947e9e74.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "orange",
+    "guidance_message": "Pizza is usually high in refined carbohydrates and fats, which can lead to rapid blood sugar spikes. The dough, cheese, and cured meats increase calorie and sodium content, and the olives add more fat and sodium. Diabetics should ideally avoid such meals or have them very infrequently and in small quantities, balancing with lots of non-starchy vegetables.",
+    "meal_title": "Slice of Pizza",
+    "meal_description": "A slice of pizza with tomato sauce, cheese, ham, olives, and herbs on a thick crust.",
+    "macros": {
+      "calories": 280,
+      "carbohydrates": 35,
+      "fats": 12,
+      "proteins": 10
+    },
+    "ingredients": [
+      {
+        "name": "Pizza dough (refined flour)",
+        "impact": "orange"
+      },
+      {
+        "name": "Tomato sauce",
+        "impact": "green"
+      },
+      {
+        "name": "Cheese",
+        "impact": "yellow"
+      },
+      {
+        "name": "Ham",
+        "impact": "yellow"
+      },
+      {
+        "name": "Olives",
+        "impact": "yellow"
+      },
+      {
+        "name": "Herbs",
+        "impact": "green"
+      }
+    ]
+  }
+}

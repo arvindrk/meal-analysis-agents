@@ -1,0 +1,53 @@
+{
+  "title": "Grilled Chicken Salad Bowl",
+  "fileName": "upload_1750100382667_e5dd5b7c-5a38-4304-b3a7-d8209c5d59a2.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal is well-suited for a diabetic person, as it is mostly composed of lean proteins, non-starchy vegetables, and greens. The carbohydrate content appears to be low to moderate, making it a safe option for blood sugar management. The presence of greens and grilled chicken provides nutrient density, and the absence of heavy starches or sugars is beneficial. Watch out for heavy dressings or sauces, which could add unnecessary sugars or fats.",
+    "meal_title": "Grilled Chicken Salad Bowl",
+    "meal_description": "A bowl featuring grilled chicken, leafy greens (possibly romaine lettuce), a green herb-based dressing, a small portion of mashed potatoes or polenta, and some pickled vegetables.",
+    "macros": {
+      "calories": 350,
+      "carbohydrates": 22,
+      "fats": 13,
+      "proteins": 32
+    },
+    "ingredients": [
+      {
+        "name": "Grilled chicken",
+        "impact": "green"
+      },
+      {
+        "name": "Romaine lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Pickled vegetables",
+        "impact": "green"
+      },
+      {
+        "name": "Herb-based green dressing",
+        "impact": "yellow"
+      },
+      {
+        "name": "Mashed potatoes or polenta",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

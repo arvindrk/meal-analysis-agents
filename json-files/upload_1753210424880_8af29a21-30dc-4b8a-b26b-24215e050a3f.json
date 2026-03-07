@@ -1,0 +1,57 @@
+{
+  "title": "Jalapeno Hamburger",
+  "fileName": "upload_1753210424880_8af29a21-30dc-4b8a-b26b-24215e050a3f.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This jalapeno hamburger contains a white flour bun, which is high in carbohydrates and may spike blood sugar levels. For diabetic individuals, it is best eaten in moderation or with a whole grain bun substitute. The protein from the beef patty is beneficial, while lettuce, tomato, and jalapenos are low-carb and safe. Monitor your portion size, count total carbs, and consider skipping sugary condiments. Balance with other low-carb foods in your meal.",
+    "meal_title": "Jalapeno Hamburger",
+    "meal_description": "A classic hamburger topped with jalapenos, lettuce, and tomato served on a sesame seed bun.",
+    "macros": {
+      "calories": 450,
+      "carbohydrates": 38,
+      "fats": 20,
+      "proteins": 24
+    },
+    "ingredients": [
+      {
+        "name": "Sesame seed hamburger bun",
+        "impact": "orange"
+      },
+      {
+        "name": "Beef patty",
+        "impact": "green"
+      },
+      {
+        "name": "Lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Tomato",
+        "impact": "green"
+      },
+      {
+        "name": "Jalapeno",
+        "impact": "green"
+      },
+      {
+        "name": "Condiments (possible ketchup/mustard)",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

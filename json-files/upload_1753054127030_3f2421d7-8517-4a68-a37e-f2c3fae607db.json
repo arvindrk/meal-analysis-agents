@@ -1,0 +1,42 @@
+{
+  "title": "Green Salad",
+  "fileName": "upload_1753054127030_3f2421d7-8517-4a68-a37e-f2c3fae607db.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {},
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This salad is a healthy, low-carbohydrate option that is very diabetes-friendly. It is rich in fiber from the vegetables, low in calories, and unlikely to cause a rapid rise in blood sugar. You can enjoy this meal without concern, but be mindful of additions like dressings that may contain hidden sugars.",
+    "meal_title": "Green Salad",
+    "meal_description": "A simple salad consisting of lettuce, shredded carrots, shredded cabbage, and a light vinaigrette dressing.",
+    "macros": {
+      "calories": 60,
+      "carbohydrates": 8,
+      "fats": 2,
+      "proteins": 2
+    },
+    "ingredients": [
+      {
+        "name": "Lettuce",
+        "impact": "green"
+      },
+      {
+        "name": "Shredded carrots",
+        "impact": "yellow"
+      },
+      {
+        "name": "Shredded cabbage",
+        "impact": "green"
+      },
+      {
+        "name": "Vinaigrette dressing",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Grilled Ribs with Fries and Rice",
+  "fileName": "upload_1752265511713_bc7c0828-8da5-4880-bd18-4f7ad8a3b18d.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal contains a moderate-to-high amount of carbohydrates from the fries and rice, which may lead to a spike in blood sugar levels for a diabetic person. The grilled ribs are a good source of protein and fats but can be high in saturated fat. Diabetics should consider limiting the portion of fries and rice or replacing one of them with a non-starchy vegetable to help manage blood glucose. Opt for leaner cuts of meat and eat in moderation.",
+    "meal_title": "Grilled Ribs with Fries and Rice",
+    "meal_description": "A plate with grilled pork or beef ribs, French fries, white rice, and a lemon wedge.",
+    "macros": {
+      "calories": 850,
+      "carbohydrates": 80,
+      "fats": 45,
+      "proteins": 35
+    },
+    "ingredients": [
+      {
+        "name": "Grilled ribs",
+        "impact": "yellow"
+      },
+      {
+        "name": "French fries",
+        "impact": "orange"
+      },
+      {
+        "name": "White rice",
+        "impact": "orange"
+      },
+      {
+        "name": "Lemon",
+        "impact": "green"
+      },
+      {
+        "name": "Oil (for fries)",
+        "impact": "orange"
+      },
+      {
+        "name": "Seasonings",
+        "impact": "green"
+      }
+    ]
+  }
+}

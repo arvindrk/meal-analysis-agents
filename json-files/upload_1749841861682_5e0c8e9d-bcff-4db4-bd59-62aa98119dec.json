@@ -1,0 +1,49 @@
+{
+  "title": "Creamy Potatoes with Vegetables",
+  "fileName": "upload_1749841861682_5e0c8e9d-bcff-4db4-bd59-62aa98119dec.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal contains mostly non-starchy vegetables (carrots, broccoli) and a creamy potato-based dish. The carrots and broccoli are healthy for diabetics, being low in carbs and high in fiber. However, the creamy potatoes could be higher in carbohydrates, which may cause a rise in blood sugar levels. Diabetics should watch their portion of potatoes and opt for more of the non-starchy vegetables. Consider limiting added creamy sauces to reduce fat and calories.",
+    "meal_title": "Creamy Potatoes with Vegetables",
+    "meal_description": "A plate with creamy scalloped potatoes, steamed carrots, and broccoli.",
+    "macros": {
+      "calories": 300,
+      "carbohydrates": 45,
+      "fats": 9,
+      "proteins": 6
+    },
+    "ingredients": [
+      {
+        "name": "Potatoes",
+        "impact": "yellow"
+      },
+      {
+        "name": "Carrots",
+        "impact": "green"
+      },
+      {
+        "name": "Broccoli",
+        "impact": "green"
+      },
+      {
+        "name": "Cream sauce (milk/cheese/butter)",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

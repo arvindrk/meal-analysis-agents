@@ -1,0 +1,53 @@
+{
+  "title": "Miso Soup",
+  "fileName": "upload_1753199710361_657a23e2-1ed3-4b67-86cb-e5b5b76d0cc5.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This appears to be a serving of miso soup, which is generally safe for people with diabetes as it is low in carbohydrates and calories. However, if you have concerns about sodium, check portion sizes and added ingredients, as restaurant and packaged miso soup can be high in salt.",
+    "meal_title": "Miso Soup",
+    "meal_description": "A traditional Japanese soup made from miso paste, tofu, seaweed, and green onions in a clear broth.",
+    "macros": {
+      "calories": 35,
+      "carbohydrates": 4,
+      "fats": 1,
+      "proteins": 2
+    },
+    "ingredients": [
+      {
+        "name": "Miso paste",
+        "impact": "green"
+      },
+      {
+        "name": "Seaweed",
+        "impact": "green"
+      },
+      {
+        "name": "Green onion",
+        "impact": "green"
+      },
+      {
+        "name": "Tofu (sometimes included)",
+        "impact": "green"
+      },
+      {
+        "name": "Dashi broth",
+        "impact": "green"
+      }
+    ]
+  }
+}

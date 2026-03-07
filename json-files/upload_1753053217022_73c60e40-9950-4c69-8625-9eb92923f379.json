@@ -1,0 +1,37 @@
+{
+  "title": "Bowl of Grapes",
+  "fileName": "upload_1753053217022_73c60e40-9950-4c69-8625-9eb92923f379.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "Grapes are high in natural sugars and carbohydrates, which can quickly raise blood sugar levels. If you have diabetes, consume grapes in moderation and monitor your portion size carefully. Try pairing them with a source of protein or healthy fat to help minimize blood sugar spikes.",
+    "meal_title": "Bowl of Grapes",
+    "meal_description": "A small white bowl filled with fresh red and green grapes.",
+    "macros": {
+      "calories": 62,
+      "carbohydrates": 16,
+      "fats": 0,
+      "proteins": 1
+    },
+    "ingredients": [
+      {
+        "name": "Grapes",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

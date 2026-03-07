@@ -1,0 +1,37 @@
+{
+  "title": "Peeled Carrot",
+  "fileName": "upload_1753199632104_3a898757-6efe-49de-ab61-6195be57723c.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": false,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "Carrots are low in calories and provide a moderate amount of carbohydrates with a low glycemic load. They can be consumed in moderation by diabetics, as their impact on blood sugar is minimal. Ideal as a healthy snack or part of a meal.",
+    "meal_title": "Peeled Carrot",
+    "meal_description": "A single, peeled raw carrot.",
+    "macros": {
+      "calories": 30,
+      "carbohydrates": 7,
+      "fats": 0,
+      "proteins": 1
+    },
+    "ingredients": [
+      {
+        "name": "Carrot",
+        "impact": "green"
+      }
+    ]
+  }
+}

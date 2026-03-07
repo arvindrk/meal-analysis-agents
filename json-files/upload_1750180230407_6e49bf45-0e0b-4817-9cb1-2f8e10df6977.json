@@ -1,0 +1,41 @@
+{
+  "title": "Black Coffee",
+  "fileName": "upload_1750180230407_6e49bf45-0e0b-4817-9cb1-2f8e10df6977.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "Black coffee has almost no calories or carbohydrates and does not significantly impact blood glucose levels, making it generally safe for people with diabetes. However, it's important to avoid adding sugar or high-carb creamers.",
+    "meal_title": "Black Coffee",
+    "meal_description": "A cup of black coffee served in a themed mug, without visible sugar or cream.",
+    "macros": {
+      "calories": 2,
+      "carbohydrates": 0,
+      "fats": 0,
+      "proteins": 0
+    },
+    "ingredients": [
+      {
+        "name": "Coffee",
+        "impact": "green"
+      },
+      {
+        "name": "Water",
+        "impact": "green"
+      }
+    ]
+  }
+}

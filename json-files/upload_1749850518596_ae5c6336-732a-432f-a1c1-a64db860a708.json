@@ -1,0 +1,53 @@
+{
+  "title": "Espresso and Cake",
+  "fileName": "upload_1749850518596_ae5c6336-732a-432f-a1c1-a64db860a708.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal consists of espresso and a piece of plain cake. The espresso is safe for diabetic individuals as it contains negligible carbohydrates, but the cake has a moderate carbohydrate and sugar content, which can raise blood glucose levels. If you have diabetes, enjoy the cake in moderation, ideally paired with unsweetened coffee and balanced with other lower-carb meals throughout the day. Consider a smaller portion or replace the cake with a lower-carb snack if blood sugar control is a concern.",
+    "meal_title": "Espresso and Cake",
+    "meal_description": "A serving of espresso coffee paired with a slice of plain pound cake.",
+    "macros": {
+      "calories": 130,
+      "carbohydrates": 19,
+      "fats": 4,
+      "proteins": 2
+    },
+    "ingredients": [
+      {
+        "name": "Espresso coffee",
+        "impact": "green"
+      },
+      {
+        "name": "Sugar (in cake)",
+        "impact": "orange"
+      },
+      {
+        "name": "Flour (in cake)",
+        "impact": "yellow"
+      },
+      {
+        "name": "Butter or oil (in cake)",
+        "impact": "yellow"
+      },
+      {
+        "name": "Egg (in cake)",
+        "impact": "green"
+      }
+    ]
+  }
+}

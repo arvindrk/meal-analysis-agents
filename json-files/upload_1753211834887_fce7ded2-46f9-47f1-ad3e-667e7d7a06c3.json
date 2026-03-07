@@ -1,0 +1,49 @@
+{
+  "title": "Baked Fish with Sauerkraut",
+  "fileName": "upload_1753211834887_fce7ded2-46f9-47f1-ad3e-667e7d7a06c3.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This meal is ideal for people with diabetes. The fish provides lean protein and healthy fats, while sauerkraut is a low-carb fermented vegetable. Both are unlikely to cause blood sugar spikes, making this meal a safe option.",
+    "meal_title": "Baked Fish with Sauerkraut",
+    "meal_description": "A serving of baked white fish fillet accompanied by a generous portion of sauerkraut.",
+    "macros": {
+      "calories": 220,
+      "carbohydrates": 6,
+      "fats": 6,
+      "proteins": 32
+    },
+    "ingredients": [
+      {
+        "name": "White fish fillet (baked)",
+        "impact": "green"
+      },
+      {
+        "name": "Sauerkraut",
+        "impact": "green"
+      },
+      {
+        "name": "Olive oil (if used for baking)",
+        "impact": "green"
+      },
+      {
+        "name": "Seasonings (salt, pepper)",
+        "impact": "green"
+      }
+    ]
+  }
+}

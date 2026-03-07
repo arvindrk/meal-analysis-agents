@@ -1,0 +1,49 @@
+{
+  "title": "Ginger Lemon Water",
+  "fileName": "upload_1749843713632_58c8331c-7aec-4895-a51b-cb92988cade5.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "green",
+    "guidance_message": "This beverage is safe for people with diabetes. It contains minimal carbohydrates and calories, and provides beneficial nutrients. Ginger and lemon can offer some health benefits without impacting blood sugar levels, while vitamin D+K drops have no effect on glucose.",
+    "meal_title": "Ginger Lemon Water",
+    "meal_description": "A warm beverage made from hot water infused with ginger and lemon, with added vitamin D+K drops.",
+    "macros": {
+      "calories": 5,
+      "carbohydrates": 1,
+      "fats": 0,
+      "proteins": 0
+    },
+    "ingredients": [
+      {
+        "name": "Hot water",
+        "impact": "green"
+      },
+      {
+        "name": "Ginger",
+        "impact": "green"
+      },
+      {
+        "name": "Lemon juice",
+        "impact": "green"
+      },
+      {
+        "name": "Vitamin D+K drops",
+        "impact": "green"
+      }
+    ]
+  }
+}

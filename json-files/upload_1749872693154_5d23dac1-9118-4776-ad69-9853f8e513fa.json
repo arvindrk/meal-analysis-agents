@@ -1,0 +1,57 @@
+{
+  "title": "Beef Sushi Roll",
+  "fileName": "upload_1749872693154_5d23dac1-9118-4776-ad69-9853f8e513fa.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This sushi roll is moderate in carbohydrates due to the rice content, which can raise blood glucose levels. The beef or seared meat topping adds protein and some fat, which can help slow blood sugar spikes, but portion size should be watched. Diabetics can enjoy this meal in moderation, preferably with a smaller rice portion or by sharing. Avoid sweet sauces or excess soy sauce to keep sodium and sugar controlled.",
+    "meal_title": "Beef Sushi Roll",
+    "meal_description": "Seared beef sushi roll garnished with sliced peppers, served with wasabi and pickled ginger.",
+    "macros": {
+      "calories": 380,
+      "carbohydrates": 40,
+      "fats": 13,
+      "proteins": 22
+    },
+    "ingredients": [
+      {
+        "name": "Sushi rice",
+        "impact": "yellow"
+      },
+      {
+        "name": "Beef (seared)",
+        "impact": "green"
+      },
+      {
+        "name": "Sliced peppers",
+        "impact": "green"
+      },
+      {
+        "name": "Wasabi",
+        "impact": "green"
+      },
+      {
+        "name": "Pickled ginger",
+        "impact": "green"
+      },
+      {
+        "name": "Soy sauce (optional)",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

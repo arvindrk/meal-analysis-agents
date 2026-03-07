@@ -1,0 +1,53 @@
+{
+  "title": "Pâté and Greens Plate",
+  "fileName": "upload_1750097765140_1dccfd72-61d7-462c-b163-f5b7c348b547.jpeg",
+  "guardrailCheck": {
+    "is_food": true,
+    "no_pii": true,
+    "no_humans": true,
+    "no_captcha": true
+  },
+  "safetyChecks": {
+    "no_insuline_guidance": true,
+    "no_carb_content": true,
+    "no_emotional_or_judgmental_language": true,
+    "no_risky_ingredient_substitutions": true,
+    "no_treatment_recommendation": true,
+    "no_medical_diagnosis": true
+  },
+  "mealAnalysis": {
+    "is_food": true,
+    "recommendation": "yellow",
+    "guidance_message": "This meal combines salad, pâté, foie gras, and toasted bread. The greens are safe and beneficial for diabetics, while the pâté and foie gras are high in fat and should be eaten in moderation. The toasted bread represents a source of refined carbohydrates and will increase blood glucose levels; diabetics should limit portion size or substitute with whole-grain bread whenever possible.",
+    "meal_title": "Pâté and Greens Plate",
+    "meal_description": "A plate consisting of fresh leafy greens, two pieces of toasted white bread, slices of pâté, and foie gras.",
+    "macros": {
+      "calories": 450,
+      "carbohydrates": 40,
+      "fats": 26,
+      "proteins": 14
+    },
+    "ingredients": [
+      {
+        "name": "Toasted white bread",
+        "impact": "orange"
+      },
+      {
+        "name": "Leafy greens (lamb's lettuce or similar)",
+        "impact": "green"
+      },
+      {
+        "name": "Pâté",
+        "impact": "yellow"
+      },
+      {
+        "name": "Foie gras",
+        "impact": "yellow"
+      },
+      {
+        "name": "Salad dressing (possibly creamy)",
+        "impact": "yellow"
+      }
+    ]
+  }
+}

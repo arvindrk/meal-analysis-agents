@@ -2,12 +2,14 @@
   "name": "meal-agents",
   "type": "module",
   "scripts": {
-    "start": "bun run src/cli.ts",
-    "run:all": "bun run src/cli.ts -- --all",
-    "run:one": "bun run src/cli.ts -- --image"
+    "start": "tsx --env-file=.env src/run.ts"
   },
   "dependencies": {
     "@openai/agents": "^0.5.4",
     "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }

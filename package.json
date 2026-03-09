@@ -3,12 +3,21 @@
   "type": "module",
   "scripts": {
     "start": "tsx --env-file=.env src/run.ts",
+    "run": "npm run start --",
+    "run:guardrail": "npm run start -- --agent guardrail",
+    "run:analysis": "npm run start -- --agent analysis",
+    "run:safety": "npm run start -- --agent safety",
+    "run:quick": "npm run start -- --n 3",
     "eval:generate": "tsx --env-file=.env scripts/generate-test-cases.ts",
     "eval:guardrail": "NODE_ENV=test NODE_OPTIONS='--import tsx/esm' promptfoo eval -c evals/guardrailCheck.yaml --output output/evals/results/guardrailCheck-results.json",
     "eval:analysis": "NODE_ENV=test NODE_OPTIONS='--import tsx/esm' promptfoo eval -c evals/mealAnalysis.yaml --output output/evals/results/mealAnalysis-results.json",
     "eval:merge-meal": "tsx --env-file=.env scripts/merge-meal-for-safety.ts",
     "eval:safety": "NODE_ENV=test NODE_OPTIONS='--import tsx/esm' promptfoo eval -c evals/safetyChecks.yaml --output output/evals/results/safetyChecks-results.json",
-    "eval:score": "tsx --env-file=.env scripts/score-composite.ts"
+    "eval:score": "tsx --env-file=.env scripts/score-composite.ts",
+    "eval:all": "npm run eval:generate && npm run eval:guardrail && npm run eval:analysis && npm run eval:merge-meal && npm run eval:safety && npm run eval:score",
+    "eval:view": "promptfoo view",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf output dist"
   },
   "dependencies": {
     "@openai/agents": "^0.5.4",

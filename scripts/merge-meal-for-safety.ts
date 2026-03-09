@@ -7,13 +7,12 @@
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
-import { join, resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
+import { EVALS_TEST_CASES_DIR, EVALS_RESULTS_DIR } from './constants';
 
-const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const MEAL_RESULTS_PATH = join(ROOT, 'output', 'evals', 'mealAnalysis-results.json');
-const TEST_CASES_PATH = join(ROOT, 'evals', 'test-cases.json');
-const OUT_PATH = join(ROOT, 'evals', 'safetyChecks-test-cases.json');
+const MEAL_RESULTS_PATH = join(EVALS_RESULTS_DIR, 'mealAnalysis-results.json');
+const TEST_CASES_PATH = join(EVALS_TEST_CASES_DIR, 'test-cases.json');
+const OUT_PATH = join(EVALS_TEST_CASES_DIR, 'safetyChecks-test-cases.json');
 
 interface PromptfooResult {
   vars?: { imageId?: string };
@@ -89,7 +88,7 @@ function main() {
     });
   }
 
-  mkdirSync(join(ROOT, 'evals'), { recursive: true });
+  mkdirSync(EVALS_TEST_CASES_DIR, { recursive: true });
   writeFileSync(OUT_PATH, JSON.stringify(merged, null, 2));
   console.log(
     `Merged ${merged.length} test cases (skipped ${skippedNoMeal} no meal output, ${skippedNoSafety} no safetyChecks) → ${OUT_PATH}`,

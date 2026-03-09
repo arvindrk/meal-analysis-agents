@@ -1,9 +1,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { join, resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { loadDatasetWithStats } from '../src/dataset';
-
-const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+import { EVALS_TEST_CASES_DIR } from './constants';
 
 const { entries } = loadDatasetWithStats();
 
@@ -15,8 +13,8 @@ const testCases = entries.map((entry) => ({
   },
 }));
 
-mkdirSync(join(ROOT, 'evals'), { recursive: true });
+mkdirSync(EVALS_TEST_CASES_DIR, { recursive: true });
 
-const outPath = join(ROOT, 'evals', 'test-cases.json');
+const outPath = join(EVALS_TEST_CASES_DIR, 'test-cases.json');
 writeFileSync(outPath, JSON.stringify(testCases, null, 2));
 console.log(`Generated ${testCases.length} test cases (guardrail + mealAnalysis) → ${outPath}`);

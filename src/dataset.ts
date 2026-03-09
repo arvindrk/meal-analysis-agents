@@ -6,7 +6,7 @@ import type { GroundTruth, DatasetEntry } from './types';
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), '..', '..');
 const DEFAULT_DATA_DIR = join(PROJECT_ROOT, 'data');
-const DEFAULT_OUTPUT_DIR = join(PROJECT_ROOT, 'output');
+const DEFAULT_OUTPUT_DIR = join(PROJECT_ROOT, 'output', 'pipeline');
 
 export interface LoadDatasetResult {
   entries: DatasetEntry[];

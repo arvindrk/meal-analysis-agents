@@ -51,7 +51,7 @@ providers:
 prompts:
   - "{{imageId}}"
 
-tests: file://safetyChecks-test-cases.json
+tests: file://../output/evals/test-cases/safetyChecks-test-cases.json
 
 defaultTest:
   assert:

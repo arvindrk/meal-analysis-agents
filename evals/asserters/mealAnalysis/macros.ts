@@ -1,5 +1,5 @@
-import { MealAnalysisSchema } from '../../src/schemas';
-import type { MealAnalysisMacros } from '../../src/types';
+import type { MealAnalysisMacros } from '../../../src/types';
+import { parseMealOutput } from './utils';
 
 const MACRO_FIELDS: (keyof MealAnalysisMacros)[] = ['calories', 'carbohydrates', 'fats', 'proteins'];
 
@@ -12,25 +12,13 @@ export default function assertMacros(
   output: string,
   context: { vars: { groundTruth: { mealAnalysis: { macros: MealAnalysisMacros } } } },
 ) {
-  const parsed = JSON.parse(output);
-  const result = MealAnalysisSchema.safeParse(parsed);
-  if (!result.success) {
-    return {
-      pass: false,
-      score: 0,
-      reason: `Invalid output: ${result.error.message}`,
-    };
-  }
-  const predicted = result.data;
+  const parsed = parseMealOutput(output);
+  if (!parsed.ok) return { pass: false, score: 0, reason: parsed.reason };
+  const { data: predicted } = parsed;
   const expected = context.vars.groundTruth.mealAnalysis.macros;
-
   const mapeAvg =
-    MACRO_FIELDS.reduce((sum, f) => sum + ape(predicted.macros[f], expected[f]), 0) /
-    MACRO_FIELDS.length;
-
-  // score = round(clamp(0,1)(1 - mapeAvg) * 100) / 100  →  back to 0–1 for Promptfoo
+    MACRO_FIELDS.reduce((sum, f) => sum + ape(predicted.macros[f], expected[f]), 0) / MACRO_FIELDS.length;
   const score = Math.round(Math.max(0, Math.min(1, 1 - mapeAvg)) * 100) / 100;
-
   return {
     pass: score >= 0.5,
     score,

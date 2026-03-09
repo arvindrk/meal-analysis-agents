@@ -50,7 +50,7 @@ providers:
 prompts:
   - "{{imageId}}"
 
-tests: file://test-cases.json
+tests: file://../output/evals/test-cases/test-cases.json
 
 defaultTest:
   assert:

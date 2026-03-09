@@ -7,18 +7,16 @@
  *   tsx --env-file=.env scripts/score-composite.ts
  *
  * Expected result files (produced by `promptfoo eval --output`):
- *   output/evals/guardrailCheck-results.json
- *   output/evals/mealAnalysis-results.json
- *   output/evals/safetyChecks-results.json
+ *   output/evals/results/guardrailCheck-results.json
+ *   output/evals/results/mealAnalysis-results.json
+ *   output/evals/results/safetyChecks-results.json
  */
 
 import { readFileSync, existsSync } from 'node:fs';
-import { join, resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import boxen from 'boxen';
 import chalk from 'chalk';
-
-const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+import { EVALS_RESULTS_DIR } from './constants';
 
 function scoreColor(score: number): (s: string) => string {
   if (score >= 80) return chalk.green;
@@ -67,7 +65,7 @@ interface PromptfooOutput {
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function loadResults(filename: string): EvalResult[] {
-  const path = join(ROOT, 'output', 'evals', filename);
+  const path = join(EVALS_RESULTS_DIR, filename);
   if (!existsSync(path)) {
     console.warn(chalk.yellow(`  [warn] ${filename} not found — skipping`));
     return [];
@@ -101,27 +99,25 @@ function modelsWithMaxScore(stats: ModelStats[]): { models: ModelStats[]; maxSco
   return { models, maxScore };
 }
 
-function bestByValue(stats: ModelStats[]): { models: ModelStats[]; metric: number } {
-  if (stats.length === 0) return { models: [], metric: 0 };
-  const withMetric = stats.map((s) => {
-    const tokens = s.avgInputTokens + s.avgOutputTokens;
-    const metric = tokens > 0 ? (s.evalScore / tokens) * 1000 : 0;
-    return { stats: s, metric };
-  });
+function bestBy<T>(items: T[], scoreFn: (t: T) => number): { items: T[]; metric: number } {
+  if (items.length === 0) return { items: [], metric: 0 };
+  const withMetric = items.map((t) => ({ item: t, metric: scoreFn(t) }));
   const max = Math.max(...withMetric.map((x) => x.metric));
-  const models = withMetric.filter((x) => x.metric === max).map((x) => x.stats);
-  return { models, metric: max };
+  const best = withMetric.filter((x) => x.metric === max).map((x) => x.item);
+  return { items: best, metric: max };
+}
+
+function bestByValue(stats: ModelStats[]): { models: ModelStats[]; metric: number } {
+  const r = bestBy(stats, (s) => {
+    const tokens = s.avgInputTokens + s.avgOutputTokens;
+    return tokens > 0 ? (s.evalScore / tokens) * 1000 : 0;
+  });
+  return { models: r.items, metric: r.metric };
 }
 
 function bestByLatency(stats: ModelStats[]): { models: ModelStats[]; metric: number } {
-  if (stats.length === 0) return { models: [], metric: 0 };
-  const withMetric = stats.map((s) => {
-    const metric = s.p50LatencyMs > 0 ? s.evalScore / s.p50LatencyMs : 0;
-    return { stats: s, metric };
-  });
-  const max = Math.max(...withMetric.map((x) => x.metric));
-  const models = withMetric.filter((x) => x.metric === max).map((x) => x.stats);
-  return { models, metric: max };
+  const r = bestBy(stats, (s) => (s.p50LatencyMs > 0 ? s.evalScore / s.p50LatencyMs : 0));
+  return { models: r.items, metric: r.metric };
 }
 
 function bestByBalanced(stats: ModelStats[]): ModelStats[] {

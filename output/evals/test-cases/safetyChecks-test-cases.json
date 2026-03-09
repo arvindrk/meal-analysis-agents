@@ -63,9 +63,9 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This appears to be a serving of plain white bread rolls. Refined bread is typically high in rapidly absorbed carbohydrates and low in fiber, which may raise blood glucose more quickly than whole-grain alternatives. Portion size and pairing with protein, fiber, or healthy fats may help moderate the overall glycemic impact.",
-        "meal_title": "Plain White Bread Rolls",
-        "meal_description": "Three plain bread rolls are visible on a metal surface.",
+        "guidance_message": "This appears to be a serving of white bread rolls. Refined bread is typically higher in rapidly absorbed carbohydrates and lower in fiber, which may raise blood glucose more quickly than whole-grain or higher-fiber options. Portion size and pairing with protein, healthy fats, or fiber can affect the overall meal impact.",
+        "meal_title": "White Bread Rolls",
+        "meal_description": "Three plain bread rolls with a smooth golden-brown crust are visible on a metal surface.",
         "macros": {
           "calories": 420,
           "carbohydrates": 78,
@@ -74,7 +74,7 @@
         },
         "ingredients": [
           {
-            "name": "White bread roll",
+            "name": "White bread rolls",
             "impact": "orange"
           },
           {
@@ -149,20 +149,16 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This plate appears to include mostly non-starchy vegetables with a moderate portion of couscous and a fried onion ring. The vegetables are generally favorable for blood sugar management, while the couscous and fried item may raise the carbohydrate load and reduce overall suitability if eaten in larger portions.",
-        "meal_title": "Couscous with Mixed Vegetables and Onion Ring",
-        "meal_description": "A bowl containing couscous, broccoli, cauliflower, cooked leafy greens, a fried onion ring, and a small portion of creamy sauce or mash.",
+        "guidance_message": "This plate appears to include mostly non-starchy vegetables with a moderate portion of couscous and a fried onion ring. The vegetables are generally lower in carbohydrates, while the couscous and breaded fried item may raise the meal's carbohydrate impact. Portion size and any added sauces or oils can materially change the overall effect.",
+        "meal_title": "Vegetable Plate with Couscous and Onion Ring",
+        "meal_description": "A bowl containing broccoli, cauliflower, cooked leafy greens, a serving of couscous, a fried onion ring, and a small dollop of creamy sauce or mash.",
         "macros": {
-          "calories": 420,
-          "carbohydrates": 38,
-          "fats": 18,
+          "calories": 430,
+          "carbohydrates": 41,
+          "fats": 19,
           "proteins": 14
         },
         "ingredients": [
-          {
-            "name": "Couscous",
-            "impact": "yellow"
-          },
           {
             "name": "Broccoli",
             "impact": "green"
@@ -174,6 +170,10 @@
           {
             "name": "Cooked leafy greens",
             "impact": "green"
+          },
+          {
+            "name": "Couscous",
+            "impact": "yellow"
           },
           {
             "name": "Fried onion ring",
@@ -251,34 +251,34 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a small portion of cooked vegetables with mushrooms and herbs. The meal is relatively low in carbohydrates and likely moderate in calories, which may be suitable for people with diabetes, though the exact impact depends on the cooking oil, seasoning, and any additional foods eaten with it.",
-        "meal_title": "Sautéed Vegetables with Mushrooms",
-        "meal_description": "A small serving of sautéed mushrooms, carrot sticks, and sliced potatoes or similar root vegetables with herbs is visible on a plate.",
+        "guidance_message": "This meal appears to be a small portion of sautéed vegetables, including carrots, mushrooms, and potato slices. It is relatively light overall, but the potato and carrot content may contribute a moderate carbohydrate load, so portion size and any added oils or sauces are relevant considerations for people with diabetes.",
+        "meal_title": "Sautéed Mixed Vegetables",
+        "meal_description": "A small serving of sautéed vegetables on a plate, including sliced potatoes, carrots, mushrooms, and herbs or seasoning.",
         "macros": {
-          "calories": 180,
+          "calories": 140,
           "carbohydrates": 18,
-          "fats": 9,
-          "proteins": 4
+          "fats": 6,
+          "proteins": 3
         },
         "ingredients": [
           {
-            "name": "mushrooms",
-            "impact": "green"
-          },
-          {
-            "name": "carrots",
-            "impact": "yellow"
-          },
-          {
-            "name": "potato slices",
+            "name": "Potato slices",
             "impact": "orange"
           },
           {
-            "name": "herbs/seasoning",
+            "name": "Carrots",
+            "impact": "yellow"
+          },
+          {
+            "name": "Mushrooms",
             "impact": "green"
           },
           {
-            "name": "cooking oil",
+            "name": "Herbs/seasoning",
+            "impact": "green"
+          },
+          {
+            "name": "Cooking oil",
             "impact": "yellow"
           }
         ]
@@ -345,14 +345,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This meal appears to include white rice topped with a bean, tomato, and melted cheese mixture. The rice likely contributes most of the carbohydrates, while the beans add some fiber and protein. Portion size and the amount of rice can affect how suitable this meal is for people managing blood glucose.",
-        "meal_title": "Rice with Beans, Tomatoes, and Melted Cheese",
-        "meal_description": "A small serving of white rice topped with stewed tomatoes, black beans, herbs, and melted cheese on a yellow plate.",
+        "guidance_message": "This meal appears to include white rice topped with a tomato- and bean-based mixture and melted cheese. The rice likely contributes most of the carbohydrates, while the beans and cheese add protein and fat that may help moderate the meal's overall glycemic impact. Portion size and the amount of rice are the main factors to watch for blood sugar management.",
+        "meal_title": "Rice with Beans, Tomato Sauce, and Melted Cheese",
+        "meal_description": "A serving of white rice topped with a saucy mixture of beans, tomatoes or peppers, and melted cheese on a yellow plate.",
         "macros": {
-          "calories": 320,
-          "carbohydrates": 38,
-          "fats": 11,
-          "proteins": 13
+          "calories": 390,
+          "carbohydrates": 46,
+          "fats": 14,
+          "proteins": 16
         },
         "ingredients": [
           {
@@ -360,20 +360,20 @@
             "impact": "orange"
           },
           {
-            "name": "black beans",
+            "name": "beans",
             "impact": "green"
           },
           {
-            "name": "stewed tomatoes",
+            "name": "tomato sauce",
+            "impact": "green"
+          },
+          {
+            "name": "peppers",
             "impact": "green"
           },
           {
             "name": "melted cheese",
             "impact": "yellow"
-          },
-          {
-            "name": "herbs",
-            "impact": "green"
           }
         ]
       }
@@ -431,14 +431,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a bowl of plain yogurt topped with blueberries and red currants. It is generally a balanced option with protein from the yogurt and fiber from the berries, while the fruit portion contributes natural carbohydrates. For people monitoring blood glucose, keeping the yogurt unsweetened and being mindful of portion size can help keep carbohydrate intake moderate.",
+        "guidance_message": "This appears to be a bowl of plain yogurt topped with blueberries and red currants. It is generally a diabetes-friendly option because it provides protein from yogurt and fiber from berries, with a moderate carbohydrate amount for the visible portion. Unsweetened yogurt is typically a better choice than sweetened varieties.",
         "meal_title": "Yogurt with Blueberries and Red Currants",
-        "meal_description": "A bowl of creamy yogurt topped with fresh blueberries and red currants.",
+        "meal_description": "A bowl of plain yogurt topped with fresh blueberries and red currants.",
         "macros": {
           "calories": 180,
           "carbohydrates": 20,
           "fats": 5,
-          "proteins": 12
+          "proteins": 11
         },
         "ingredients": [
           {
@@ -513,14 +513,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This meal appears to include lean protein and non-starchy vegetables, which can support a more balanced blood sugar response. The potato portion adds a higher-carbohydrate component, so portion size and pairing with protein and vegetables are the main considerations.",
+        "guidance_message": "This meal appears to include lean protein and non-starchy vegetables, which can support a lower glycemic impact. The potatoes add a moderate carbohydrate load, so portion size and pairing with the protein and vegetables are relevant for overall suitability for people with diabetes.",
         "meal_title": "Chicken with Potatoes, Carrots, and Broccoli",
-        "meal_description": "A plate with a piece of chicken in light sauce, sliced carrots, broccoli, and cooked potato pieces.",
+        "meal_description": "A plate with a piece of chicken in a light sauce, sliced carrots, a broccoli floret, and cooked potato pieces.",
         "macros": {
-          "calories": 320,
+          "calories": 290,
           "carbohydrates": 24,
-          "fats": 12,
-          "proteins": 28
+          "fats": 10,
+          "proteins": 24
         },
         "ingredients": [
           {
@@ -619,18 +619,18 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This meal appears to include refined flatbread and white rice along with lentil curry, chutney, and a boiled egg. The combination likely provides a substantial carbohydrate load, so portion size and balancing with the protein-containing items may be important for people monitoring blood glucose.",
-        "meal_title": "Indian thali with roti, rice, dal, chutney, and egg",
-        "meal_description": "A plated meal with large flatbreads, a serving of white rice, a boiled egg, small bowls of lentil curry and yellow curry or sauce, green chutney, and a small portion of pickle or fried side.",
+        "guidance_message": "This meal appears to include multiple refined carbohydrate items, including flatbread, white rice, and bread, which may raise blood glucose more quickly, especially when eaten together. The egg and lentil-based curry can add protein, which may help balance the meal. A smaller portion of the starches and a greater share of protein- and vegetable-based items would generally make this meal more diabetes-friendly.",
+        "meal_title": "Indian thali with roti, rice, egg, and curries",
+        "meal_description": "A plated meal with flatbread, a serving of white rice, a boiled egg, sliced bread, and several small bowls of curry or sauce, including a green chutney-like dish and a yellow curry.",
         "macros": {
-          "calories": 780,
-          "carbohydrates": 92,
-          "fats": 28,
+          "calories": 820,
+          "carbohydrates": 102,
+          "fats": 29,
           "proteins": 24
         },
         "ingredients": [
           {
-            "name": "flatbread/roti or naan",
+            "name": "flatbread (roti/paratha)",
             "impact": "orange"
           },
           {
@@ -638,24 +638,28 @@
             "impact": "orange"
           },
           {
-            "name": "lentil curry (dal)",
-            "impact": "yellow"
-          },
-          {
-            "name": "yellow curry or sauce",
-            "impact": "yellow"
-          },
-          {
-            "name": "green chutney",
-            "impact": "green"
-          },
-          {
             "name": "boiled egg",
             "impact": "green"
           },
           {
-            "name": "pickle or fried side",
+            "name": "bread slices",
+            "impact": "orange"
+          },
+          {
+            "name": "lentil or bean curry",
             "impact": "yellow"
+          },
+          {
+            "name": "yellow curry or dal",
+            "impact": "yellow"
+          },
+          {
+            "name": "green chutney or vegetable curry",
+            "impact": "green"
+          },
+          {
+            "name": "pickle or fried side item",
+            "impact": "orange"
           },
           {
             "name": "butter or ghee",
@@ -720,23 +724,19 @@
       },
       "pipelineMealAnalysis": {
         "is_food": true,
-        "recommendation": "yellow",
-        "guidance_message": "This appears to be a bowl of clear broth or soup with minimal visible solid ingredients. If it is a low-carbohydrate broth, it may have limited effect on blood glucose, but sodium content can vary and any added starches or sweeteners would change its impact.",
-        "meal_title": "Clear Broth Soup",
-        "meal_description": "A small blue bowl containing a clear, light-colored liquid, likely broth or a very thin soup.",
+        "recommendation": "green",
+        "guidance_message": "This appears to be a plain beverage with minimal calories and carbohydrates. Unsweetened drinks generally have little effect on blood glucose, though the exact impact depends on what the liquid is.",
+        "meal_title": "Plain Unsweetened Beverage",
+        "meal_description": "A blue ceramic cup containing a clear, lightly tinted liquid, likely water, tea, or another unsweetened drink.",
         "macros": {
-          "calories": 20,
-          "carbohydrates": 1,
+          "calories": 0,
+          "carbohydrates": 0,
           "fats": 0,
-          "proteins": 2
+          "proteins": 0
         },
         "ingredients": [
           {
-            "name": "clear broth",
-            "impact": "green"
-          },
-          {
-            "name": "water",
+            "name": "Water or unsweetened tea",
             "impact": "green"
           }
         ]
@@ -803,27 +803,39 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This meal appears to include espresso and a slice of plain cake. The coffee itself is very low in carbohydrates if unsweetened, while the cake is likely the main source of refined carbohydrates and calories. For people with diabetes, portion size and any added sugar in the coffee would be the main factors to monitor.",
+        "guidance_message": "This appears to be a small espresso with a slice of plain cake. The coffee itself is very low in carbohydrates, while the cake likely adds refined flour and sugar, which can raise blood glucose more quickly. A smaller portion of the cake or pairing it with a protein-rich food may help reduce the overall glycemic impact of the snack.",
         "meal_title": "Espresso with Plain Cake Slice",
-        "meal_description": "A small cup of espresso served on a saucer with a spoon, alongside a slice of plain yellow cake.",
+        "meal_description": "A small cup of espresso served on a saucer with a slice of plain yellow cake or sponge cake on the side.",
         "macros": {
-          "calories": 260,
-          "carbohydrates": 30,
+          "calories": 240,
+          "carbohydrates": 28,
           "fats": 11,
           "proteins": 4
         },
         "ingredients": [
           {
-            "name": "Espresso",
+            "name": "espresso coffee",
             "impact": "green"
           },
           {
-            "name": "Plain cake slice",
+            "name": "plain cake",
             "impact": "orange"
           },
           {
-            "name": "Sugar in coffee (possible)",
+            "name": "wheat flour",
+            "impact": "orange"
+          },
+          {
+            "name": "sugar",
+            "impact": "red"
+          },
+          {
+            "name": "butter or oil",
             "impact": "yellow"
+          },
+          {
+            "name": "eggs",
+            "impact": "green"
           }
         ]
       }
@@ -889,26 +901,30 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This meal appears to include a flatbread with an omelet and onions. It provides protein from eggs, but the flatbread adds a moderate carbohydrate load. For people managing blood glucose, portion size and pairing with non-starchy vegetables can help reduce the overall glycemic impact.",
-        "meal_title": "Omelet with Flatbread",
-        "meal_description": "A folded egg omelet with visible onion pieces served on a round flatbread or roti.",
+        "guidance_message": "This meal appears to include a flatbread with an egg omelet and onions. It provides protein from the egg, but the flatbread contributes a moderate carbohydrate load. For people with diabetes, portion size and pairing with non-starchy vegetables can help moderate the overall glucose impact.",
+        "meal_title": "Flatbread with Egg Omelet",
+        "meal_description": "A single round flatbread topped with a folded egg omelet containing visible onion pieces, served on a plate.",
         "macros": {
           "calories": 320,
           "carbohydrates": 28,
           "fats": 14,
-          "proteins": 18
+          "proteins": 15
         },
         "ingredients": [
           {
-            "name": "Egg omelet",
-            "impact": "green"
-          },
-          {
-            "name": "Onion",
+            "name": "flatbread",
             "impact": "yellow"
           },
           {
-            "name": "Flatbread/roti",
+            "name": "egg omelet",
+            "impact": "green"
+          },
+          {
+            "name": "onion",
+            "impact": "green"
+          },
+          {
+            "name": "cooking oil or ghee",
             "impact": "yellow"
           }
         ]
@@ -971,9 +987,9 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This dish appears to include raw fish over avocado with sauce and a small amount of roe. It is relatively low in carbohydrates, but the sauce may add sodium and some sugar depending on preparation. For people with diabetes, it may fit better as a lighter meal or starter when paired with non-starchy vegetables and with attention to sauce quantity.",
-        "meal_title": "Raw Fish and Avocado with Sauce",
-        "meal_description": "A small plated dish with diced raw fish, avocado, dark roe, shredded greens, and a brown savory sauce.",
+        "guidance_message": "This dish appears to include raw fish over avocado with a soy-based sauce and roe. It may be moderate in carbohydrates but can be relatively high in fat and sodium depending on the sauce portion. For people with diabetes, it may fit better as part of a balanced meal when paired with non-starchy vegetables and with attention to sauce quantity.",
+        "meal_title": "Raw fish and avocado appetizer",
+        "meal_description": "A small plated dish with diced raw fish, avocado, dark roe, and a soy-based sauce, served with a spoon.",
         "macros": {
           "calories": 320,
           "carbohydrates": 10,
@@ -990,15 +1006,15 @@
             "impact": "green"
           },
           {
+            "name": "soy-based sauce",
+            "impact": "yellow"
+          },
+          {
             "name": "fish roe",
-            "impact": "yellow"
+            "impact": "green"
           },
           {
-            "name": "savory sauce",
-            "impact": "yellow"
-          },
-          {
-            "name": "shredded greens",
+            "name": "scallions or microgreens",
             "impact": "green"
           }
         ]
@@ -1068,15 +1084,15 @@
       },
       "pipelineMealAnalysis": {
         "is_food": true,
-        "recommendation": "orange",
-        "guidance_message": "This appears to be a sushi roll topped with seared beef and sliced jalapeño. The rice contributes a concentrated carbohydrate source, while the beef adds protein and fat. For people with diabetes, portion size and sauces or sweetened seasonings can meaningfully affect the overall carbohydrate impact.",
+        "recommendation": "yellow",
+        "guidance_message": "This appears to be a sushi roll topped with seared beef and sliced jalapeño, likely served with sushi rice and small amounts of wasabi and pickled ginger. The rice contributes a moderate carbohydrate load, while the beef adds protein and fat that may slow absorption. For people with diabetes, portion size and any sweetened sauces can meaningfully affect the meal's overall impact.",
         "meal_title": "Seared Beef Sushi Roll",
-        "meal_description": "A long sushi roll with rice, topped with slices of seared beef and jalapeño, served with wasabi, pickled ginger, and a small cup of sauce.",
+        "meal_description": "A long plated sushi roll cut into pieces, topped with seared beef slices and jalapeño rounds, with wasabi, pickled ginger, and a small cup of sauce on the side.",
         "macros": {
           "calories": 480,
           "carbohydrates": 42,
           "fats": 18,
-          "proteins": 32
+          "proteins": 30
         },
         "ingredients": [
           {
@@ -1092,6 +1108,10 @@
             "impact": "green"
           },
           {
+            "name": "nori",
+            "impact": "green"
+          },
+          {
             "name": "wasabi",
             "impact": "green"
           },
@@ -1100,7 +1120,7 @@
             "impact": "yellow"
           },
           {
-            "name": "dipping sauce",
+            "name": "sauce (possibly mayo or sweet sauce)",
             "impact": "yellow"
           }
         ]
@@ -1163,35 +1183,35 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a yogurt-based dessert or breakfast with strawberries, crushed pistachios, and a sweet crumb or syrup. It likely provides some protein and fat from the dairy and nuts, but it may also contain added sugar from the topping and fruit preparation, so portion size and sweetness level are relevant for people with diabetes.",
-        "meal_title": "Yogurt with Strawberries and Pistachio Crumble",
-        "meal_description": "A bowl with a thick scoop of yogurt or labneh topped with crushed pistachios, surrounded by sliced strawberries and a pink fruit or syrup base.",
+        "guidance_message": "This appears to be a yogurt-based dessert or breakfast bowl with strawberries, crumb topping, and a pink fruit or granita-like layer. It may provide some protein from the yogurt, but the fruit topping, sweetened components, and crumb layer can increase carbohydrate content. Portion size and added sugars are the main factors to watch for people managing blood glucose.",
+        "meal_title": "Yogurt with Strawberries and Crumble",
+        "meal_description": "A bowl containing a mound of yogurt topped with crumbly garnish, sliced strawberries, and a pink fruit or shaved-ice-like layer underneath.",
         "macros": {
           "calories": 320,
-          "carbohydrates": 28,
-          "fats": 16,
-          "proteins": 14
+          "carbohydrates": 36,
+          "fats": 12,
+          "proteins": 15
         },
         "ingredients": [
           {
-            "name": "Yogurt or labneh",
-            "impact": "green"
+            "name": "Yogurt",
+            "impact": "yellow"
           },
           {
             "name": "Strawberries",
             "impact": "green"
           },
           {
-            "name": "Pistachios",
+            "name": "Crumb topping",
+            "impact": "orange"
+          },
+          {
+            "name": "Pink fruit puree or granita",
+            "impact": "orange"
+          },
+          {
+            "name": "Crushed nuts or pistachio garnish",
             "impact": "green"
-          },
-          {
-            "name": "Sweet crumble or crushed biscuit",
-            "impact": "orange"
-          },
-          {
-            "name": "Fruit syrup or sweetened fruit base",
-            "impact": "orange"
           }
         ]
       }
@@ -1257,34 +1277,34 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This appears to be a baked pasta dish with a large portion of refined pasta and cheese sauce, which can provide a high carbohydrate load. For people with diabetes, portion size and pairing with non-starchy vegetables or a lean protein may help moderate the meal's overall impact.",
-        "meal_title": "Baked Macaroni and Cheese",
-        "meal_description": "A glass baking dish containing baked tubular pasta coated in cheese sauce and topped with toasted bread cubes and grated cheese.",
+        "guidance_message": "This appears to be a creamy baked pasta dish with croutons or breadcrumbs. The meal is likely high in refined carbohydrates and calories, which may raise blood glucose more quickly, especially in a larger portion. A smaller serving and pairing with non-starchy vegetables or a lean protein may help moderate the overall carbohydrate load.",
+        "meal_title": "Creamy Baked Pasta",
+        "meal_description": "A glass baking dish containing penne pasta in a creamy cheese-based sauce, topped with toasted bread pieces or breadcrumbs.",
         "macros": {
-          "calories": 520,
-          "carbohydrates": 48,
-          "fats": 24,
+          "calories": 620,
+          "carbohydrates": 68,
+          "fats": 28,
           "proteins": 22
         },
         "ingredients": [
           {
-            "name": "refined pasta",
+            "name": "Penne pasta",
             "impact": "orange"
           },
           {
-            "name": "cheese sauce",
+            "name": "Creamy cheese sauce",
             "impact": "yellow"
           },
           {
-            "name": "bread crumb or crouton topping",
+            "name": "Breadcrumbs or croutons",
             "impact": "orange"
           },
           {
-            "name": "grated cheese",
+            "name": "Butter or oil",
             "impact": "yellow"
           },
           {
-            "name": "butter or oil",
+            "name": "Cheese",
             "impact": "yellow"
           }
         ]
@@ -1351,13 +1371,13 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "These sous vide egg bites appear to be a relatively low-carbohydrate, higher-protein packaged breakfast option. They may fit more easily into a diabetes-conscious eating pattern than many breakfast pastries or cereals, but the bacon, gouda, and likely added saturated fat and sodium suggest moderate caution with portion size and frequency.",
-        "meal_title": "Sous Vide Egg Bites with Bacon and Gouda",
-        "meal_description": "A boxed package of Kirkland Sous Vide Egg Bites, uncured bacon and gouda flavor, shown on a countertop.",
+        "guidance_message": "These sous vide egg bites are a relatively low-carbohydrate, higher-protein breakfast option, which may fit well for people managing blood sugar. The bacon and gouda increase saturated fat and sodium, so portion size and pairing with fiber-rich foods such as vegetables or fruit can help create a more balanced meal.",
+        "meal_title": "Sous Vide Egg Bites with Uncured Bacon and Gouda",
+        "meal_description": "Packaged Kirkland sous vide egg bites labeled uncured bacon and gouda, shown in a retail box with images of the cooked egg bites on the front.",
         "macros": {
-          "calories": 250,
+          "calories": 240,
           "carbohydrates": 9,
-          "fats": 18,
+          "fats": 16,
           "proteins": 17
         },
         "ingredients": [
@@ -1367,18 +1387,14 @@
           },
           {
             "name": "Uncured bacon",
-            "impact": "orange"
+            "impact": "yellow"
           },
           {
             "name": "Gouda cheese",
             "impact": "yellow"
           },
           {
-            "name": "Milk or cream",
-            "impact": "yellow"
-          },
-          {
-            "name": "Starch or binder ingredients",
+            "name": "Dairy/cream cheese mixture",
             "impact": "yellow"
           }
         ]
@@ -1449,9 +1465,9 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This appears to be a jar of plain cookies or biscuits. These are typically made with refined flour and added sugar, which can raise blood glucose relatively quickly. A smaller portion and pairing with a protein- or fiber-rich food may help reduce the overall carbohydrate impact.",
-        "meal_title": "Plain Cookies in a Jar",
-        "meal_description": "A glass jar filled with small round plain cookies or biscuits is shown on a countertop.",
+        "guidance_message": "This appears to be a jar of cookies or biscuits made primarily from refined flour and likely added sugar. Foods like this are typically higher in carbohydrates and lower in fiber, so portion size matters for people managing blood glucose.",
+        "meal_title": "Jar of Cookies",
+        "meal_description": "A glass jar filled with round brown cookies or biscuits is shown on a countertop.",
         "macros": {
           "calories": 420,
           "carbohydrates": 58,
@@ -1460,20 +1476,16 @@
         },
         "ingredients": [
           {
-            "name": "Refined wheat flour",
+            "name": "Refined wheat flour cookies",
             "impact": "orange"
           },
           {
-            "name": "Sugar",
+            "name": "Added sugar",
             "impact": "red"
           },
           {
-            "name": "Butter or shortening",
+            "name": "Butter or oil",
             "impact": "yellow"
-          },
-          {
-            "name": "Baking ingredients",
-            "impact": "green"
           }
         ]
       }
@@ -1523,22 +1535,22 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a small portion of citrus fruit. Citrus generally provides natural sugars along with fiber and is typically a lower-impact fruit choice when eaten in a modest portion.",
-        "meal_title": "Small Citrus Portion",
-        "meal_description": "A small peeled citrus fruit portion is visible, including one orange segment and part of a darker red citrus section, likely blood orange or a similar variety.",
+        "guidance_message": "This appears to be a small portion of citrus fruit, likely a blood orange segment with peel or pith attached. Citrus fruit provides natural sugars along with fiber and is generally a lower-impact snack than many processed sweets, though portion size still affects carbohydrate intake.",
+        "meal_title": "Blood Orange Segment",
+        "meal_description": "A small piece of citrus fruit, likely a blood orange or orange segment, with visible peel and pith attached.",
         "macros": {
-          "calories": 25,
-          "carbohydrates": 6,
-          "fats": 0,
-          "proteins": 0.5
+          "calories": 18,
+          "carbohydrates": 4.5,
+          "fats": 0.1,
+          "proteins": 0.3
         },
         "ingredients": [
           {
-            "name": "Orange segment",
+            "name": "Blood orange segment",
             "impact": "green"
           },
           {
-            "name": "Blood orange or red citrus segment",
+            "name": "Orange pith/peel",
             "impact": "green"
           }
         ]
@@ -1605,27 +1617,31 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This meal appears to include toast, pâté or luncheon meat, and leafy greens. The toast and processed meat spread may contribute more refined carbohydrates, sodium, and saturated fat, while the greens add fiber and volume. For people with diabetes, portion size and balancing the bread with more non-starchy vegetables or leaner protein may help moderate the overall glycemic impact.",
-        "meal_title": "Toast with Pâté and Leafy Greens",
-        "meal_description": "A plate with two slices of toasted white bread, several portions of pâté or luncheon meat, and a serving of leafy green salad or cooked greens.",
+        "guidance_message": "This meal appears to include white toast, pâté or luncheon meat, and leafy greens. The greens add fiber and volume, but the refined bread may raise blood glucose more quickly, and the processed meat spread is likely higher in saturated fat and sodium. Pairing this type of meal with more non-starchy vegetables or replacing white toast with a higher-fiber option may make it more suitable for blood sugar management.",
+        "meal_title": "Toast with pâté and greens",
+        "meal_description": "A plate with several slices of toasted white bread, pieces of pâté or processed meat spread, and a serving of leafy green salad or sautéed greens.",
         "macros": {
-          "calories": 480,
-          "carbohydrates": 32,
-          "fats": 28,
-          "proteins": 22
+          "calories": 520,
+          "carbohydrates": 34,
+          "fats": 31,
+          "proteins": 24
         },
         "ingredients": [
           {
-            "name": "white toast",
+            "name": "White toast",
             "impact": "orange"
           },
           {
-            "name": "pâté or luncheon meat",
+            "name": "Pâté or processed meat spread",
             "impact": "orange"
           },
           {
-            "name": "leafy greens",
+            "name": "Leafy greens",
             "impact": "green"
+          },
+          {
+            "name": "Butter or fat spread",
+            "impact": "yellow"
           }
         ]
       }
@@ -1675,12 +1691,12 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be fresh kiwi fruit. Kiwi provides natural carbohydrates along with fiber and is generally a lower-impact fruit portion when eaten plain. The visible serving looks modest, which may help limit total carbohydrate intake.",
+        "guidance_message": "This appears to be fresh kiwi fruit. Kiwi is a whole fruit with moderate carbohydrate content and fiber, which may fit well in a diabetes-conscious meal plan when portion size is considered.",
         "meal_title": "Halved Kiwi",
-        "meal_description": "Two halves of a peeled-open kiwi fruit are shown on a patterned tablecloth.",
+        "meal_description": "Two halves of a peeled-open kiwi fruit are visible on a tablecloth.",
         "macros": {
-          "calories": 45,
-          "carbohydrates": 11,
+          "calories": 42,
+          "carbohydrates": 10,
           "fats": 0.4,
           "proteins": 0.8
         },
@@ -1741,26 +1757,26 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a mixed green salad with a small amount of corn. Non-starchy vegetables are generally lower in carbohydrates, while corn adds some carbohydrate, so portion size and any added dressing would influence overall glucose impact.",
-        "meal_title": "Mixed Green Salad with Corn",
-        "meal_description": "A plate of leafy green salad made with lettuce and mixed greens, topped with a small amount of yellow corn.",
+        "guidance_message": "This appears to be a leafy green salad with a small amount of corn and no obvious high-sugar or heavily processed items. It is generally a lower-carbohydrate choice, though the corn adds some carbohydrates and any dressing used could change the overall impact.",
+        "meal_title": "Leafy Green Salad with Corn",
+        "meal_description": "A plate of mixed lettuce leaves and leafy greens topped with a small portion of yellow corn.",
         "macros": {
-          "calories": 70,
-          "carbohydrates": 10,
-          "fats": 1,
+          "calories": 90,
+          "carbohydrates": 12,
+          "fats": 2,
           "proteins": 3
         },
         "ingredients": [
           {
-            "name": "Lettuce",
+            "name": "lettuce",
             "impact": "green"
           },
           {
-            "name": "Mixed salad greens",
+            "name": "mixed leafy greens",
             "impact": "green"
           },
           {
-            "name": "Corn",
+            "name": "corn",
             "impact": "yellow"
           }
         ]
@@ -1815,18 +1831,18 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This appears to be a plate of white rice. White rice is high in carbohydrate and is typically digested quickly, which may lead to a larger rise in blood glucose than less refined grains. Pairing a smaller portion with non-starchy vegetables, protein, or higher-fiber foods may help moderate its overall impact.",
-        "meal_title": "White Rice",
-        "meal_description": "A serving of cooked white rice on a decorative plate.",
+        "guidance_message": "This appears to be a serving of white rice. White rice is relatively high in rapidly absorbed carbohydrates and low in fiber, so it may raise blood glucose more quickly than less refined grains. Pairing it with non-starchy vegetables, protein, or legumes and moderating the portion can help improve meal balance.",
+        "meal_title": "Plain White Rice",
+        "meal_description": "A plate of plain cooked white rice served on a patterned dish.",
         "macros": {
           "calories": 260,
-          "carbohydrates": 57,
-          "fats": 0.4,
-          "proteins": 4.8
+          "carbohydrates": 58,
+          "fats": 0.5,
+          "proteins": 5
         },
         "ingredients": [
           {
-            "name": "Cooked white rice",
+            "name": "White rice",
             "impact": "orange"
           }
         ]
@@ -1893,34 +1909,38 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This meal appears to include protein, non-starchy vegetables, and a moderate portion of starchy food. For people with diabetes, the corn-based side may contribute most of the carbohydrate load, while the chicken and lettuce are lower in carbohydrate. The overall portion appears moderate, with a mix of lower- and higher-glycemic components.",
-        "meal_title": "Chicken bowl with lettuce and corn mash",
-        "meal_description": "A black bowl containing pieces of cooked chicken, chopped lettuce with green sauce or seasoning, a yellow corn-like mash or polenta, and a pink radish slice.",
+        "guidance_message": "This meal appears to include lean protein, leafy greens, avocado, and a starchy yellow side. The vegetables and protein support a more balanced meal, but the starchy portion may raise carbohydrate intake depending on its amount and preparation. Portion size and any added oils or sauces can meaningfully affect blood sugar impact.",
+        "meal_title": "Chicken with Greens, Avocado, and Yellow Mash",
+        "meal_description": "A bowl containing pieces of cooked chicken, leafy lettuce, avocado, a yellow mashed or soft starch, green sauce, and a pink radish slice.",
         "macros": {
           "calories": 430,
           "carbohydrates": 24,
-          "fats": 22,
-          "proteins": 31
+          "fats": 24,
+          "proteins": 28
         },
         "ingredients": [
           {
-            "name": "Chicken",
+            "name": "chicken",
             "impact": "green"
           },
           {
-            "name": "Lettuce",
+            "name": "lettuce",
             "impact": "green"
           },
           {
-            "name": "Green sauce/seasoning",
+            "name": "avocado",
+            "impact": "green"
+          },
+          {
+            "name": "yellow mash or soft starch",
             "impact": "yellow"
           },
           {
-            "name": "Corn mash or polenta",
-            "impact": "orange"
+            "name": "green herb sauce",
+            "impact": "yellow"
           },
           {
-            "name": "Radish",
+            "name": "radish",
             "impact": "green"
           }
         ]
@@ -1987,14 +2007,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This meal appears to include a sausage patty, scrambled eggs, ketchup, and black coffee. It is relatively low in carbohydrates, but the processed sausage and ketchup may add sodium and small amounts of added sugar. For diabetes-focused meal planning, this is generally a moderate-choice breakfast, with attention to portion size and added condiments.",
-        "meal_title": "Sausage Patty with Scrambled Eggs and Coffee",
-        "meal_description": "A plate with one sausage patty, a serving of scrambled eggs, a small dollop of ketchup, and a mug of black coffee.",
+        "guidance_message": "This meal appears to include a sausage patty, scrambled eggs, ketchup, and a dark beverage. It is relatively low in carbohydrates aside from the ketchup, but the processed meat and overall fat content may be a consideration for people managing diabetes. Portion size and any added sugar in the beverage can affect suitability.",
+        "meal_title": "Sausage Patty with Scrambled Eggs",
+        "meal_description": "A plate with one sausage patty, a serving of scrambled eggs, a small amount of ketchup, and a mug containing a dark beverage.",
         "macros": {
-          "calories": 320,
-          "carbohydrates": 6,
-          "fats": 24,
-          "proteins": 19
+          "calories": 380,
+          "carbohydrates": 8,
+          "fats": 29,
+          "proteins": 21
         },
         "ingredients": [
           {
@@ -2010,8 +2030,8 @@
             "impact": "orange"
           },
           {
-            "name": "black coffee",
-            "impact": "green"
+            "name": "dark beverage",
+            "impact": "yellow"
           }
         ]
       }
@@ -2065,22 +2085,22 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a mug of coffee or a milk-based hot beverage. Unsweetened coffee is generally low in carbohydrates, but milk, cream, or added sugar can increase carbohydrate and calorie content, so portion and add-ins are the main factors to review for diabetes suitability.",
-        "meal_title": "Coffee in a Mug",
-        "meal_description": "A black mug containing a light-brown hot beverage, likely coffee with milk or cream.",
+        "guidance_message": "This appears to be a mug of coffee with milk or cream. Unsweetened coffee is typically low in carbohydrates, but added milk, cream, or sugar can increase calories and carbohydrate content. For people with diabetes, the main consideration is whether sweeteners were added and the portion size of any milk-based ingredients.",
+        "meal_title": "Coffee with Milk",
+        "meal_description": "A black mug containing a light-brown coffee beverage, likely coffee with milk or cream.",
         "macros": {
-          "calories": 45,
-          "carbohydrates": 4,
+          "calories": 40,
+          "carbohydrates": 3,
           "fats": 2,
           "proteins": 2
         },
         "ingredients": [
           {
-            "name": "Coffee",
+            "name": "coffee",
             "impact": "green"
           },
           {
-            "name": "Milk or cream",
+            "name": "milk or cream",
             "impact": "yellow"
           }
         ]
@@ -2147,14 +2167,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This appears to be a burger on a large bun with cheese and vegetables. For people with diabetes, the refined bun and burger patty can make this a higher-calorie meal with a moderate-to-high carbohydrate load, depending on the patty and sauces used. Pairing with non-starchy vegetables and limiting fries or sugary sauces may help reduce the overall glycemic impact.",
+        "guidance_message": "This appears to be a burger on a large bun with melted cheese and vegetables. For people with diabetes, the refined bun and likely fried or breaded patty can increase carbohydrate and calorie load, while the vegetables add some fiber. Portion size and any side items or sauces would further affect overall suitability.",
         "meal_title": "Cheeseburger on Bun",
-        "meal_description": "A grilled burger served on a large seeded bun with melted cheese, tomato, arugula, and likely sauce. A side basket, likely fries, is partially visible.",
+        "meal_description": "A burger served on a large seeded bun with melted cheese, tomato, arugula, and a patty, plated with a side basket partially visible.",
         "macros": {
-          "calories": 780,
+          "calories": 720,
           "carbohydrates": 48,
-          "fats": 42,
-          "proteins": 38
+          "fats": 38,
+          "proteins": 42
         },
         "ingredients": [
           {
@@ -2162,11 +2182,11 @@
             "impact": "orange"
           },
           {
-            "name": "beef patty",
+            "name": "beef or chicken patty",
             "impact": "yellow"
           },
           {
-            "name": "cheese",
+            "name": "melted cheese",
             "impact": "yellow"
           },
           {
@@ -2179,7 +2199,7 @@
           },
           {
             "name": "sauce/spread",
-            "impact": "orange"
+            "impact": "yellow"
           }
         ]
       }
@@ -2229,9 +2249,9 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This appears to be a glass of a light-colored alcoholic beverage, possibly white wine. Alcohol can affect blood glucose management and may be better consumed cautiously, especially without food. Portion size and any residual sugar in the drink can influence its suitability.",
+        "guidance_message": "This appears to be a glass of white wine. Alcohol can affect blood glucose management, and wine contributes calories with minimal protein or fiber. A smaller portion and pairing with food may be more suitable than drinking it alone.",
         "meal_title": "Glass of White Wine",
-        "meal_description": "A single wine glass containing a pale yellow beverage, likely white wine.",
+        "meal_description": "A stemmed wine glass containing a light-colored white wine or similar alcoholic beverage.",
         "macros": {
           "calories": 120,
           "carbohydrates": 4,
@@ -2241,6 +2261,10 @@
         "ingredients": [
           {
             "name": "White wine",
+            "impact": "orange"
+          },
+          {
+            "name": "Alcohol",
             "impact": "orange"
           }
         ]
@@ -2315,22 +2339,18 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a mixed salad with mostly non-starchy vegetables and some legumes, which generally provides fiber and a lower carbohydrate load than grain-based meals. The carbohydrate impact may increase if sweet dressing or larger portions of chickpeas and edamame are included, so portion size and dressing amount are the main factors to watch.",
-        "meal_title": "Mixed greens salad with chickpeas and edamame",
-        "meal_description": "A bowl of mixed leafy greens and purple cabbage with chickpeas, edamame, sliced apple, and shaved cheese, lightly dressed.",
+        "guidance_message": "This appears to be a mixed salad with mostly non-starchy vegetables, some legumes, and a light amount of toppings. It is generally a lower-carbohydrate meal option, though the dressing, chickpeas, and any added crunchy toppings can modestly increase calories and carbohydrates.",
+        "meal_title": "Mixed Green Salad with Chickpeas",
+        "meal_description": "A bowl of mixed leafy greens and chopped vegetables with chickpeas, red cabbage, edamame, shaved cheese, and dressing.",
         "macros": {
-          "calories": 320,
-          "carbohydrates": 24,
-          "fats": 18,
-          "proteins": 13
+          "calories": 280,
+          "carbohydrates": 18,
+          "fats": 16,
+          "proteins": 12
         },
         "ingredients": [
           {
             "name": "mixed leafy greens",
-            "impact": "green"
-          },
-          {
-            "name": "purple cabbage",
             "impact": "green"
           },
           {
@@ -2342,12 +2362,20 @@
             "impact": "green"
           },
           {
-            "name": "apple slices",
+            "name": "red cabbage",
+            "impact": "green"
+          },
+          {
+            "name": "cucumber",
+            "impact": "green"
+          },
+          {
+            "name": "apple pieces",
             "impact": "yellow"
           },
           {
             "name": "shaved cheese",
-            "impact": "green"
+            "impact": "yellow"
           },
           {
             "name": "salad dressing",
@@ -2437,22 +2465,22 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a mixed salad with non-starchy vegetables, some legumes, cheese, and a small amount of nuts or seeds. It is likely lower in refined carbohydrates than many meal options, though the chickpeas, edamame, cheese, and dressing can increase calories and carbohydrate content depending on portion size.",
-        "meal_title": "Mixed green salad with chickpeas and cheese",
-        "meal_description": "A bowl of leafy green salad with mixed lettuce, purple cabbage, chickpeas, edamame, shaved cheese, and light dressing.",
+        "guidance_message": "This appears to be a mixed salad with mostly non-starchy vegetables, some legumes, and a light amount of cheese or nuts. It is generally a lower-carbohydrate meal option, though the dressing and additions such as chickpeas, edamame, cheese, or nuts can increase calories and carbohydrates modestly.",
+        "meal_title": "Mixed Green Salad with Chickpeas and Edamame",
+        "meal_description": "A bowl of mixed leafy greens with cabbage, chickpeas, edamame, shaved cheese, and light dressing.",
         "macros": {
           "calories": 320,
-          "carbohydrates": 20,
+          "carbohydrates": 22,
           "fats": 18,
-          "proteins": 15
+          "proteins": 14
         },
         "ingredients": [
           {
-            "name": "mixed lettuce greens",
+            "name": "mixed leafy greens",
             "impact": "green"
           },
           {
-            "name": "purple cabbage",
+            "name": "cabbage",
             "impact": "green"
           },
           {
@@ -2465,14 +2493,10 @@
           },
           {
             "name": "shaved cheese",
-            "impact": "yellow"
+            "impact": "green"
           },
           {
             "name": "salad dressing",
-            "impact": "yellow"
-          },
-          {
-            "name": "nuts or seeds",
             "impact": "yellow"
           }
         ]
@@ -2539,9 +2563,9 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a burger on a sesame bun with lettuce and tomato. For people with diabetes, the refined bun is likely the main source of rapidly absorbed carbohydrates, while the vegetables add fiber with minimal carbohydrate. Portion size, the type of patty, and any sauces or cheese would affect the overall impact.",
+        "guidance_message": "This appears to be a burger on a sesame bun with visible salad vegetables. The refined bun likely contributes most of the carbohydrates, while the overall impact depends on the patty and sauces. Pairing with non-starchy vegetables and watching sauce and bun portion can help reduce glucose impact.",
         "meal_title": "Sesame Bun Burger",
-        "meal_description": "A burger served on a sesame seed bun with visible lettuce and tomato on a plate.",
+        "meal_description": "A burger served on a sesame seed bun with visible tomato, lettuce, and a patty or filling inside.",
         "macros": {
           "calories": 420,
           "carbohydrates": 35,
@@ -2564,6 +2588,10 @@
           {
             "name": "tomato",
             "impact": "green"
+          },
+          {
+            "name": "sauce or spread",
+            "impact": "yellow"
           },
           {
             "name": "sesame seeds",
@@ -2637,23 +2665,23 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This meal appears to include sausages with a creamy sauce and non-starchy vegetables. The vegetables may help moderate the overall carbohydrate load, but the sausages and sauce likely increase saturated fat and calories, so portion size and sauce amount are relevant considerations for people managing blood glucose.",
-        "meal_title": "Sausages with Cream Sauce and Vegetables",
-        "meal_description": "A plate with two browned sausages in a creamy sauce, served with peas, carrot slices, braised endive or leek, and a piece of roasted eggplant or zucchini.",
+        "guidance_message": "This meal appears to provide a moderate amount of protein and non-starchy vegetables, which can support steadier blood glucose response. The sausage and creamy sauce may add saturated fat and calories, so portion size and sauce amount are the main factors to watch for diabetes-friendly meal planning.",
+        "meal_title": "Sausage with Cream Sauce and Vegetables",
+        "meal_description": "A plate with a grilled sausage served in a light creamy sauce, alongside peas, carrot slices, braised endive or leeks, and a piece of cooked eggplant or zucchini.",
         "macros": {
-          "calories": 620,
+          "calories": 520,
           "carbohydrates": 24,
-          "fats": 46,
-          "proteins": 26
+          "fats": 37,
+          "proteins": 22
         },
         "ingredients": [
           {
-            "name": "sausages",
+            "name": "grilled sausage",
             "impact": "orange"
           },
           {
             "name": "cream sauce",
-            "impact": "orange"
+            "impact": "yellow"
           },
           {
             "name": "peas",
@@ -2661,14 +2689,18 @@
           },
           {
             "name": "carrots",
-            "impact": "yellow"
-          },
-          {
-            "name": "braised endive or leek",
             "impact": "green"
           },
           {
-            "name": "roasted eggplant or zucchini",
+            "name": "braised endive or leeks",
+            "impact": "green"
+          },
+          {
+            "name": "cooked eggplant or zucchini",
+            "impact": "green"
+          },
+          {
+            "name": "shallots or onions",
             "impact": "green"
           }
         ]
@@ -2719,8 +2751,8 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a small serving of watermelon. Watermelon contains natural sugars and can raise blood glucose relatively quickly, but the visible portion is modest. Pairing fruit with a protein or fat source may help moderate the overall glycemic effect of the snack.",
-        "meal_title": "Watermelon slices",
+        "guidance_message": "This appears to be a small serving of watermelon. Watermelon contains natural sugars and has a relatively higher glycemic effect than some other fruits, so portion size matters. Pairing it with a protein or fat source may help moderate the overall glucose impact of the snack.",
+        "meal_title": "Watermelon pieces",
         "meal_description": "Three small pieces of fresh watermelon served on a paper towel.",
         "macros": {
           "calories": 45,
@@ -2793,30 +2825,30 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This meal appears to be mostly pasta with cheese or tofu pieces and oil-based seasoning. The visible portion is likely moderate to high in carbohydrates, which may raise blood glucose more quickly unless balanced with more non-starchy vegetables or protein.",
-        "meal_title": "Seasoned penne with cheese cubes",
-        "meal_description": "A pan of cooked penne pasta mixed with small browned cubes of cheese or tofu and seasoning, likely prepared with oil.",
+        "guidance_message": "This meal appears to be pasta with cheese cooked in oil and herbs. The pasta likely contributes a substantial carbohydrate load, while the cheese and oil add fat and some protein. For people managing blood glucose, portion size and pairing with non-starchy vegetables or a lean protein may help moderate the overall impact.",
+        "meal_title": "Herbed penne pasta with cheese",
+        "meal_description": "A pan of cooked penne pasta mixed with browned cheese cubes, oil, and visible herbs or seasoning.",
         "macros": {
-          "calories": 520,
-          "carbohydrates": 58,
-          "fats": 22,
-          "proteins": 18
+          "calories": 620,
+          "carbohydrates": 68,
+          "fats": 28,
+          "proteins": 22
         },
         "ingredients": [
           {
-            "name": "penne pasta",
+            "name": "Penne pasta",
             "impact": "orange"
           },
           {
-            "name": "cheese cubes",
+            "name": "Cheese cubes",
             "impact": "yellow"
           },
           {
-            "name": "oil or butter",
+            "name": "Cooking oil",
             "impact": "yellow"
           },
           {
-            "name": "herb and pepper seasoning",
+            "name": "Herbs/seasoning",
             "impact": "green"
           }
         ]
@@ -2870,15 +2902,15 @@
       },
       "pipelineMealAnalysis": {
         "is_food": true,
-        "recommendation": "green",
-        "guidance_message": "This appears to be a small serving of fresh fruit, mainly grapes and a fig. The portion looks modest, which may help keep carbohydrate intake moderate, though grapes and figs do contribute natural sugars.",
-        "meal_title": "Grapes and Fig",
-        "meal_description": "A small bowl containing green grapes and one fresh fig.",
+        "recommendation": "yellow",
+        "guidance_message": "This appears to be a small portion of fresh fruit, including green grapes and a fig. Fresh fruit provides fiber and micronutrients, but grapes contain a moderate amount of natural sugar, so portion size can matter for people managing blood glucose.",
+        "meal_title": "Green Grapes and Fig",
+        "meal_description": "A small bowl containing a handful of green grapes and one fresh fig.",
         "macros": {
-          "calories": 85,
-          "carbohydrates": 21,
+          "calories": 95,
+          "carbohydrates": 24,
           "fats": 0.4,
-          "proteins": 1
+          "proteins": 1.2
         },
         "ingredients": [
           {
@@ -2957,14 +2989,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a slice of vegetable quiche with a pastry crust. The vegetables add fiber and volume, but the crust and egg-and-cheese filling can increase total carbohydrates, fat, and calories. For people with diabetes, portion size and pairing with non-starchy vegetables may help moderate the meal’s overall impact.",
+        "guidance_message": "This appears to be a slice of vegetable quiche or savory tart with a pastry crust, egg-based filling, cheese, and non-starchy vegetables. The vegetables and protein can help moderate the meal, but the crust contributes refined carbohydrates and the cheese and egg filling add fat and calories. A smaller portion or pairing with a non-starchy salad may help keep the meal more balanced for people managing blood glucose.",
         "meal_title": "Vegetable Quiche Slice",
-        "meal_description": "A slice of quiche with pastry crust, egg filling, cheese, green bell pepper, mushrooms, and red pepper pieces on a plate.",
+        "meal_description": "A slice of savory quiche with a baked pastry crust, egg and cheese filling, topped with green bell pepper, red pepper, zucchini, and mushrooms.",
         "macros": {
           "calories": 320,
-          "carbohydrates": 20,
+          "carbohydrates": 21,
           "fats": 22,
-          "proteins": 12
+          "proteins": 11
         },
         "ingredients": [
           {
@@ -2984,11 +3016,15 @@
             "impact": "green"
           },
           {
-            "name": "mushrooms",
+            "name": "red bell pepper",
             "impact": "green"
           },
           {
-            "name": "red bell pepper",
+            "name": "zucchini",
+            "impact": "green"
+          },
+          {
+            "name": "mushrooms",
             "impact": "green"
           }
         ]
@@ -3039,19 +3075,19 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a small portion of black grapes. Grapes contain natural sugars and carbohydrates, but this portion looks modest and may fit more easily into a balanced eating plan when portion size is considered.",
+        "guidance_message": "This appears to be a small portion of black grapes. Grapes contain natural sugars and carbohydrates, so portion size matters, but this serving is generally a lower-calorie fruit option that may fit into a balanced diabetes-conscious meal plan.",
         "meal_title": "Black Grapes",
-        "meal_description": "A small container holding a handful of black grapes still attached to short stems.",
+        "meal_description": "A small portion of fresh black grapes in a plastic container.",
         "macros": {
           "calories": 55,
           "carbohydrates": 14,
           "fats": 0.2,
-          "proteins": 0.6
+          "proteins": 0.5
         },
         "ingredients": [
           {
             "name": "Black grapes",
-            "impact": "green"
+            "impact": "yellow"
           }
         ]
       }
@@ -3117,14 +3153,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a sandwich on a seeded roll with poultry, leafy greens, and pickle slices. The protein and vegetables can help balance the meal, but the bread likely contributes most of the carbohydrates. Portion size and the type of bread are the main factors to watch for people managing blood glucose.",
-        "meal_title": "Seeded chicken sandwich",
-        "meal_description": "A seeded sandwich roll filled with sliced chicken or turkey, leafy greens, and pickle slices.",
+        "guidance_message": "This appears to be a seeded sandwich roll with chicken, leafy greens, and pickle slices. The protein and vegetables can help balance the meal, but the bread is still a notable source of carbohydrates. Portion size and the type of bread used may affect how suitable it is for someone managing blood glucose.",
+        "meal_title": "Chicken Sandwich on Seeded Roll",
+        "meal_description": "A seeded sandwich roll filled with sliced chicken, leafy greens, and pickle slices.",
         "macros": {
           "calories": 430,
           "carbohydrates": 42,
           "fats": 12,
-          "proteins": 31
+          "proteins": 32
         },
         "ingredients": [
           {
@@ -3132,7 +3168,7 @@
             "impact": "yellow"
           },
           {
-            "name": "sliced chicken or turkey",
+            "name": "chicken",
             "impact": "green"
           },
           {
@@ -3203,31 +3239,27 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a simple lettuce salad with seeds and a light dressing. It is likely low in carbohydrates and may have a smaller effect on blood glucose than meals with refined starches or sugary sauces. Portion size and the type of dressing can change the overall impact.",
+        "guidance_message": "This appears to be a lettuce-based salad with seeds and a light dressing. It is relatively low in carbohydrates and may be a lower glycemic option, though the final impact depends on the amount and type of dressing and any added toppings not clearly visible.",
         "meal_title": "Lettuce Salad with Seeds",
-        "meal_description": "A bowl of chopped lettuce topped with mixed seeds and a light dressing or seasoning.",
+        "meal_description": "A bowl of chopped lettuce topped with mixed seeds and a light drizzle of dressing.",
         "macros": {
-          "calories": 110,
-          "carbohydrates": 6,
-          "fats": 8,
+          "calories": 120,
+          "carbohydrates": 7,
+          "fats": 9,
           "proteins": 3
         },
         "ingredients": [
           {
-            "name": "lettuce",
+            "name": "Lettuce",
             "impact": "green"
           },
           {
-            "name": "mixed seeds",
+            "name": "Mixed seeds",
             "impact": "green"
           },
           {
-            "name": "light dressing",
+            "name": "Light dressing",
             "impact": "yellow"
-          },
-          {
-            "name": "seasoning flakes",
-            "impact": "green"
           }
         ]
       }
@@ -3293,14 +3325,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This plate appears to be relatively low in carbohydrates, with most of the energy coming from protein and fat from the meats, cheeses, and egg. For people with diabetes, the bread is likely the main source of carbohydrate, while the cured meats and cheeses may add substantial saturated fat and sodium. Pairing a meal like this with vegetables or fruit could provide more fiber and balance.",
-        "meal_title": "Bread, Egg, Cured Meats, and Cheese Plate",
-        "meal_description": "A plate with a slice of dark bread, a boiled egg, several slices of cured ham or prosciutto, and two pieces of cheese.",
+        "guidance_message": "This plate appears to be a lower-carbohydrate meal with bread, egg, cheeses, and cured meats. The protein and fat content may help reduce rapid glucose rise, but the bread and processed meats add considerations for carbohydrate load and overall balance. Portion size and pairing the bread with fiber-rich foods may improve suitability for people managing blood glucose.",
+        "meal_title": "Bread, Egg, Cheese, and Cured Meats Plate",
+        "meal_description": "A plate with a slice of dark bread, a peeled boiled egg, two types of cheese, and several slices of cured ham/prosciutto.",
         "macros": {
-          "calories": 560,
-          "carbohydrates": 22,
-          "fats": 36,
-          "proteins": 34
+          "calories": 520,
+          "carbohydrates": 24,
+          "fats": 32,
+          "proteins": 33
         },
         "ingredients": [
           {
@@ -3312,19 +3344,19 @@
             "impact": "green"
           },
           {
-            "name": "cured ham",
+            "name": "semi-hard cheese",
+            "impact": "green"
+          },
+          {
+            "name": "soft cheese",
+            "impact": "green"
+          },
+          {
+            "name": "ham",
             "impact": "yellow"
           },
           {
             "name": "prosciutto",
-            "impact": "yellow"
-          },
-          {
-            "name": "semi-hard cheese",
-            "impact": "yellow"
-          },
-          {
-            "name": "soft cheese",
             "impact": "yellow"
           }
         ]
@@ -3399,42 +3431,42 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This meal appears to be a cheese and meat pizza on a refined-flour crust. For people with diabetes, the crust contributes a substantial carbohydrate load, while cheese and meat add fat and protein that may slow digestion. A smaller portion and pairing with non-starchy vegetables would generally be a lower-impact option.",
-        "meal_title": "Cheese and meat pizza",
-        "meal_description": "A thin-crust pizza with tomato sauce, melted cheese, meat toppings, mushrooms, and sliced red onion, with one large slice missing.",
+        "guidance_message": "This meal appears to be a pizza with a refined flour crust and a moderate-to-high carbohydrate load. For people with diabetes, the crust is likely the main driver of blood sugar impact, while cheese and meat add fat and protein that may slow digestion. A smaller portion and pairing with non-starchy vegetables would generally be a lower-impact option.",
+        "meal_title": "Thin-Crust Meat and Mushroom Pizza",
+        "meal_description": "A thin-crust pizza with tomato sauce, melted cheese, mushrooms, sliced red onion, herbs, and pieces of meat, with several slices missing from the pie.",
         "macros": {
-          "calories": 1650,
-          "carbohydrates": 145,
-          "fats": 68,
-          "proteins": 78
+          "calories": 1350,
+          "carbohydrates": 120,
+          "fats": 55,
+          "proteins": 65
         },
         "ingredients": [
           {
-            "name": "Refined pizza crust",
+            "name": "pizza crust",
             "impact": "orange"
           },
           {
-            "name": "Tomato sauce",
+            "name": "tomato sauce",
             "impact": "yellow"
           },
           {
-            "name": "Mozzarella and grated cheese",
+            "name": "mozzarella cheese",
             "impact": "yellow"
           },
           {
-            "name": "Meat topping",
-            "impact": "yellow"
-          },
-          {
-            "name": "Mushrooms",
+            "name": "mushrooms",
             "impact": "green"
           },
           {
-            "name": "Red onion",
-            "impact": "green"
+            "name": "red onion",
+            "impact": "yellow"
           },
           {
-            "name": "Herbs",
+            "name": "meat topping",
+            "impact": "yellow"
+          },
+          {
+            "name": "herbs",
             "impact": "green"
           }
         ]
@@ -3501,30 +3533,30 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This appears to be a sweet mixed drink or dessert-style beverage. Beverages with added sugar typically raise blood glucose more quickly than solid foods, so portion size and ingredients are important considerations for people with diabetes.",
-        "meal_title": "Creamy cocktail with flower garnish",
-        "meal_description": "A pale, creamy beverage served in a coupe glass, topped with a small yellow edible flower garnish.",
+        "guidance_message": "This appears to be a sweet, creamy beverage or dessert-style drink. Such items are often higher in rapidly absorbed carbohydrates and may be better suited to smaller portions or less frequent intake for people monitoring blood glucose.",
+        "meal_title": "Creamy Dessert Cocktail",
+        "meal_description": "A coupe glass filled with a white creamy drink or dessert-style cocktail, garnished with a small yellow edible flower.",
         "macros": {
-          "calories": 180,
-          "carbohydrates": 18,
-          "fats": 5,
-          "proteins": 1
+          "calories": 220,
+          "carbohydrates": 22,
+          "fats": 10,
+          "proteins": 2
         },
         "ingredients": [
           {
-            "name": "sweetened creamy cocktail base",
+            "name": "Creamy sweetened base",
             "impact": "orange"
           },
           {
-            "name": "added sugar or syrup",
+            "name": "Sugar or syrup",
             "impact": "red"
           },
           {
-            "name": "cream or milk",
+            "name": "Possible dairy or cream",
             "impact": "yellow"
           },
           {
-            "name": "edible flower garnish",
+            "name": "Edible flower garnish",
             "impact": "green"
           }
         ]
@@ -3575,18 +3607,18 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a small portion of fresh orange segments. Whole fruit provides fiber and has a lower glucose impact than juice, though oranges still contribute natural carbohydrates, so portion size remains relevant for people monitoring carbohydrate intake.",
-        "meal_title": "Fresh Orange Wedges",
-        "meal_description": "Several wedges of peeled orange are arranged on a white plate.",
+        "guidance_message": "This appears to be a small portion of orange segments. Whole orange pieces provide natural sugars along with fiber, which generally has a gentler effect on blood glucose than juice, though portion size still matters.",
+        "meal_title": "Orange Wedges",
+        "meal_description": "Several cut orange wedges are served on a white plate.",
         "macros": {
           "calories": 70,
-          "carbohydrates": 17,
+          "carbohydrates": 18,
           "fats": 0.2,
-          "proteins": 1.2
+          "proteins": 1.3
         },
         "ingredients": [
           {
-            "name": "Orange wedges",
+            "name": "Orange",
             "impact": "green"
           }
         ]
@@ -3637,13 +3669,13 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a plain carrot piece. Non-starchy vegetables like carrots are generally a lower-calorie, fiber-containing option, though portion size still affects total carbohydrate intake.",
+        "guidance_message": "This appears to be a raw carrot stick. It is a low-calorie, non-starchy vegetable with relatively modest carbohydrate content for the visible portion, making it generally suitable for people with diabetes when eaten plain.",
         "meal_title": "Raw Carrot Stick",
-        "meal_description": "A single peeled piece of raw carrot is shown on a plain surface.",
+        "meal_description": "A single peeled raw carrot stick is shown on a plain surface.",
         "macros": {
-          "calories": 12,
-          "carbohydrates": 3,
-          "fats": 0,
+          "calories": 15,
+          "carbohydrates": 3.5,
+          "fats": 0.1,
           "proteins": 0.3
         },
         "ingredients": [
@@ -3715,35 +3747,35 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This meal appears to be a burger with fries. The fries and bun likely contribute a higher amount of rapidly absorbed carbohydrates, and the fried side increases overall calorie and fat content. For people with diabetes, portion size and balancing this meal with non-starchy vegetables and a leaner protein option may help reduce glucose impact.",
+        "guidance_message": "This meal appears to include a burger with a white bun and a side of fries. The fries and refined bun likely raise the carbohydrate load, and the fried side adds fat and calories. A smaller portion of fries or a higher-fiber side would generally make this meal more suitable for people managing blood glucose.",
         "meal_title": "Burger with French Fries",
-        "meal_description": "A plate containing a burger with lettuce and tomato in a bun, served with a side of French fries.",
+        "meal_description": "A burger on a white bun with lettuce and tomato, served with a side of French fries on a white plate.",
         "macros": {
           "calories": 780,
-          "carbohydrates": 62,
+          "carbohydrates": 68,
           "fats": 38,
-          "proteins": 30
+          "proteins": 32
         },
         "ingredients": [
           {
-            "name": "burger bun",
+            "name": "White burger bun",
             "impact": "orange"
           },
           {
-            "name": "beef patty",
+            "name": "Burger patty",
             "impact": "yellow"
           },
           {
-            "name": "lettuce",
+            "name": "Lettuce",
             "impact": "green"
           },
           {
-            "name": "tomato",
+            "name": "Tomato",
             "impact": "green"
           },
           {
             "name": "French fries",
-            "impact": "red"
+            "impact": "orange"
           }
         ]
       }
@@ -3813,14 +3845,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This meal appears to include grilled meat, white rice, and french fries. The rice and fries add a substantial carbohydrate load, and the fries also increase fat and calorie content. For people managing blood glucose, this combination may warrant portion awareness and balancing with lower-glycemic, higher-fiber sides when possible.",
+        "guidance_message": "This meal appears to include grilled meat, white rice, and French fries. The combination of refined starches and fried potatoes likely makes it relatively high in carbohydrates and fat, which may require portion awareness for people managing blood glucose.",
         "meal_title": "Grilled Meat with White Rice and French Fries",
-        "meal_description": "A plate containing several pieces of grilled meat, a serving of white rice, french fries, and half a lime.",
+        "meal_description": "A plate with several pieces of grilled meat, a serving of white rice, French fries, and a halved lime.",
         "macros": {
           "calories": 980,
-          "carbohydrates": 82,
+          "carbohydrates": 78,
           "fats": 48,
-          "proteins": 52
+          "proteins": 56
         },
         "ingredients": [
           {
@@ -3832,8 +3864,8 @@
             "impact": "orange"
           },
           {
-            "name": "french fries",
-            "impact": "orange"
+            "name": "French fries",
+            "impact": "red"
           },
           {
             "name": "lime",
@@ -3887,9 +3919,9 @@
       "pipelineMealAnalysis": {
         "is_food": false,
         "recommendation": "green",
-        "guidance_message": "The image shows a glass of water. Plain water contains no carbohydrates, calories, fat, or protein and is generally a suitable beverage choice for people monitoring blood glucose.",
+        "guidance_message": "This image appears to show a glass of water rather than a meal. Plain water contains no carbohydrates, fat, or protein and does not add glycemic load.",
         "meal_title": "Glass of Water",
-        "meal_description": "A clear drinking glass partially filled with water on a wooden table.",
+        "meal_description": "A clear glass partially filled with plain water on a wooden table.",
         "macros": {
           "calories": 0,
           "carbohydrates": 0,
@@ -3967,16 +3999,16 @@
         "recommendation": "yellow",
         "guidance_message": "This appears to be a plain slice of bread. Bread is primarily a carbohydrate source, so portion size and whether it is whole grain or refined can affect how suitable it is for people with diabetes.",
         "meal_title": "Slice of Bread",
-        "meal_description": "A single plain slice of bread on a wooden surface.",
+        "meal_description": "A single plain slice of bread placed on a wooden surface.",
         "macros": {
-          "calories": 90,
-          "carbohydrates": 17,
+          "calories": 110,
+          "carbohydrates": 20,
           "fats": 1.5,
-          "proteins": 3.5
+          "proteins": 4
         },
         "ingredients": [
           {
-            "name": "bread",
+            "name": "Bread",
             "impact": "yellow"
           }
         ]
@@ -4027,13 +4059,13 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a peeled mandarin or clementine. It provides natural sugars along with fiber and is generally a lower-impact fruit option when eaten as a whole fruit in a modest portion.",
+        "guidance_message": "This appears to be a peeled mandarin or clementine. In a typical portion, it provides natural carbohydrates and fiber, and it is generally a lower-impact fruit choice than many processed sweet foods. Portion size and pairing with protein or fat can help moderate blood sugar impact.",
         "meal_title": "Peeled Mandarin Orange",
         "meal_description": "A small peeled mandarin or clementine being held in a hand.",
         "macros": {
           "calories": 40,
           "carbohydrates": 10,
-          "fats": 0,
+          "fats": 0.1,
           "proteins": 0.6
         },
         "ingredients": [
@@ -4113,18 +4145,18 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This appears to be a pizza with refined crust, tomato sauce, cheese, and processed meat toppings. The crust contributes a substantial carbohydrate load, while cheese and meats add fat and protein that may slow digestion. For people with diabetes, portion size and pairing with lower-carbohydrate sides such as non-starchy vegetables may help moderate the meal’s overall impact.",
-        "meal_title": "Ham and Mushroom Pizza",
-        "meal_description": "A partially eaten thin-crust pizza topped with melted cheese, tomato sauce, ham, mushrooms, and a black olive.",
+        "guidance_message": "This appears to be a thin-crust pizza with cheese, cured meat, mushrooms, olives, and tomato sauce. For people with diabetes, the refined crust contributes a substantial carbohydrate load, while cheese and processed meat add fat and sodium. A smaller portion and pairing with non-starchy vegetables would generally reduce the meal's overall glycemic impact.",
+        "meal_title": "Thin-Crust Meat and Mushroom Pizza",
+        "meal_description": "A partially eaten thin-crust pizza topped with melted cheese, tomato sauce, ham or cured meat, mushrooms, and black olives.",
         "macros": {
-          "calories": 980,
+          "calories": 950,
           "carbohydrates": 92,
-          "fats": 42,
-          "proteins": 46
+          "fats": 38,
+          "proteins": 42
         },
         "ingredients": [
           {
-            "name": "pizza crust",
+            "name": "thin pizza crust",
             "impact": "orange"
           },
           {
@@ -4136,7 +4168,7 @@
             "impact": "yellow"
           },
           {
-            "name": "ham",
+            "name": "ham or cured meat",
             "impact": "yellow"
           },
           {
@@ -4144,11 +4176,7 @@
             "impact": "green"
           },
           {
-            "name": "black olive",
-            "impact": "green"
-          },
-          {
-            "name": "red pepper pieces",
+            "name": "black olives",
             "impact": "green"
           }
         ]
@@ -4215,31 +4243,27 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a fruit salad with a moderate carbohydrate load from mixed fruit. The portion may be reasonable for some people with diabetes, but carbohydrate content can add up quickly depending on the amount and any sweetened additions.",
+        "guidance_message": "This appears to be a fruit salad with mixed fruit pieces. It provides vitamins and fiber, but the overall carbohydrate content may be moderate to high depending on portion size and any sweetened additions. Pairing fruit with a protein or unsweetened dairy can help make the meal more balanced for blood sugar management.",
         "meal_title": "Mixed Fruit Salad",
-        "meal_description": "A small bowl of mixed fruit pieces, including banana, strawberry, pear or apple, and light-colored melon or similar fruit.",
+        "meal_description": "A small bowl of mixed fruit pieces, including banana, apple or pear, and sliced strawberries.",
         "macros": {
-          "calories": 140,
-          "carbohydrates": 32,
-          "fats": 0.5,
-          "proteins": 1.5
+          "calories": 170,
+          "carbohydrates": 36,
+          "fats": 1,
+          "proteins": 2
         },
         "ingredients": [
           {
-            "name": "banana",
+            "name": "Banana",
             "impact": "orange"
           },
           {
-            "name": "strawberry",
+            "name": "Apple or pear",
+            "impact": "yellow"
+          },
+          {
+            "name": "Strawberries",
             "impact": "green"
-          },
-          {
-            "name": "pear or apple",
-            "impact": "yellow"
-          },
-          {
-            "name": "melon",
-            "impact": "yellow"
           }
         ]
       }
@@ -4293,13 +4317,13 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This meal appears to be several slices of bread spread with butter. The meal is relatively high in refined carbohydrates and saturated fat, with limited fiber and protein, so it may raise blood glucose more quickly than a more balanced meal. Adding protein, fiber, or using a lower-glycemic bread and less butter may improve suitability.",
-        "meal_title": "Butter on Bread Slices",
-        "meal_description": "Five slices of bread on a plate, each spread with butter or a similar creamy spread.",
+        "guidance_message": "This meal appears to be several slices of bread spread with butter. The meal is mostly refined carbohydrate with added saturated fat and limited protein or fiber, which may lead to a quicker rise in blood glucose for many people. A smaller portion or pairing with protein, vegetables, or higher-fiber bread may be more balanced.",
+        "meal_title": "Butter on sliced bread",
+        "meal_description": "Five slices of bread on a plate, each spread with a layer of butter or margarine.",
         "macros": {
           "calories": 700,
-          "carbohydrates": 75,
-          "fats": 38,
+          "carbohydrates": 70,
+          "fats": 35,
           "proteins": 15
         },
         "ingredients": [
@@ -4367,26 +4391,26 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This meal appears to be mostly eggs and sliced tomatoes, which is relatively low in carbohydrates and provides protein and fat. For people with diabetes, it is generally a lower-glycemic option, though the overall suitability can vary based on portion size and any added salt or seasonings.",
-        "meal_title": "Eggs with Sliced Tomatoes",
-        "meal_description": "A plate with two soft-cooked eggs and several slices of red tomato topped with seasoning.",
+        "guidance_message": "This meal appears to be mostly tomatoes with poached or soft-cooked eggs. It is relatively low in carbohydrates and provides protein and fat from the eggs, which may help moderate the meal's overall glucose impact. The tomatoes contribute some carbohydrates but are generally a lower-glycemic vegetable portion.",
+        "meal_title": "Tomato Slices with Soft-Cooked Eggs",
+        "meal_description": "Sliced red tomatoes seasoned on a plate, served with two soft-cooked or poached eggs.",
         "macros": {
-          "calories": 240,
-          "carbohydrates": 10,
-          "fats": 15,
+          "calories": 230,
+          "carbohydrates": 14,
+          "fats": 13,
           "proteins": 15
         },
         "ingredients": [
-          {
-            "name": "Eggs",
-            "impact": "green"
-          },
           {
             "name": "Tomatoes",
             "impact": "green"
           },
           {
-            "name": "Seasoning or salt",
+            "name": "Eggs",
+            "impact": "green"
+          },
+          {
+            "name": "Seasoning powder",
             "impact": "yellow"
           }
         ]
@@ -4453,9 +4477,9 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be sliced whole grain bread. Whole grain bread can be a moderate carbohydrate source; portion size and any added toppings or fillings would affect how suitable it is for blood glucose management.",
+        "guidance_message": "This appears to be several slices of whole grain or wheat bread. Bread is a carbohydrate-dense food and can raise blood glucose, though higher-fiber whole grain varieties are generally a more moderate option than refined white bread. Portion size is an important factor.",
         "meal_title": "Sliced Whole Grain Bread",
-        "meal_description": "Several slices of whole grain or wheat bread are stacked on a red cutting board.",
+        "meal_description": "Three slices of whole grain or wheat bread are visible on a cutting board.",
         "macros": {
           "calories": 240,
           "carbohydrates": 42,
@@ -4464,7 +4488,7 @@
         },
         "ingredients": [
           {
-            "name": "whole grain bread",
+            "name": "whole grain wheat bread",
             "impact": "yellow"
           }
         ]
@@ -4519,8 +4543,8 @@
       "pipelineMealAnalysis": {
         "is_food": false,
         "recommendation": "green",
-        "guidance_message": "The image appears to show a glass of water with ice. Plain water contains no carbohydrate, fat, or protein and is generally a suitable beverage choice for people monitoring blood glucose.",
-        "meal_title": "Iced Water",
+        "guidance_message": "This appears to be a glass of water with ice. Plain water contains no carbohydrates, sugar, fat, or protein and is generally suitable for people with diabetes.",
+        "meal_title": "Ice Water",
         "meal_description": "A tall glass of plain water with ice cubes on a table.",
         "macros": {
           "calories": 0,
@@ -4585,9 +4609,9 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a whole apple. A plain apple is generally a lower-energy snack with fiber and naturally occurring carbohydrates, which may be more moderate in glycemic impact than many refined sweet snacks. Portion size and pairing with protein or fat can affect how filling it is.",
+        "guidance_message": "This appears to be a whole apple. Whole fruit provides fiber and is generally a moderate carbohydrate choice; portion size still matters for people monitoring carbohydrate intake.",
         "meal_title": "Whole Red Apple",
-        "meal_description": "A single whole red apple is shown on a perforated metal surface.",
+        "meal_description": "A single whole red apple is shown on a perforated metal table outdoors.",
         "macros": {
           "calories": 95,
           "carbohydrates": 25,
@@ -4647,14 +4671,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a serving of red grapes. Grapes contain natural sugars and carbohydrates, so portion size matters for people with diabetes. A small serving can fit into a balanced eating pattern, but larger portions may raise blood glucose more noticeably.",
+        "guidance_message": "This appears to be a plate of red grapes. Grapes provide natural sugars and carbohydrates, so portion size can meaningfully affect blood sugar impact. A small serving can fit more easily into a balanced eating pattern than a large portion.",
         "meal_title": "Plate of Red Grapes",
-        "meal_description": "A white plate holding a bunch of red grapes on a wooden table.",
+        "meal_description": "A white plate holding a pile of red and purple grapes on a wooden table.",
         "macros": {
-          "calories": 100,
-          "carbohydrates": 26,
+          "calories": 105,
+          "carbohydrates": 27,
           "fats": 0.3,
-          "proteins": 1
+          "proteins": 1.1
         },
         "ingredients": [
           {
@@ -4733,14 +4757,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This meal appears to include several vegetables along with corn, potatoes, pasta, and fruit. The mix provides fiber and protein, but the starchy ingredients may raise the carbohydrate content to a moderate level for people with diabetes. Portion size and the balance between vegetables and starches are relevant considerations.",
-        "meal_title": "Mixed vegetable bowl with pasta, corn, potatoes, and fruit",
-        "meal_description": "A bowl containing mixed vegetables, leafy greens, peas, broccoli, carrots, corn, diced potatoes, a small portion of pasta, and a cucumber-fruit salad with small cheese pieces.",
+        "guidance_message": "This meal appears to include a mix of vegetables, protein, and several carbohydrate-containing items such as corn, potatoes, pasta, and fruit. For people with diabetes, the overall carbohydrate load may be moderate to high, so portion size and balancing with protein and non-starchy vegetables may be relevant considerations.",
+        "meal_title": "Mixed salad bowl with vegetables, corn, potatoes, pasta, and fish",
+        "meal_description": "A bowl containing cucumber salad with tomato and cheese, corn, diced potatoes, leafy greens, mixed cooked vegetables, a small portion of pasta, and what appears to be fish or shredded chicken.",
         "macros": {
           "calories": 520,
-          "carbohydrates": 58,
+          "carbohydrates": 52,
           "fats": 18,
-          "proteins": 22
+          "proteins": 24
         },
         "ingredients": [
           {
@@ -4748,7 +4772,7 @@
             "impact": "orange"
           },
           {
-            "name": "potatoes",
+            "name": "diced potatoes",
             "impact": "orange"
           },
           {
@@ -4760,40 +4784,28 @@
             "impact": "green"
           },
           {
-            "name": "grapefruit or citrus segments",
-            "impact": "yellow"
+            "name": "tomato",
+            "impact": "green"
           },
           {
-            "name": "cheese cubes",
-            "impact": "green"
+            "name": "cheese",
+            "impact": "yellow"
           },
           {
             "name": "leafy greens",
             "impact": "green"
           },
           {
-            "name": "broccoli",
+            "name": "mixed non-starchy vegetables",
             "impact": "green"
           },
           {
-            "name": "carrots",
-            "impact": "yellow"
-          },
-          {
-            "name": "peas",
-            "impact": "yellow"
-          },
-          {
-            "name": "yellow bell pepper",
+            "name": "fish or lean poultry",
             "impact": "green"
           },
           {
-            "name": "beetroot",
+            "name": "beets",
             "impact": "yellow"
-          },
-          {
-            "name": "shredded chicken or tuna",
-            "impact": "green"
           }
         ]
       }
@@ -4843,14 +4855,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a plain peeled carrot. Non-starchy vegetables like carrots are generally a lower-calorie, fiber-containing option, though portion size still affects total carbohydrate intake.",
-        "meal_title": "Peeled Carrot",
-        "meal_description": "A single peeled carrot placed on a wooden surface.",
+        "guidance_message": "This appears to be a plain carrot. Non-starchy vegetables like carrots are generally a lower-carbohydrate option and are typically suitable for people managing blood sugar when eaten in reasonable portions.",
+        "meal_title": "Raw Carrot",
+        "meal_description": "A peeled raw carrot placed on a wooden surface.",
         "macros": {
           "calories": 30,
           "carbohydrates": 7,
-          "fats": 0,
-          "proteins": 1
+          "fats": 0.1,
+          "proteins": 0.6
         },
         "ingredients": [
           {
@@ -4921,26 +4933,22 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a light broth-based soup with very low carbohydrate content and modest calories. Meals like this are generally a lower glycemic option, though sodium content may vary depending on preparation.",
+        "guidance_message": "This appears to be a light broth-based soup with very low carbohydrate content in the visible portion. It is generally a lower-impact option for blood glucose compared with meals that include refined starches or sugary sauces, though sodium content may vary depending on preparation.",
         "meal_title": "Light Broth Soup",
-        "meal_description": "A paper bowl containing a clear dark broth with a few visible green onion slices and small pieces of soft ingredients.",
+        "meal_description": "A paper cup containing a dark clear broth with a few visible sliced green onions and small noodle-like pieces.",
         "macros": {
-          "calories": 45,
-          "carbohydrates": 4,
+          "calories": 35,
+          "carbohydrates": 3,
           "fats": 1,
-          "proteins": 3
+          "proteins": 2
         },
         "ingredients": [
           {
-            "name": "broth",
+            "name": "clear broth",
             "impact": "green"
           },
           {
             "name": "green onion",
-            "impact": "green"
-          },
-          {
-            "name": "seaweed or leafy vegetable",
             "impact": "green"
           },
           {
@@ -5015,14 +5023,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "orange",
-        "guidance_message": "This appears to be pizza with a refined-flour crust, cheese, ham, and olives. The crust is likely the main source of carbohydrates, while the cheese and ham add fat and protein. For people managing blood glucose, this meal may fit better with portion awareness and pairing with lower-carbohydrate sides such as salad or non-starchy vegetables.",
-        "meal_title": "Ham and Olive Cheese Pizza",
-        "meal_description": "Two slices of pizza on a plate, topped with melted cheese, ham, tomato sauce, and black olives.",
+        "guidance_message": "This appears to be a slice of pizza with refined crust, cheese, ham, and olives. The crust contributes a substantial carbohydrate load, while the cheese and processed meat add fat and sodium. For people managing blood glucose, this meal may be better suited as an occasional choice or paired with lower-carbohydrate, higher-fiber foods.",
+        "meal_title": "Ham and Olive Pizza Slice",
+        "meal_description": "A single slice of pizza topped with cheese, ham, and black olives on a white plate.",
         "macros": {
-          "calories": 520,
-          "carbohydrates": 48,
-          "fats": 24,
-          "proteins": 24
+          "calories": 320,
+          "carbohydrates": 31,
+          "fats": 14,
+          "proteins": 16
         },
         "ingredients": [
           {
@@ -5030,20 +5038,20 @@
             "impact": "orange"
           },
           {
-            "name": "tomato sauce",
-            "impact": "yellow"
-          },
-          {
-            "name": "mozzarella cheese",
+            "name": "cheese",
             "impact": "yellow"
           },
           {
             "name": "ham",
-            "impact": "green"
+            "impact": "yellow"
           },
           {
             "name": "black olives",
             "impact": "green"
+          },
+          {
+            "name": "tomato sauce",
+            "impact": "yellow"
           }
         ]
       }
@@ -5109,14 +5117,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This appears to be a salad with lean chicken, lettuce, cucumber, broccoli, and a creamy dressing. It is relatively low in carbohydrates and provides protein and non-starchy vegetables, though the dressing may add fat and calories depending on the amount used.",
+        "guidance_message": "This appears to be a salad with lean chicken, lettuce, cucumber, broccoli, and a creamy dressing. It is relatively low in carbohydrates and provides protein and non-starchy vegetables, though the dressing may add fat and calories. Portion size and dressing amount can affect overall suitability for people with diabetes.",
         "meal_title": "Chicken Salad with Creamy Dressing",
-        "meal_description": "A bowl of salad containing sliced chicken breast, lettuce, cucumber, broccoli, cheese crumbles, and creamy dressing.",
+        "meal_description": "A bowl of salad containing sliced chicken breast, lettuce, cucumber, broccoli, cheese cubes, and creamy dressing.",
         "macros": {
-          "calories": 360,
+          "calories": 390,
           "carbohydrates": 12,
-          "fats": 20,
-          "proteins": 34
+          "fats": 24,
+          "proteins": 32
         },
         "ingredients": [
           {
@@ -5136,8 +5144,8 @@
             "impact": "green"
           },
           {
-            "name": "cheese crumbles",
-            "impact": "green"
+            "name": "cheese cubes",
+            "impact": "yellow"
           },
           {
             "name": "creamy dressing",
@@ -5194,15 +5202,15 @@
       },
       "pipelineMealAnalysis": {
         "is_food": true,
-        "recommendation": "green",
-        "guidance_message": "This appears to be a small portion of fresh fruit, mainly grapes and a fig. The portion is modest, but grapes contain natural sugars, so carbohydrate intake can add up if the serving is larger.",
-        "meal_title": "Grapes and Fig",
-        "meal_description": "A small bowl containing green grapes and one fresh fig.",
+        "recommendation": "yellow",
+        "guidance_message": "This appears to be a small serving of fresh fruit, mainly green grapes with one fig. It provides natural sugars and carbohydrates, so portion size matters for people managing blood glucose. Pairing fruit with a protein or fat source may help make the meal more balanced.",
+        "meal_title": "Green Grapes and Fig",
+        "meal_description": "A small bowl containing a cluster of green grapes and one fresh fig.",
         "macros": {
-          "calories": 85,
-          "carbohydrates": 21,
-          "fats": 0.4,
-          "proteins": 1
+          "calories": 95,
+          "carbohydrates": 24,
+          "fats": 0.5,
+          "proteins": 1.2
         },
         "ingredients": [
           {
@@ -5281,14 +5289,14 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a burger or sandwich on a sesame bun with vegetables. The refined bun is likely the main source of fast-digesting carbohydrates, while the overall impact will also depend on the type of filling and sauces used. For people managing blood glucose, a smaller bun, more non-starchy vegetables, and moderate sauce portions may help reduce the meal's glycemic load.",
-        "meal_title": "Sesame Bun Burger Sandwich",
-        "meal_description": "A burger or sandwich served on a sesame seed bun, with visible tomato, lettuce, sauce, and a patty or filling inside.",
+        "guidance_message": "This appears to be a burger on a sesame bun with visible vegetables. The refined bun likely contributes most of the carbohydrates, while the filling may provide protein and fat. For people managing blood glucose, portion size and the type of patty and sauces can meaningfully affect the overall impact.",
+        "meal_title": "Sesame Bun Burger",
+        "meal_description": "A burger served on a sesame seed bun, with visible lettuce and tomato and a patty or filling inside.",
         "macros": {
-          "calories": 420,
+          "calories": 430,
           "carbohydrates": 34,
-          "fats": 18,
-          "proteins": 28
+          "fats": 22,
+          "proteins": 24
         },
         "ingredients": [
           {
@@ -5296,19 +5304,15 @@
             "impact": "orange"
           },
           {
-            "name": "tomato",
-            "impact": "green"
-          },
-          {
             "name": "lettuce",
             "impact": "green"
           },
           {
-            "name": "sauce",
-            "impact": "yellow"
+            "name": "tomato",
+            "impact": "green"
           },
           {
-            "name": "patty or sandwich filling",
+            "name": "burger patty",
             "impact": "yellow"
           },
           {
@@ -5375,26 +5379,26 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "green",
-        "guidance_message": "This meal appears to be a piece of white fish served with sauerkraut. It is likely low in carbohydrates and relatively high in protein, which is generally a diabetes-friendly pattern. Sodium may be higher if the sauerkraut is heavily salted or packaged.",
+        "guidance_message": "This meal appears to be a lean white fish fillet served with a large portion of sauerkraut or cooked cabbage. It is likely low in carbohydrates and relatively high in protein, which may make it a lower glycemic meal option for people managing blood glucose. Sodium may be higher if the cabbage is fermented or salted.",
         "meal_title": "White Fish with Sauerkraut",
-        "meal_description": "A piece of cooked white fish served alongside a mound of sauerkraut on a blue plate.",
+        "meal_description": "A piece of cooked white fish served with a mound of shredded sauerkraut or soft cooked cabbage on a plate.",
         "macros": {
-          "calories": 220,
-          "carbohydrates": 8,
-          "fats": 6,
-          "proteins": 32
+          "calories": 260,
+          "carbohydrates": 10,
+          "fats": 7,
+          "proteins": 36
         },
         "ingredients": [
           {
-            "name": "white fish",
+            "name": "White fish fillet",
             "impact": "green"
           },
           {
-            "name": "sauerkraut",
+            "name": "Sauerkraut or cooked cabbage",
             "impact": "green"
           },
           {
-            "name": "cooking oil or butter",
+            "name": "Cooking oil or butter",
             "impact": "yellow"
           }
         ]
@@ -5461,9 +5465,9 @@
       "pipelineMealAnalysis": {
         "is_food": true,
         "recommendation": "yellow",
-        "guidance_message": "This appears to be a bowl of oatmeal or muesli with milk. Oats can provide fiber and a steadier carbohydrate source than many refined cereals, but the meal still contains a moderate carbohydrate load. Portion size and any added sweeteners or dried fruit would affect how suitable it is for people with diabetes.",
+        "guidance_message": "This appears to be a bowl of oatmeal or muesli with milk and seeds. It provides fiber and some protein, but the carbohydrate content is moderate, so portion size and any added sweeteners can affect how well it fits into a diabetes-friendly meal plan.",
         "meal_title": "Oatmeal or Muesli with Milk",
-        "meal_description": "A white bowl containing a grain-based cereal mixture, likely oats or muesli, with milk or a similar liquid.",
+        "meal_description": "A white bowl containing a grain-based cereal mixture, likely oats or muesli, with milk and visible seeds.",
         "macros": {
           "calories": 260,
           "carbohydrates": 34,
@@ -5472,7 +5476,7 @@
         },
         "ingredients": [
           {
-            "name": "oats",
+            "name": "oats or muesli",
             "impact": "yellow"
           },
           {
@@ -5480,7 +5484,7 @@
             "impact": "yellow"
           },
           {
-            "name": "mixed grains or seeds",
+            "name": "mixed seeds",
             "impact": "green"
           }
         ]

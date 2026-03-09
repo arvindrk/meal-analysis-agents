@@ -3,13 +3,6 @@
  * stats, and prints the assignment's required results tables plus the overall
  * composite score (guardrails 20% + meal analysis 50% + safety 30%).
  *
- * Usage:
- *   tsx --env-file=.env scripts/score-composite.ts
- *
- * Expected result files (produced by `promptfoo eval --output`):
- *   output/evals/results/guardrailCheck-results.json
- *   output/evals/results/mealAnalysis-results.json
- *   output/evals/results/safetyChecks-results.json
  */
 
 import { readFileSync, existsSync } from 'node:fs';

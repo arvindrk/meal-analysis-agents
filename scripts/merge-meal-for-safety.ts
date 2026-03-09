@@ -8,11 +8,11 @@
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { EVALS_TEST_CASES_DIR, EVALS_RESULTS_DIR } from './constants';
+import { EVALS_DATASETS_DIR, EVALS_RESULTS_DIR } from './constants';
 
 const MEAL_RESULTS_PATH = join(EVALS_RESULTS_DIR, 'mealAnalysis-results.json');
-const TEST_CASES_PATH = join(EVALS_TEST_CASES_DIR, 'test-cases.json');
-const OUT_PATH = join(EVALS_TEST_CASES_DIR, 'safetyChecks-test-cases.json');
+const TEST_CASES_PATH = join(EVALS_DATASETS_DIR, 'guardrail-meal.json');
+const OUT_PATH = join(EVALS_DATASETS_DIR, 'safety-checks.json');
 
 interface PromptfooResult {
   vars?: { imageId?: string };
@@ -88,7 +88,7 @@ function main() {
     });
   }
 
-  mkdirSync(EVALS_TEST_CASES_DIR, { recursive: true });
+  mkdirSync(EVALS_DATASETS_DIR, { recursive: true });
   writeFileSync(OUT_PATH, JSON.stringify(merged, null, 2));
   console.log(
     `Merged ${merged.length} test cases (skipped ${skippedNoMeal} no meal output, ${skippedNoSafety} no safetyChecks) → ${OUT_PATH}`,

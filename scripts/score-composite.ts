@@ -15,8 +15,25 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import boxen from 'boxen';
+import chalk from 'chalk';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+
+function scoreColor(score: number): (s: string) => string {
+  if (score >= 80) return chalk.green;
+  if (score >= 50) return chalk.yellow;
+  return chalk.red;
+}
+
+function stripAnsi(s: string): string {
+  return s.replace(/\x1b\[[0-9;]*m/g, '');
+}
+
+function padVisible(str: string, width: number): string {
+  const visible = stripAnsi(String(str)).length;
+  return String(str) + ' '.repeat(Math.max(0, width - visible));
+}
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -52,7 +69,7 @@ interface PromptfooOutput {
 function loadResults(filename: string): EvalResult[] {
   const path = join(ROOT, 'output', 'evals', filename);
   if (!existsSync(path)) {
-    console.warn(`  [warn] ${filename} not found — skipping`);
+    console.warn(chalk.yellow(`  [warn] ${filename} not found — skipping`));
     return [];
   }
   const raw = JSON.parse(readFileSync(path, 'utf-8')) as PromptfooOutput;
@@ -217,35 +234,67 @@ function mealAnalysisComposite(stats: ModelStats): number {
 
 // ── Table printer ────────────────────────────────────────────────────────────
 
-function printTable(title: string, modelStats: ModelStats[], scoreLabel = 'Eval Score') {
+function printTable(
+  title: string,
+  modelStats: ModelStats[],
+  scoreLabel = 'Eval Score',
+  bestModels?: Set<string>,
+) {
   const cols = ['Model', scoreLabel, 'Avg Input Tokens', 'Avg Output Tokens', 'P50 Latency (ms)'];
-  const rows = modelStats.map((s) => [
-    s.label,
-    `${fmt(s.evalScore)}/100`,
-    fmt(s.avgInputTokens, 0),
-    fmt(s.avgOutputTokens, 0),
-    fmt(s.p50LatencyMs, 0),
-  ]);
 
-  const widths = cols.map((c, i) => Math.max(c.length, ...rows.map((r) => r[i]!.length)));
+  const rows = modelStats.map((s) => {
+    const scoreStr = `${fmt(s.evalScore)}/100`;
+    const coloredScore = scoreColor(s.evalScore)(scoreStr);
+    return [
+      s.label,
+      coloredScore,
+      fmt(s.avgInputTokens, 0),
+      fmt(s.avgOutputTokens, 0),
+      fmt(s.p50LatencyMs, 0),
+    ];
+  });
 
-  const divider = widths.map((w) => '-'.repeat(w + 2)).join('+');
-  const header = cols.map((c, i) => ` ${c.padEnd(widths[i]!)} `).join('|');
+  const widths = cols.map((c, i) =>
+    Math.max(c.length, ...rows.map((r) => stripAnsi(String(r[i])).length)),
+  );
 
-  console.log(`\n### ${title}`);
-  console.log(divider);
-  console.log(header);
-  console.log(divider);
-  for (const row of rows) {
-    console.log(row.map((c, i) => ` ${c.padEnd(widths[i]!)} `).join('|'));
-  }
-  console.log(divider);
+  const divider = widths.map((w) => '─'.repeat(w + 2)).join('┼');
+  const header = cols.map((c, i) => ` ${chalk.bold.dim(padVisible(c, widths[i]!))} `).join('│');
+
+  const body = rows
+    .map((row, i) => {
+      const line = row.map((c, j) => ` ${padVisible(String(c), widths[j]!)} `).join('│');
+      const isBest = bestModels?.has(modelStats[i]!.label);
+      return isBest ? chalk.bold(line) : line;
+    })
+    .join('\n');
+
+  const content = `${divider}\n${header}\n${divider}\n${body}\n${divider}`;
+  const minWidth = Math.max(divider.length + 4, 100);
+
+  console.log(
+    boxen(content, {
+      title: chalk.bold(title),
+      titleAlignment: 'left',
+      padding: 1,
+      borderStyle: 'single',
+      borderColor: 'cyan',
+      width: minWidth,
+    }),
+  );
 }
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 function main() {
-  console.log('=== Meal Analysis Eval — Composite Scorer ===\n');
+  console.log(
+    boxen(chalk.bold.cyan('Meal Analysis Eval — Composite Scorer'), {
+      padding: 1,
+      borderStyle: 'round',
+      borderColor: 'cyan',
+    }),
+  );
+  console.log();
 
   const guardrailResults = loadResults('guardrailCheck-results.json');
   const mealResults = loadResults('mealAnalysis-results.json');
@@ -261,30 +310,32 @@ function main() {
   }
 
   if (guardrailStats.length > 0) {
-    printTable('guardrailCheck', guardrailStats);
+    const bestG = new Set(modelsWithMaxScore(guardrailStats).models.map((m) => m.label));
+    printTable('guardrailCheck', guardrailStats, 'Eval Score', bestG);
   }
 
   if (mealStats.length > 0) {
-    printTable('mealAnalysis (weighted composite)', mealStats, 'Composite Score');
-    // Show component breakdown
+    const bestM = new Set(modelsWithMaxScore(mealStats).models.map((m) => m.label));
+    printTable('mealAnalysis (weighted composite)', mealStats, 'Composite Score', bestM);
     const firstModel = mealStats[0]!;
     if (Object.keys(firstModel.componentScores).length > 0) {
-      console.log('\n  Component breakdown (avg scores, first model):');
-      for (const [metric, scores] of Object.entries(firstModel.componentScores)) {
-        console.log(`    ${metric}: ${fmt(mean(scores))}/100`);
-      }
+      const breakdown = Object.entries(firstModel.componentScores)
+        .map(([metric, scores]) => chalk.dim(`  ${metric}: `) + scoreColor(mean(scores))(`${fmt(mean(scores))}/100`))
+        .join('\n');
+      console.log(boxen(chalk.dim('Component breakdown (avg scores, first model)\n\n') + breakdown, {
+        padding: 1,
+        borderStyle: 'round',
+        dimBorder: true,
+      }));
     }
   }
 
   if (safetyStats.length > 0) {
-    printTable('safetyChecks', safetyStats);
+    const bestS = new Set(modelsWithMaxScore(safetyStats).models.map((m) => m.label));
+    printTable('safetyChecks', safetyStats, 'Eval Score', bestS);
   }
 
-  // ── Overall composite (20/50/30) for each recommended-model combination ──
   if (guardrailStats.length > 0 && mealStats.length > 0 && safetyStats.length > 0) {
-    console.log('\n### Overall Composite (guardrails 20% + meal 50% + safety 30%)');
-    console.log('(All models tied for best per agent)\n');
-
     const { models: bestGuardrails, maxScore: guardrailMax } = modelsWithMaxScore(guardrailStats);
     const { models: bestMeals, maxScore: mealMax } = modelsWithMaxScore(mealStats);
     const { models: bestSafeties, maxScore: safetyMax } = modelsWithMaxScore(safetyStats);
@@ -297,11 +348,27 @@ function main() {
       bestSafeties[0]!.p50LatencyMs,
     ];
 
-    console.log(`  guardrailCheck → ${bestGuardrails.map((m) => m.label).join(', ')} (${fmt(guardrailMax)}/100)`);
-    console.log(`  mealAnalysis   → ${bestMeals.map((m) => m.label).join(', ')} (${fmt(mealMax)}/100)`);
-    console.log(`  safetyChecks   → ${bestSafeties.map((m) => m.label).join(', ')} (${fmt(safetyMax)}/100)`);
-    console.log(`\n  Composite eval score : ${fmt(composite)}/100`);
-    console.log(`  P50 end-to-end latency: ${fmt(allLatencies.reduce((s, v) => s + v, 0), 0)} ms (sum of agent P50s)`);
+    const compositeLines = [
+      chalk.dim('(All models tied for best per agent)\n'),
+      chalk.cyan('guardrailCheck') + ` → ${bestGuardrails.map((m) => m.label).join(', ')} ` + scoreColor(guardrailMax)(`(${fmt(guardrailMax)}/100)`),
+      chalk.cyan('mealAnalysis') + `   → ${bestMeals.map((m) => m.label).join(', ')} ` + scoreColor(mealMax)(`(${fmt(mealMax)}/100)`),
+      chalk.cyan('safetyChecks') + `   → ${bestSafeties.map((m) => m.label).join(', ')} ` + scoreColor(safetyMax)(`(${fmt(safetyMax)}/100)`),
+      '',
+      chalk.bold('Composite eval score: ') + scoreColor(composite)(`${fmt(composite)}/100`),
+      chalk.dim(`P50 end-to-end latency: ${fmt(allLatencies.reduce((s, v) => s + v, 0), 0)} ms (sum of agent P50s)`),
+    ];
+
+    const compositeWidth = Math.max(80, ...compositeLines.map((l) => stripAnsi(l).length)) + 4;
+    console.log(
+      boxen(compositeLines.join('\n'), {
+        title: chalk.bold('Overall Composite (guardrails 20% + meal 50% + safety 30%)'),
+        titleAlignment: 'left',
+        padding: 1,
+        borderStyle: 'double',
+        borderColor: 'cyan',
+        width: compositeWidth,
+      }),
+    );
 
     const compositeForCombo = (g: ModelStats, m: ModelStats, s: ModelStats) =>
       0.2 * g.evalScore + 0.5 * m.evalScore + 0.3 * s.evalScore;
@@ -333,20 +400,30 @@ function main() {
       ['A+B: Balanced', bestBalG.map((m) => m.label).join(', '), bestBalM.map((m) => m.label).join(', '), bestBalS.map((m) => m.label).join(', '), `${fmt(compAB)}/100`, `${fmt(e2eAB, 0)}`],
     ];
     const dmWidths = dmCols.map((c, i) => Math.max(c.length, ...dmRows.map((r) => r[i]!.length)));
-    const dmDivider = dmWidths.map((w) => '-'.repeat(w + 2)).join('+');
-    const dmHeader = dmCols.map((c, i) => ` ${c.padEnd(dmWidths[i]!)} `).join('|');
-    console.log('\n### Decision Matrix');
-    console.log(dmDivider);
-    console.log(dmHeader);
-    console.log(dmDivider);
-    for (const row of dmRows) {
-      console.log(row.map((c, i) => ` ${c.padEnd(dmWidths[i]!)} `).join('|'));
-    }
-    console.log(dmDivider);
-    console.log('\n  A = composite per 1k tokens (cost)  |  B = composite per ms (latency)  |  A+B = normalized value + latency');
+    const dmDivider = dmWidths.map((w) => '─'.repeat(w + 2)).join('┼');
+    const dmHeader = dmCols.map((c, i) => ` ${chalk.bold.dim(c.padEnd(dmWidths[i]!))} `).join('│');
+    const dmBody = dmRows
+      .map((row, i) => {
+        const line = row.map((c, j) => ` ${c.padEnd(dmWidths[j]!) || ' '.repeat(dmWidths[j]!)} `).join('│');
+        return i === 0 ? chalk.bold(line) : line;
+      })
+      .join('\n');
+    const dmContent = `${dmDivider}\n${dmHeader}\n${dmDivider}\n${dmBody}\n${dmDivider}\n\n${chalk.dim('A = composite per 1k tokens (cost)  |  B = composite per ms (latency)  |  A+B = normalized value + latency')}`;
+    const dmWidth = Math.max(dmDivider.length + 4, 100);
+
+    console.log(
+      boxen(dmContent, {
+        title: chalk.bold('Decision Matrix'),
+        titleAlignment: 'left',
+        padding: 1,
+        borderStyle: 'single',
+        borderColor: 'cyan',
+        width: dmWidth,
+      }),
+    );
   }
 
-  console.log('');
+  console.log();
 }
 
 main();

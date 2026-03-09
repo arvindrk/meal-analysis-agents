@@ -1,0 +1,35 @@
+{
+  "is_food": true,
+  "recommendation": "orange",
+  "guidance_message": "This meal is high in carbohydrates, which can affect blood sugar levels. Portion control and pairing with protein or fiber-rich foods can help manage its impact.",
+  "meal_title": "Bread Rolls with Juice Box",
+  "meal_description": "Three plain bread rolls served on a tray with a box of juice.",
+  "macros": {
+    "calories": 320,
+    "carbohydrates": 62,
+    "fats": 4,
+    "proteins": 8
+  },
+  "ingredients": [
+    {
+      "name": "Wheat flour (bread rolls)",
+      "impact": "orange"
+    },
+    {
+      "name": "Sugar (bread rolls)",
+      "impact": "orange"
+    },
+    {
+      "name": "Vegetable oil/butter (bread rolls)",
+      "impact": "yellow"
+    },
+    {
+      "name": "Yeast (bread rolls)",
+      "impact": "green"
+    },
+    {
+      "name": "Fruit juice (juice box)",
+      "impact": "red"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "is_food": true,
+  "no_pii": true,
+  "no_humans": true,
+  "no_captcha": true
+}

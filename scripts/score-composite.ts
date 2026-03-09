@@ -1,8 +1,7 @@
 /**
  * Reads Promptfoo JSON result files for all three agents, computes per-model
- * stats, and prints the assignment's required results tables plus the overall
- * composite score (guardrails 20% + meal analysis 50% + safety 30%).
- *
+ * stats, and prints results tables plus the overall composite score
+ * (guardrails 20% + meal analysis 50% + safety 30%).
  */
 
 import { readFileSync, existsSync } from 'node:fs';
@@ -25,8 +24,6 @@ function padVisible(str: string, width: number): string {
   const visible = stripAnsi(String(str)).length;
   return String(str) + ' '.repeat(Math.max(0, width - visible));
 }
-
-// ── Types ────────────────────────────────────────────────────────────────────
 
 interface TokenUsage {
   total?: number;
@@ -51,11 +48,8 @@ interface EvalResult {
 
 interface PromptfooOutput {
   results?: EvalResult[];
-  // Promptfoo v3 wraps results under a nested key in some versions
-  [key: string]: unknown;
+  [key: string]: unknown; // Promptfoo v3 wraps results under nested key in some versions
 }
-
-// ── Helpers ──────────────────────────────────────────────────────────────────
 
 function loadResults(filename: string): EvalResult[] {
   const path = join(EVALS_RESULTS_DIR, filename);
@@ -137,15 +131,13 @@ function bestByBalanced(stats: ModelStats[]): ModelStats[] {
   return combined.filter((x) => x.score === maxCombined).map((x) => x.stats);
 }
 
-// ── Per-model stats ──────────────────────────────────────────────────────────
-
 interface ModelStats {
   label: string;
-  evalScore: number;       // 0–100
+  evalScore: number;
   avgInputTokens: number;
   avgOutputTokens: number;
   p50LatencyMs: number;
-  componentScores: Record<string, number[]>; // metric → [scores]
+  componentScores: Record<string, number[]>;
 }
 
 function groupByModel(results: EvalResult[]): ModelStats[] {
@@ -194,10 +186,7 @@ function groupByModel(results: EvalResult[]): ModelStats[] {
   });
 }
 
-// ── mealAnalysis weighted composite (assignment 3.1.3) ─────────────────────
-// 50% recommendation exact (100/0) + 30% text (description, guidance, title) + 20% avg(macros, ingredients)
-// Normalize weights over available components if any are missing.
-
+// 50% rec + 30% text + 20% avg(macros, ingredients); normalize if components missing
 function mealAnalysisComposite(stats: ModelStats): number {
   const cs = stats.componentScores;
   const recScores = cs['recommendation_score'] ?? [];
@@ -220,8 +209,6 @@ function mealAnalysisComposite(stats: ModelStats): number {
   const totalW = available.reduce((s, x) => s + x.w, 0);
   return totalW > 0 ? available.reduce((s, x) => s + (x.w / totalW) * x.v, 0) : 0;
 }
-
-// ── Table printer ────────────────────────────────────────────────────────────
 
 function printTable(
   title: string,
@@ -273,8 +260,6 @@ function printTable(
   );
 }
 
-// ── Main ─────────────────────────────────────────────────────────────────────
-
 function main() {
   console.log(
     boxen(chalk.bold.cyan('Meal Analysis Eval — Composite Scorer'), {
@@ -293,7 +278,6 @@ function main() {
   const mealStats = groupByModel(mealResults);
   const safetyStats = groupByModel(safetyResults);
 
-  // Override mealAnalysis evalScore with the assignment's weighted composite
   for (const s of mealStats) {
     s.evalScore = mealAnalysisComposite(s);
   }

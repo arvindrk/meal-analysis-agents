@@ -27,3 +27,19 @@ export interface PipelineResult {
   mealAnalysis?: MealAnalysisOutput;
   safetyChecks?: SafetyChecksOutput;
 }
+
+export interface PipelineOptions {
+  dataDir?: string;
+  loadDataset?: boolean;
+  models?: {
+    guardrail?: string;
+    mealAnalysis?: string;
+    safety?: string;
+  };
+}
+
+export interface LoadDatasetResult {
+  entries: DatasetEntry[];
+  total: number;
+  withSafetyChecks: number;
+}

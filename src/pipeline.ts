@@ -5,23 +5,15 @@ import type {
   SafetyChecksOutput,
   DatasetEntry,
   PipelineResult,
+  PipelineOptions,
 } from './types';
-import { loadDataset, buildImageInput } from './dataset';
+import { loadDataset } from './dataset';
+import { buildImageInput } from './agentIO';
 import { createGuardrailAgent } from './agents/guardrailCheck';
 import { createMealAnalysisAgent } from './agents/mealAnalysis';
 import { createSafetyAgent } from './agents/safetyChecks';
 
 const DEFAULT_MODEL = 'gpt-4.1';
-
-export interface PipelineOptions {
-  dataDir?: string;
-  loadDataset?: boolean;
-  models?: {
-    guardrail?: string;
-    mealAnalysis?: string;
-    safety?: string;
-  };
-}
 
 function guardrailsPassed(output: GuardrailCheckOutput): boolean {
   return output.is_food && output.no_pii && output.no_humans && output.no_captcha;
@@ -86,9 +78,9 @@ export class MealAnalysisPipeline {
     const entries = n ? this.dataset.slice(0, n) : this.dataset;
     const results: PipelineResult[] = [];
 
-    for (let i = 0; i < entries.length; i++) {
-      console.log(`[${i + 1}/${entries.length}] ${entries[i].id}`);
-      results.push(await this.analyze(entries[i]));
+    for (const entry of entries) {
+      console.log(`[${results.length + 1}/${entries.length}] ${entry.id}`);
+      results.push(await this.analyze(entry));
     }
 
     return results;

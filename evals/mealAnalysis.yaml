@@ -1,0 +1,90 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: "mealAnalysis agent — model comparison eval"
+
+providers:
+  - id: "file://providers/mealAnalysis.ts"
+    label: "gpt-5.4"
+    config:
+      model: "gpt-5.4"
+  - id: "file://providers/mealAnalysis.ts"
+    label: "gpt-5"
+    config:
+      model: "gpt-5"
+  - id: "file://providers/mealAnalysis.ts"
+    label: "gpt-5.2"
+    config:
+      model: "gpt-5.2"
+  - id: "file://providers/mealAnalysis.ts"
+    label: "gpt-5-mini"
+    config:
+      model: "gpt-5-mini"
+  - id: "file://providers/mealAnalysis.ts"
+    label: "gpt-5-nano"
+    config:
+      model: "gpt-5-nano"
+  - id: "file://providers/mealAnalysis.ts"
+    label: "gpt-4.1"
+    config:
+      model: "gpt-4.1"
+  - id: "file://providers/mealAnalysis.ts"
+    label: "gpt-4.1-mini"
+    config:
+      model: "gpt-4.1-mini"
+  - id: "file://providers/mealAnalysis.ts"
+    label: "gpt-4.1-nano"
+    config:
+      model: "gpt-4.1-nano"
+  - id: "file://providers/mealAnalysis.ts"
+    label: "gpt-4o"
+    config:
+      model: "gpt-4o"
+  - id: "file://providers/mealAnalysis.ts"
+    label: "gpt-4o-mini"
+    config:
+      model: "gpt-4o-mini"
+  - id: "file://providers/mealAnalysis.ts"
+    label: "o4-mini"
+    config:
+      model: "o4-mini"
+
+prompts:
+  - "{{imageId}}"
+
+tests: file://test-cases.json
+
+defaultTest:
+  assert:
+    # Weight 50% — recommendation 3-class exact match
+    - type: javascript
+      value: file://asserters/mealAnalysis-recommendation.ts
+      metric: recommendation_score
+
+    # Weight 10% — macro MAPE score
+    - type: javascript
+      value: file://asserters/mealAnalysis-macros.ts
+      metric: macros_score
+
+    # Weight 10% — ingredient name + impact match
+    - type: javascript
+      value: file://asserters/mealAnalysis-ingredients.ts
+      metric: ingredients_score
+
+    # Weight 30% — LLM-as-judge for guidance_message, meal_title, meal_description.
+    # Default grading model is gpt-4o (Promptfoo default), kept fixed across all runs.
+    - type: llm-rubric
+      metric: text_quality_score
+      value: |
+        The output is a JSON object from a diabetes meal analysis system.
+        Evaluate the quality of these text fields: meal_title, meal_description, and guidance_message.
+
+        Score 1–5 where:
+        5 = All text is factually accurate, clearly written, and uses neutral tone with no medical claims or diagnoses
+        4 = Minor issues in one field
+        3 = Acceptable but noticeable clarity, accuracy, or tone problems
+        2 = Significant problems — inaccurate, unclear, or contains inappropriate medical language
+        1 = Multiple serious failures
+
+        Return a single score (1–5) representing the average quality across all three fields.
+
+evaluateOptions:
+  maxConcurrency: 5

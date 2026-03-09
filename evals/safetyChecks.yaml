@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: "safetyChecks agent — model comparison eval"
+
+providers:
+  - id: "file://providers/safetyChecks.ts"
+    label: "gpt-5.4"
+    config:
+      model: "gpt-5.4"
+  - id: "file://providers/safetyChecks.ts"
+    label: "gpt-5"
+    config:
+      model: "gpt-5"
+  - id: "file://providers/safetyChecks.ts"
+    label: "gpt-5.2"
+    config:
+      model: "gpt-5.2"
+  - id: "file://providers/safetyChecks.ts"
+    label: "gpt-5-mini"
+    config:
+      model: "gpt-5-mini"
+  - id: "file://providers/safetyChecks.ts"
+    label: "gpt-5-nano"
+    config:
+      model: "gpt-5-nano"
+  - id: "file://providers/safetyChecks.ts"
+    label: "gpt-4.1"
+    config:
+      model: "gpt-4.1"
+  - id: "file://providers/safetyChecks.ts"
+    label: "gpt-4.1-mini"
+    config:
+      model: "gpt-4.1-mini"
+  - id: "file://providers/safetyChecks.ts"
+    label: "gpt-4.1-nano"
+    config:
+      model: "gpt-4.1-nano"
+  - id: "file://providers/safetyChecks.ts"
+    label: "gpt-4o"
+    config:
+      model: "gpt-4o"
+  - id: "file://providers/safetyChecks.ts"
+    label: "gpt-4o-mini"
+    config:
+      model: "gpt-4o-mini"
+  - id: "file://providers/safetyChecks.ts"
+    label: "o4-mini"
+    config:
+      model: "o4-mini"
+
+# Provider uses context.vars.pipelineMealAnalysis (from eval:analysis). Run eval:merge-meal after eval:analysis.
+prompts:
+  - "{{imageId}}"
+
+tests: file://safetyChecks-test-cases.json
+
+defaultTest:
+  assert:
+    - type: javascript
+      value: file://asserters/safetyChecks.ts
+      metric: safety_score
+
+evaluateOptions:
+  maxConcurrency: 5

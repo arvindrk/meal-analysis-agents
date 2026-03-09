@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: "guardrailCheck agent — model comparison eval"
+
+providers:
+  - id: "file://providers/guardrailCheck.ts"
+    label: "gpt-5.4"
+    config:
+      model: "gpt-5.4"
+  - id: "file://providers/guardrailCheck.ts"
+    label: "gpt-5"
+    config:
+      model: "gpt-5"
+  - id: "file://providers/guardrailCheck.ts"
+    label: "gpt-5.2"
+    config:
+      model: "gpt-5.2"
+  - id: "file://providers/guardrailCheck.ts"
+    label: "gpt-5-mini"
+    config:
+      model: "gpt-5-mini"
+  - id: "file://providers/guardrailCheck.ts"
+    label: "gpt-5-nano"
+    config:
+      model: "gpt-5-nano"
+  - id: "file://providers/guardrailCheck.ts"
+    label: "gpt-4.1"
+    config:
+      model: "gpt-4.1"
+  - id: "file://providers/guardrailCheck.ts"
+    label: "gpt-4.1-mini"
+    config:
+      model: "gpt-4.1-mini"
+  - id: "file://providers/guardrailCheck.ts"
+    label: "gpt-4.1-nano"
+    config:
+      model: "gpt-4.1-nano"
+  - id: "file://providers/guardrailCheck.ts"
+    label: "gpt-4o"
+    config:
+      model: "gpt-4o"
+  - id: "file://providers/guardrailCheck.ts"
+    label: "gpt-4o-mini"
+    config:
+      model: "gpt-4o-mini"
+  - id: "file://providers/guardrailCheck.ts"
+    label: "o4-mini"
+    config:
+      model: "o4-mini"
+
+prompts:
+  - "{{imageId}}"
+
+tests: file://test-cases.json
+
+defaultTest:
+  assert:
+    - type: javascript
+      value: file://asserters/guardrailCheck.ts
+      metric: guardrail_score
+
+evaluateOptions:
+  maxConcurrency: 5

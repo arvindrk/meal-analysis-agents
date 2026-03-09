@@ -2,7 +2,13 @@
   "name": "meal-agents",
   "type": "module",
   "scripts": {
-    "start": "tsx --env-file=.env src/run.ts"
+    "start": "tsx --env-file=.env src/run.ts",
+    "eval:generate": "tsx --env-file=.env scripts/generate-test-cases.ts",
+    "eval:guardrail": "NODE_ENV=test NODE_OPTIONS='--import tsx/esm' promptfoo eval -c evals/guardrailCheck.yaml --output output/evals/guardrailCheck-results.json",
+    "eval:analysis": "NODE_ENV=test NODE_OPTIONS='--import tsx/esm' promptfoo eval -c evals/mealAnalysis.yaml --output output/evals/mealAnalysis-results.json",
+    "eval:merge-meal": "tsx --env-file=.env scripts/merge-meal-for-safety.ts",
+    "eval:safety": "NODE_ENV=test NODE_OPTIONS='--import tsx/esm' promptfoo eval -c evals/safetyChecks.yaml --output output/evals/safetyChecks-results.json",
+    "eval:score": "tsx --env-file=.env scripts/score-composite.ts"
   },
   "dependencies": {
     "@openai/agents": "^0.5.4",

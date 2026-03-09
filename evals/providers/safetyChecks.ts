@@ -1,16 +1,19 @@
 import type { ApiProvider, ProviderOptions, ProviderResponse, CallApiContextParams } from 'promptfoo';
-import { run } from '@openai/agents';
-import { createSafetyAgent } from '../../src/agents/safetyChecks';
+import { MealAnalysisPipeline } from '../../src/pipeline';
 import { SafetyEvalVarsSchema } from '../../src/schemas';
 import { computeTokenUsage } from './utils';
 
 export default class SafetyChecksProvider implements ApiProvider {
-  private model: string;
+  private pipeline: MealAnalysisPipeline;
   private providerId: string;
 
   constructor(options: ProviderOptions) {
-    this.model = (options.config?.model as string) ?? 'gpt-4.1';
-    this.providerId = options.id ?? `safetyChecks/${this.model}`;
+    const model = (options.config?.model as string) ?? 'gpt-4.1';
+    this.pipeline = new MealAnalysisPipeline({
+      loadDataset: false,
+      models: { guardrail: model, mealAnalysis: model, safety: model },
+    });
+    this.providerId = options.id ?? `safetyChecks/${model}`;
   }
 
   id(): string {
@@ -23,14 +26,11 @@ export default class SafetyChecksProvider implements ApiProvider {
       throw new Error(`Invalid eval vars: ${parseResult.error.message}`);
     }
     const vars = parseResult.data;
-    const agent = createSafetyAgent(this.model);
-
-    const mealAnalysisText = JSON.stringify(vars.pipelineMealAnalysis);
-    const runResult = await run(agent, mealAnalysisText);
+    const { safetyChecks, rawResponses } = await this.pipeline.runSafetyChecks(vars.pipelineMealAnalysis);
 
     return {
-      output: JSON.stringify(runResult.finalOutput),
-      tokenUsage: computeTokenUsage(runResult.rawResponses),
+      output: JSON.stringify(safetyChecks),
+      tokenUsage: computeTokenUsage(rawResponses),
     };
   }
 }

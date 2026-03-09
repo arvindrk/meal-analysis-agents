@@ -1,17 +1,19 @@
 import type { ApiProvider, ProviderOptions, ProviderResponse, CallApiContextParams } from 'promptfoo';
-import { run } from '@openai/agents';
-import { createMealAnalysisAgent } from '../../src/agents/mealAnalysis';
-import { buildImageInput } from '../../src/dataset';
+import { MealAnalysisPipeline } from '../../src/pipeline';
 import { MealAnalysisEvalVarsSchema } from '../../src/schemas';
 import { computeTokenUsage } from './utils';
 
 export default class MealAnalysisProvider implements ApiProvider {
-  private model: string;
+  private pipeline: MealAnalysisPipeline;
   private providerId: string;
 
   constructor(options: ProviderOptions) {
-    this.model = (options.config?.model as string) ?? 'gpt-4.1';
-    this.providerId = options.id ?? `mealAnalysis/${this.model}`;
+    const model = (options.config?.model as string) ?? 'gpt-4.1';
+    this.pipeline = new MealAnalysisPipeline({
+      loadDataset: false,
+      models: { guardrail: model, mealAnalysis: model, safety: model },
+    });
+    this.providerId = options.id ?? `mealAnalysis/${model}`;
   }
 
   id(): string {
@@ -24,13 +26,11 @@ export default class MealAnalysisProvider implements ApiProvider {
       throw new Error(`Invalid eval vars: ${parseResult.error.message}`);
     }
     const vars = parseResult.data;
-    const agent = createMealAnalysisAgent(this.model);
-
-    const runResult = await run(agent, buildImageInput(vars.imagePath));
+    const { mealAnalysis, rawResponses } = await this.pipeline.runMealAnalysis(vars.imagePath);
 
     return {
-      output: JSON.stringify(runResult.finalOutput),
-      tokenUsage: computeTokenUsage(runResult.rawResponses),
+      output: JSON.stringify(mealAnalysis),
+      tokenUsage: computeTokenUsage(rawResponses),
     };
   }
 }

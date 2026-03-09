@@ -35,14 +35,14 @@ async function runSingleAgent(pipeline: MealAnalysisPipeline, agentName: AgentNa
     let output: unknown;
     switch (agentName) {
       case 'guardrail':
-        output = await pipeline.runGuardrailCheck(entry);
+        output = (await pipeline.runGuardrailCheck(entry.imagePath)).guardrailCheck;
         break;
       case 'analysis':
-        output = await pipeline.runMealAnalysis(entry);
+        output = (await pipeline.runMealAnalysis(entry.imagePath)).mealAnalysis;
         break;
       case 'safety': {
         const mealAnalysis = readAgentOutput<MealAnalysisOutput>('mealAnalysis', entry.id);
-        output = await pipeline.runSafetyChecks(mealAnalysis);
+        output = (await pipeline.runSafetyChecks(mealAnalysis)).safetyChecks;
         break;
       }
     }

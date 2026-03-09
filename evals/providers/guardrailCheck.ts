@@ -1,17 +1,19 @@
 import type { ApiProvider, ProviderOptions, ProviderResponse, CallApiContextParams } from 'promptfoo';
-import { run } from '@openai/agents';
-import { createGuardrailAgent } from '../../src/agents/guardrailCheck';
-import { buildImageInput } from '../../src/dataset';
+import { MealAnalysisPipeline } from '../../src/pipeline';
 import { GuardrailEvalVarsSchema } from '../../src/schemas';
 import { computeTokenUsage } from './utils';
 
 export default class GuardrailCheckProvider implements ApiProvider {
-  private model: string;
+  private pipeline: MealAnalysisPipeline;
   private providerId: string;
 
   constructor(options: ProviderOptions) {
-    this.model = (options.config?.model as string) ?? 'gpt-4.1';
-    this.providerId = options.id ?? `guardrailCheck/${this.model}`;
+    const model = (options.config?.model as string) ?? 'gpt-4.1';
+    this.pipeline = new MealAnalysisPipeline({
+      loadDataset: false,
+      models: { guardrail: model, mealAnalysis: model, safety: model },
+    });
+    this.providerId = options.id ?? `guardrailCheck/${model}`;
   }
 
   id(): string {
@@ -24,13 +26,11 @@ export default class GuardrailCheckProvider implements ApiProvider {
       throw new Error(`Invalid eval vars: ${parseResult.error.message}`);
     }
     const vars = parseResult.data;
-    const agent = createGuardrailAgent(this.model);
-
-    const runResult = await run(agent, buildImageInput(vars.imagePath));
+    const { guardrailCheck, rawResponses } = await this.pipeline.runGuardrailCheck(vars.imagePath);
 
     return {
-      output: JSON.stringify(runResult.finalOutput),
-      tokenUsage: computeTokenUsage(runResult.rawResponses),
+      output: JSON.stringify(guardrailCheck),
+      tokenUsage: computeTokenUsage(rawResponses),
     };
   }
 }

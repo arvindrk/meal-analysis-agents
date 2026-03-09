@@ -77,6 +77,13 @@ function fmt(n: number, decimals = 1): string {
   return n.toFixed(decimals);
 }
 
+function modelsWithMaxScore(stats: ModelStats[]): { models: ModelStats[]; maxScore: number } {
+  if (stats.length === 0) return { models: [], maxScore: 0 };
+  const maxScore = Math.max(...stats.map((s) => s.evalScore));
+  const models = stats.filter((s) => s.evalScore === maxScore);
+  return { models, maxScore };
+}
+
 // ── Per-model stats ──────────────────────────────────────────────────────────
 
 interface ModelStats {
@@ -229,24 +236,23 @@ function main() {
   // ── Overall composite (20/50/30) for each recommended-model combination ──
   if (guardrailStats.length > 0 && mealStats.length > 0 && safetyStats.length > 0) {
     console.log('\n### Overall Composite (guardrails 20% + meal 50% + safety 30%)');
-    console.log('(Best model per agent shown)\n');
+    console.log('(All models tied for best per agent)\n');
 
-    const bestGuardrail = guardrailStats.reduce((a, b) => (a.evalScore > b.evalScore ? a : b));
-    const bestMeal = mealStats.reduce((a, b) => (a.evalScore > b.evalScore ? a : b));
-    const bestSafety = safetyStats.reduce((a, b) => (a.evalScore > b.evalScore ? a : b));
+    const { models: bestGuardrails, maxScore: guardrailMax } = modelsWithMaxScore(guardrailStats);
+    const { models: bestMeals, maxScore: mealMax } = modelsWithMaxScore(mealStats);
+    const { models: bestSafeties, maxScore: safetyMax } = modelsWithMaxScore(safetyStats);
 
-    const composite =
-      0.2 * bestGuardrail.evalScore + 0.5 * bestMeal.evalScore + 0.3 * bestSafety.evalScore;
+    const composite = 0.2 * guardrailMax + 0.5 * mealMax + 0.3 * safetyMax;
 
     const allLatencies = [
-      bestGuardrail.p50LatencyMs,
-      bestMeal.p50LatencyMs,
-      bestSafety.p50LatencyMs,
+      bestGuardrails[0]!.p50LatencyMs,
+      bestMeals[0]!.p50LatencyMs,
+      bestSafeties[0]!.p50LatencyMs,
     ];
 
-    console.log(`  guardrailCheck → ${bestGuardrail.label} (${fmt(bestGuardrail.evalScore)}/100)`);
-    console.log(`  mealAnalysis   → ${bestMeal.label} (${fmt(bestMeal.evalScore)}/100)`);
-    console.log(`  safetyChecks   → ${bestSafety.label} (${fmt(bestSafety.evalScore)}/100)`);
+    console.log(`  guardrailCheck → ${bestGuardrails.map((m) => m.label).join(', ')} (${fmt(guardrailMax)}/100)`);
+    console.log(`  mealAnalysis   → ${bestMeals.map((m) => m.label).join(', ')} (${fmt(mealMax)}/100)`);
+    console.log(`  safetyChecks   → ${bestSafeties.map((m) => m.label).join(', ')} (${fmt(safetyMax)}/100)`);
     console.log(`\n  Composite eval score : ${fmt(composite)}/100`);
     console.log(`  P50 end-to-end latency: ${fmt(allLatencies.reduce((s, v) => s + v, 0), 0)} ms (sum of agent P50s)`);
   }

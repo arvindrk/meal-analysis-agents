@@ -35,7 +35,8 @@ interface ComponentResult {
 interface EvalResult {
   provider?: { id?: string; label?: string };
   response?: { output?: string; tokenUsage?: TokenUsage };
-  gradingResult?: { score?: number; componentResults?: ComponentResult[] };
+  gradingResult?: { score?: number; componentResults?: ComponentResult[]; namedScores?: Record<string, number> };
+  namedScores?: Record<string, number>;
   latencyMs?: number;
   score?: number;
 }
@@ -57,7 +58,8 @@ function loadResults(filename: string): EvalResult[] {
   const raw = JSON.parse(readFileSync(path, 'utf-8')) as PromptfooOutput;
   if (Array.isArray(raw)) return raw as EvalResult[];
   const inner = raw.results as EvalResult[] | Record<string, unknown> | undefined;
-  return (Array.isArray(inner) ? inner : (inner?.results as EvalResult[] | undefined)) ?? [];
+  const arr = Array.isArray(inner) ? inner : (inner && typeof inner === 'object' && 'results' in inner ? (inner as { results?: EvalResult[] }).results : undefined);
+  return arr ?? [];
 }
 
 function p50(values: number[]): number {
@@ -101,13 +103,23 @@ function groupByModel(results: EvalResult[]): ModelStats[] {
     const outputTokens = rows.map((r) => r.response?.tokenUsage?.completion ?? 0);
     const latencies = rows.map((r) => r.latencyMs ?? 0);
 
-    // Collect per-metric component scores
     const componentScores: Record<string, number[]> = {};
     for (const r of rows) {
-      for (const c of r.gradingResult?.componentResults ?? []) {
-        const metric = c.assertion?.metric ?? c.assertion?.type ?? 'unknown';
-        if (!componentScores[metric]) componentScores[metric] = [];
-        componentScores[metric].push((c.score ?? 0) * 100);
+      const ns = r.namedScores ?? r.gradingResult?.namedScores;
+      if (ns) {
+        for (const [metric, s] of Object.entries(ns)) {
+          if (!componentScores[metric]) componentScores[metric] = [];
+          const scaled = metric === 'text_quality_score' ? (s / 5) * 100 : s * 100;
+          componentScores[metric].push(scaled);
+        }
+      } else {
+        for (const c of r.gradingResult?.componentResults ?? []) {
+          const metric = c.assertion?.metric ?? c.assertion?.type ?? 'unknown';
+          if (!componentScores[metric]) componentScores[metric] = [];
+          const s = c.score ?? 0;
+          const scaled = metric === 'text_quality_score' ? (s / 5) * 100 : s * 100;
+          componentScores[metric].push(scaled);
+        }
       }
     }
 
@@ -122,26 +134,31 @@ function groupByModel(results: EvalResult[]): ModelStats[] {
   });
 }
 
-// ── mealAnalysis weighted composite ─────────────────────────────────────────
-// 50% recommendation + 30% text_quality + 10% macros + 10% ingredients
+// ── mealAnalysis weighted composite (assignment 3.1.3) ─────────────────────
+// 50% recommendation exact (100/0) + 30% text (description, guidance, title) + 20% avg(macros, ingredients)
+// Normalize weights over available components if any are missing.
 
 function mealAnalysisComposite(stats: ModelStats): number {
   const cs = stats.componentScores;
-  const rec = mean(cs['recommendation_score'] ?? [stats.evalScore]);
+  const recScores = cs['recommendation_score'] ?? [];
   const textScores = cs['text_quality_score'] ?? [];
-  const text = mean(textScores);
-  const macros = mean(cs['macros_score'] ?? []);
-  const ingr = mean(cs['ingredients_score'] ?? []);
+  const macrosScores = cs['macros_score'] ?? [];
+  const ingrScores = cs['ingredients_score'] ?? [];
 
-  const available = [
-    textScores.length === 0 ? null : { w: 0.3, v: text },
-    { w: 0.5, v: rec },
-    { w: 0.1, v: macros },
-    { w: 0.1, v: ingr },
-  ].filter(Boolean) as { w: number; v: number }[];
+  const available: { w: number; v: number }[] = [];
+  if (recScores.length > 0) available.push({ w: 0.5, v: mean(recScores) });
+  if (textScores.length > 0) available.push({ w: 0.3, v: mean(textScores) });
+  const hasMacros = macrosScores.length > 0;
+  const hasIngr = ingrScores.length > 0;
+  if (hasMacros || hasIngr) {
+    const v = hasMacros && hasIngr
+      ? (mean(macrosScores) + mean(ingrScores)) / 2
+      : hasMacros ? mean(macrosScores) : mean(ingrScores);
+    available.push({ w: 0.2, v });
+  }
 
   const totalW = available.reduce((s, x) => s + x.w, 0);
-  return available.reduce((s, x) => s + (x.w / totalW) * x.v, 0);
+  return totalW > 0 ? available.reduce((s, x) => s + (x.w / totalW) * x.v, 0) : 0;
 }
 
 // ── Table printer ────────────────────────────────────────────────────────────

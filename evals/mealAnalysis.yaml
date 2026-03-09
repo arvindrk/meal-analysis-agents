@@ -54,22 +54,27 @@ tests: file://test-cases.json
 
 defaultTest:
   assert:
-    # Weight 50% — recommendation 3-class exact match
+    # is_food correctness (assignment 3.1.3) — boolean exact match
+    - type: javascript
+      value: file://asserters/mealAnalysis-isFood.ts
+      metric: is_food_score
+
+    # Weight 50% — recommendation 3-class exact match (green, yellow, red; orange=red)
     - type: javascript
       value: file://asserters/mealAnalysis-recommendation.ts
       metric: recommendation_score
 
-    # Weight 10% — macro MAPE score
+    # Weight 20% — macro MAPE score (0–100)
     - type: javascript
       value: file://asserters/mealAnalysis-macros.ts
       metric: macros_score
 
-    # Weight 10% — ingredient name + impact match
+    # Weight 20% — ingredient name + impact match (0–100)
     - type: javascript
       value: file://asserters/mealAnalysis-ingredients.ts
       metric: ingredients_score
 
-    # Weight 30% — LLM-as-judge for guidance_message, meal_title, meal_description.
+    # Weight 30% — LLM-as-judge for description, guidance, title (scored 0–5, scaled to 0–100 in composite)
     # Default grading model is gpt-4o (Promptfoo default), kept fixed across all runs.
     - type: llm-rubric
       metric: text_quality_score

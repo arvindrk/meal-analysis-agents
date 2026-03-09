@@ -349,16 +349,108 @@ function printGridTable(
   );
 }
 
-function main() {
-  console.log(
-    boxen(chalk.bold.cyan('Meal Analysis Eval — Composite Scorer'), {
-      padding: 1,
-      borderStyle: 'round',
-      borderColor: 'cyan',
-    }),
-  );
-  console.log();
+function escapeMdCell(s: string): string {
+  return String(s).replace(/\|/g, '\\|');
+}
 
+function mdTable(
+  title: string,
+  cols: string[],
+  rows: string[][],
+  bestModels?: Set<string>,
+) {
+  const sep = cols.map(() => '---').join(' | ');
+  const header = cols.map(escapeMdCell).join(' | ');
+  const body = rows
+    .map((row, i) =>
+      row.map((c, j) => (bestModels && j === 0 && bestModels.has(row[0]! ?? '') ? `**${escapeMdCell(c)}**` : escapeMdCell(c))).join(' | '),
+    )
+    .join('\n');
+  const lines = [`## ${title}`, '', `| ${header} |`, `| ${sep} |`, ...body.split('\n').map((l) => `| ${l} |`), ''];
+  return lines.join('\n');
+}
+
+function mdComposite(
+  bestGuardrails: ModelStats[],
+  bestMeals: ModelStats[],
+  bestSafeties: ModelStats[],
+  guardrailMax: number,
+  mealMax: number,
+  safetyMax: number,
+  composite: number,
+  e2eP50: number,
+  e2eP75: number,
+  e2eP95: number,
+  e2eP99: number,
+  balAccLatG: ModelStats | undefined,
+  balAccLatM: ModelStats | undefined,
+  balAccLatS: ModelStats | undefined,
+  compAccLat: number,
+  e2eP50AccLat: number,
+  pctFaster: number,
+): string {
+  const lines = [
+    '## 3.1 Recommended Architecture',
+    '',
+    '| Agent | Models | Score |',
+    '| --- | --- | --- |',
+    `| guardrailCheck | ${bestGuardrails.map((m) => m.label).join(', ')} | ${fmt(guardrailMax)}/100 |`,
+    `| mealAnalysis | ${bestMeals.map((m) => m.label).join(', ')} | ${fmt(mealMax)}/100 |`,
+    `| safetyChecks | ${bestSafeties.map((m) => m.label).join(', ')} | ${fmt(safetyMax)}/100 |`,
+    '',
+    `**Composite eval score:** ${fmt(composite)}/100`,
+    '',
+    `**P50 end-to-end:** ${fmt(e2eP50, 0)} ms` +
+      ` | **P75:** ${fmt(e2eP75, 0)} ms` +
+      ` | **P95:** ${fmt(e2eP95, 0)} ms` +
+      ` | **P99:** ${fmt(e2eP99, 0)} ms`,
+    '',
+    `**Alternative (balanced):** ${balAccLatG?.label ?? '?'} + ${balAccLatM?.label ?? '?'} + ${balAccLatS?.label ?? '?'} → ${fmt(compAccLat)}/100 composite, ~${fmt(e2eP50AccLat, 0)} ms P50 (≈${pctFaster}% faster)`,
+    '',
+  ];
+  return lines.join('\n');
+}
+
+function mdTableFromStats(
+  title: string,
+  modelStats: ModelStats[],
+  scoreLabel: string,
+  bestModels?: Set<string>,
+): string {
+  const cols = ['Model', scoreLabel, 'Avg Input Tokens', 'Avg Output Tokens', 'P50 (ms)', 'P75 (ms)', 'P95 (ms)', 'P99 (ms)'];
+  const rows = modelStats.map((s) => [
+    s.label,
+    `${fmt(s.evalScore)}/100`,
+    fmt(s.avgInputTokens, 0),
+    fmt(s.avgOutputTokens, 0),
+    fmt(s.p50LatencyMs, 0),
+    fmt(s.p75LatencyMs, 0),
+    fmt(s.p95LatencyMs, 0),
+    fmt(s.p99LatencyMs, 0),
+  ]);
+  return mdTable(title, cols, rows, bestModels);
+}
+
+function mdGridTable(title: string, cols: string[], rows: string[][]): string {
+  const sep = cols.map(() => '---').join(' | ');
+  const header = cols.map(escapeMdCell).join(' | ');
+  const body = rows.map((row) => row.map(escapeMdCell).join(' | ')).join('\n');
+  const lines = [`## ${title}`, '', `| ${header} |`, `| ${sep} |`, ...body.split('\n').map((l) => `| ${l} |`), ''];
+  return lines.join('\n');
+}
+
+function mdComponentBreakdown(componentScores: Record<string, number[]>): string {
+  const items = Object.entries(componentScores)
+    .map(([metric, scores]) => `- **${metric}:** ${fmt(mean(scores))}/100`)
+    .join('\n');
+  return ['### Component breakdown (avg scores, first model)', '', items, ''].join('\n');
+}
+
+const isMarkdown =
+  (process.argv.includes('--format') && process.argv[process.argv.indexOf('--format') + 1] === 'markdown') ||
+  process.env.FORMAT === 'markdown';
+
+function main() {
   const guardrailResults = loadResults('guardrailCheck-results.json');
   const mealResults = loadResults('mealAnalysis-results.json');
   const safetyResults = loadResults('safetyChecks-results.json');
@@ -374,6 +466,130 @@ function main() {
   const { models: bestGuardrails, maxScore: guardrailMax } = bestG;
   const { models: bestMeals, maxScore: mealMax } = bestM;
   const { models: bestSafeties, maxScore: safetyMax } = bestS;
+
+  if (isMarkdown) {
+    const mdParts: string[] = [];
+    if (guardrailStats.length > 0 && mealStats.length > 0 && safetyStats.length > 0) {
+      const composite = WEIGHT_GUARDRAIL * guardrailMax + WEIGHT_MEAL * mealMax + WEIGHT_SAFETY * safetyMax;
+      const g0 = first(bestGuardrails), m0 = first(bestMeals), s0 = first(bestSafeties);
+      const e2eP50 = g0 && m0 && s0 ? g0.p50LatencyMs + m0.p50LatencyMs + s0.p50LatencyMs : 0;
+      const e2eP75 = g0 && m0 && s0 ? g0.p75LatencyMs + m0.p75LatencyMs + s0.p75LatencyMs : 0;
+      const e2eP95 = g0 && m0 && s0 ? g0.p95LatencyMs + m0.p95LatencyMs + s0.p95LatencyMs : 0;
+      const e2eP99 = g0 && m0 && s0 ? g0.p99LatencyMs + m0.p99LatencyMs + s0.p99LatencyMs : 0;
+      const bestBalAccLatG = bestByBalancedAccuracyLatency(guardrailStats);
+      const bestBalAccLatM = bestByBalancedAccuracyLatency(mealStats);
+      const bestBalAccLatS = bestByBalancedAccuracyLatency(safetyStats);
+      const balAccLatG = first(bestBalAccLatG), balAccLatM = first(bestBalAccLatM), balAccLatS = first(bestBalAccLatS);
+      const compAccLat = balAccLatG && balAccLatM && balAccLatS
+        ? compositeForCombo(balAccLatG, balAccLatM, balAccLatS)
+        : 0;
+      const e2eP50AccLat = balAccLatG && balAccLatM && balAccLatS
+        ? e2eP50ForCombo(balAccLatG, balAccLatM, balAccLatS)
+        : 0;
+      const pctFaster = e2eP50 > 0 ? Math.round(((e2eP50 - e2eP50AccLat) / e2eP50) * 100) : 0;
+      mdParts.push(
+        mdComposite(
+          bestGuardrails,
+          bestMeals,
+          bestSafeties,
+          guardrailMax,
+          mealMax,
+          safetyMax,
+          composite,
+          e2eP50,
+          e2eP75,
+          e2eP95,
+          e2eP99,
+          balAccLatG,
+          balAccLatM,
+          balAccLatS,
+          compAccLat,
+          e2eP50AccLat,
+          pctFaster,
+        ),
+      );
+    }
+    if (guardrailStats.length > 0) {
+      mdParts.push(
+        mdTableFromStats(
+          '3.2 guardrailCheck',
+          sortByScoreDesc(guardrailStats),
+          'Eval Score',
+          new Set(bestG.models.map((m) => m.label)),
+        ),
+      );
+    }
+    if (mealStats.length > 0) {
+      const sortedMeal = sortByScoreDesc(mealStats);
+      mdParts.push(
+        mdTableFromStats(
+          '3.2 mealAnalysis (weighted composite)',
+          sortedMeal,
+          'Composite Score',
+          new Set(bestM.models.map((m) => m.label)),
+        ),
+      );
+      const firstModel = sortedMeal[0]!;
+      if (Object.keys(firstModel.componentScores).length > 0) {
+        mdParts.push(mdComponentBreakdown(firstModel.componentScores));
+      }
+    }
+    if (safetyStats.length > 0) {
+      mdParts.push(
+        mdTableFromStats(
+          '3.2 safetyChecks',
+          sortByScoreDesc(safetyStats),
+          'Eval Score',
+          new Set(bestS.models.map((m) => m.label)),
+        ),
+      );
+    }
+    if (guardrailStats.length > 0 && mealStats.length > 0 && safetyStats.length > 0) {
+      const composite = WEIGHT_GUARDRAIL * guardrailMax + WEIGHT_MEAL * mealMax + WEIGHT_SAFETY * safetyMax;
+      const g0 = first(bestGuardrails), m0 = first(bestMeals), s0 = first(bestSafeties);
+      const e2eP50 = g0 && m0 && s0 ? e2eP50ForCombo(g0, m0, s0) : 0;
+      const bestValG = bestByValue(guardrailStats);
+      const bestValM = bestByValue(mealStats);
+      const bestValS = bestByValue(safetyStats);
+      const bestLatG = bestByLatency(guardrailStats);
+      const bestLatM = bestByLatency(mealStats);
+      const bestLatS = bestByLatency(safetyStats);
+      const bestBalAccLatG = bestByBalancedAccuracyLatency(guardrailStats);
+      const bestBalAccLatM = bestByBalancedAccuracyLatency(mealStats);
+      const bestBalAccLatS = bestByBalancedAccuracyLatency(safetyStats);
+      const bestBalAllG = bestByBalancedAllThree(guardrailStats);
+      const bestBalAllM = bestByBalancedAllThree(mealStats);
+      const bestBalAllS = bestByBalancedAllThree(safetyStats);
+      const vg0 = first(bestValG.models)!, vm0 = first(bestValM.models)!, vs0 = first(bestValS.models)!;
+      const lg0 = first(bestLatG.models)!, lm0 = first(bestLatM.models)!, ls0 = first(bestLatS.models)!;
+      const balAccLatG = first(bestBalAccLatG)!, balAccLatM = first(bestBalAccLatM)!, balAccLatS = first(bestBalAccLatS)!;
+      const balAllG = first(bestBalAllG)!, balAllM = first(bestBalAllM)!, balAllS = first(bestBalAllS)!;
+      const compA = compositeForCombo(vg0, vm0, vs0);
+      const compB = compositeForCombo(lg0, lm0, ls0);
+      const compAccLat = compositeForCombo(balAccLatG, balAccLatM, balAccLatS);
+      const compAll = compositeForCombo(balAllG, balAllM, balAllS);
+      const dmCols = ['Scenario', 'guardrailCheck', 'mealAnalysis', 'safetyChecks', 'Composite', 'P50 (ms)'];
+      const dmRows = [
+        ['Best accuracy', bestGuardrails.map((m) => m.label).join(', '), bestMeals.map((m) => m.label).join(', '), bestSafeties.map((m) => m.label).join(', '), `${fmt(composite)}/100`, `${fmt(e2eP50, 0)}`],
+        ['Best value (score per 1k tokens)', bestValG.models.map((m) => m.label).join(', '), bestValM.models.map((m) => m.label).join(', '), bestValS.models.map((m) => m.label).join(', '), `${fmt(compA)}/100`, `${fmt(e2eP50ForCombo(vg0, vm0, vs0), 0)}`],
+        ['Best latency', bestLatG.models.map((m) => m.label).join(', '), bestLatM.models.map((m) => m.label).join(', '), bestLatS.models.map((m) => m.label).join(', '), `${fmt(compB)}/100`, `${fmt(e2eP50ForCombo(lg0, lm0, ls0), 0)}`],
+        ['Balanced (accuracy + latency)', bestBalAccLatG.map((m) => m.label).join(', '), bestBalAccLatM.map((m) => m.label).join(', '), bestBalAccLatS.map((m) => m.label).join(', '), `${fmt(compAccLat)}/100`, `${fmt(e2eP50ForCombo(balAccLatG, balAccLatM, balAccLatS), 0)}`],
+        ['Balanced (accuracy + latency + cost)', bestBalAllG.map((m) => m.label).join(', '), bestBalAllM.map((m) => m.label).join(', '), bestBalAllS.map((m) => m.label).join(', '), `${fmt(compAll)}/100`, `${fmt(e2eP50ForCombo(balAllG, balAllM, balAllS), 0)}`],
+      ];
+      mdParts.push(mdGridTable('3.3 Decision Matrix', dmCols, dmRows));
+    }
+    console.log(mdParts.join('\n'));
+    return;
+  }
+
+  console.log(
+    boxen(chalk.bold.cyan('Meal Analysis Eval — Composite Scorer'), {
+      padding: 1,
+      borderStyle: 'round',
+      borderColor: 'cyan',
+    }),
+  );
+  console.log();
 
   if (guardrailStats.length > 0 && mealStats.length > 0 && safetyStats.length > 0) {
     const composite = WEIGHT_GUARDRAIL * guardrailMax + WEIGHT_MEAL * mealMax + WEIGHT_SAFETY * safetyMax;

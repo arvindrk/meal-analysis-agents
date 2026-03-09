@@ -19,7 +19,7 @@ function main() {
   const version = args[0] ?? 'v2';
   const changes = args[1] ?? '';
 
-  const result = spawnSync('npx', ['tsx', '--env-file=.env', 'scripts/score-composite.ts'], {
+  const result = spawnSync('npx', ['tsx', '--env-file=.env', 'scripts/score-composite.ts', '--format', 'markdown'], {
     cwd: ROOT,
     encoding: 'utf-8',
     env: { ...process.env, FORCE_COLOR: '0' },

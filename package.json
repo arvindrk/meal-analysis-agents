@@ -4,9 +4,9 @@
   "scripts": {
     "start": "tsx --env-file=.env src/run.ts",
     "run": "npm run start --",
-    "run:guardrail": "npm run start -- --agent guardrail",
-    "run:analysis": "npm run start -- --agent analysis",
-    "run:safety": "npm run start -- --agent safety",
+    "run:guardrail": "npm run start -- --agent guardrail --n 3",
+    "run:analysis": "npm run start -- --agent analysis --n 3",
+    "run:safety": "npm run start -- --agent safety --n 3",
     "run:quick": "npm run start -- --n 3",
     "eval:generate": "tsx --env-file=.env scripts/generate-test-cases.ts",
     "eval:guardrail": "NODE_ENV=test NODE_OPTIONS='--import tsx/esm' promptfoo eval -c evals/guardrailCheck.yaml --output output/evals/results/guardrailCheck-results.json",

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const GlycemicColor = z.enum(['green', 'yellow', 'orange', 'red']);
+export const GlycemicColor = z.enum(['green', 'yellow', 'orange', 'red']);
 
 export const GuardrailCheckSchema = z.object({
   is_food: z.boolean(),
@@ -36,4 +36,39 @@ export const SafetyChecksSchema = z.object({
   no_risky_ingredient_substitutions: z.boolean(),
   no_treatment_recommendation: z.boolean(),
   no_medical_diagnosis: z.boolean(),
+});
+
+export const GroundTruthSchema = z.object({
+  title: z.string(),
+  fileName: z.string(),
+  guardrailCheck: GuardrailCheckSchema,
+  mealAnalysis: MealAnalysisSchema,
+  safetyChecks: z.optional(
+    z.union([
+      SafetyChecksSchema,
+      z.record(z.string(), z.unknown()).transform(() => undefined),
+    ]),
+  ),
+});
+
+export const GroundTruthWithSafetySchema = GroundTruthSchema.extend({
+  safetyChecks: SafetyChecksSchema,
+});
+
+export const GuardrailEvalVarsSchema = z.object({
+  imageId: z.string(),
+  imagePath: z.string(),
+  groundTruth: GroundTruthSchema,
+});
+
+export const MealAnalysisEvalVarsSchema = z.object({
+  imageId: z.string(),
+  imagePath: z.string(),
+  groundTruth: GroundTruthSchema,
+});
+
+export const SafetyEvalVarsSchema = z.object({
+  imageId: z.string(),
+  pipelineMealAnalysis: MealAnalysisSchema,
+  groundTruth: GroundTruthWithSafetySchema,
 });

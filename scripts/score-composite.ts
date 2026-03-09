@@ -64,10 +64,11 @@ function loadResults(filename: string): EvalResult[] {
   return arr ?? [];
 }
 
-function p50(values: number[]): number {
+function percentile(values: number[], p: number): number {
   if (values.length === 0) return 0;
   const sorted = [...values].sort((a, b) => a - b);
-  return sorted[Math.floor(sorted.length * 0.5)] ?? sorted[sorted.length - 1]!;
+  const idx = Math.min(Math.floor(sorted.length * p), sorted.length - 1);
+  return sorted[idx] ?? sorted[sorted.length - 1]!;
 }
 
 function mean(values: number[]): number {
@@ -137,6 +138,9 @@ interface ModelStats {
   avgInputTokens: number;
   avgOutputTokens: number;
   p50LatencyMs: number;
+  p75LatencyMs: number;
+  p95LatencyMs: number;
+  p99LatencyMs: number;
   componentScores: Record<string, number[]>;
 }
 
@@ -180,7 +184,10 @@ function groupByModel(results: EvalResult[]): ModelStats[] {
       evalScore: mean(scores),
       avgInputTokens: mean(inputTokens),
       avgOutputTokens: mean(outputTokens),
-      p50LatencyMs: p50(latencies),
+      p50LatencyMs: percentile(latencies, 0.5),
+      p75LatencyMs: percentile(latencies, 0.75),
+      p95LatencyMs: percentile(latencies, 0.95),
+      p99LatencyMs: percentile(latencies, 0.99),
       componentScores,
     };
   });
@@ -216,7 +223,7 @@ function printTable(
   scoreLabel = 'Eval Score',
   bestModels?: Set<string>,
 ) {
-  const cols = ['Model', scoreLabel, 'Avg Input Tokens', 'Avg Output Tokens', 'P50 Latency (ms)'];
+  const cols = ['Model', scoreLabel, 'Avg Input Tokens', 'Avg Output Tokens', 'P50 (ms)', 'P75 (ms)', 'P95 (ms)', 'P99 (ms)'];
 
   const rows = modelStats.map((s) => {
     const scoreStr = `${fmt(s.evalScore)}/100`;
@@ -227,6 +234,9 @@ function printTable(
       fmt(s.avgInputTokens, 0),
       fmt(s.avgOutputTokens, 0),
       fmt(s.p50LatencyMs, 0),
+      fmt(s.p75LatencyMs, 0),
+      fmt(s.p95LatencyMs, 0),
+      fmt(s.p99LatencyMs, 0),
     ];
   });
 
@@ -315,11 +325,10 @@ function main() {
 
     const composite = 0.2 * guardrailMax + 0.5 * mealMax + 0.3 * safetyMax;
 
-    const allLatencies = [
-      bestGuardrails[0]!.p50LatencyMs,
-      bestMeals[0]!.p50LatencyMs,
-      bestSafeties[0]!.p50LatencyMs,
-    ];
+    const e2eP50 = bestGuardrails[0]!.p50LatencyMs + bestMeals[0]!.p50LatencyMs + bestSafeties[0]!.p50LatencyMs;
+    const e2eP75 = bestGuardrails[0]!.p75LatencyMs + bestMeals[0]!.p75LatencyMs + bestSafeties[0]!.p75LatencyMs;
+    const e2eP95 = bestGuardrails[0]!.p95LatencyMs + bestMeals[0]!.p95LatencyMs + bestSafeties[0]!.p95LatencyMs;
+    const e2eP99 = bestGuardrails[0]!.p99LatencyMs + bestMeals[0]!.p99LatencyMs + bestSafeties[0]!.p99LatencyMs;
 
     const compositeLines = [
       chalk.dim('(All models tied for best per agent)\n'),
@@ -328,7 +337,10 @@ function main() {
       chalk.cyan('safetyChecks') + `   → ${bestSafeties.map((m) => m.label).join(', ')} ` + scoreColor(safetyMax)(`(${fmt(safetyMax)}/100)`),
       '',
       chalk.bold('Composite eval score: ') + scoreColor(composite)(`${fmt(composite)}/100`),
-      chalk.dim(`P50 end-to-end latency: ${fmt(allLatencies.reduce((s, v) => s + v, 0), 0)} ms (sum of agent P50s)`),
+      chalk.dim(`P50 end-to-end: ${fmt(e2eP50, 0)} ms`),
+      chalk.dim(`P75 end-to-end: ${fmt(e2eP75, 0)} ms`),
+      chalk.dim(`P95 end-to-end: ${fmt(e2eP95, 0)} ms`),
+      chalk.dim(`P99 end-to-end: ${fmt(e2eP99, 0)} ms`),
     ];
 
     const compositeWidth = Math.max(80, ...compositeLines.map((l) => stripAnsi(l).length)) + 4;
@@ -345,8 +357,14 @@ function main() {
 
     const compositeForCombo = (g: ModelStats, m: ModelStats, s: ModelStats) =>
       0.2 * g.evalScore + 0.5 * m.evalScore + 0.3 * s.evalScore;
-    const e2eForCombo = (g: ModelStats, m: ModelStats, s: ModelStats) =>
+    const e2eP50ForCombo = (g: ModelStats, m: ModelStats, s: ModelStats) =>
       g.p50LatencyMs + m.p50LatencyMs + s.p50LatencyMs;
+    const e2eP75ForCombo = (g: ModelStats, m: ModelStats, s: ModelStats) =>
+      g.p75LatencyMs + m.p75LatencyMs + s.p75LatencyMs;
+    const e2eP95ForCombo = (g: ModelStats, m: ModelStats, s: ModelStats) =>
+      g.p95LatencyMs + m.p95LatencyMs + s.p95LatencyMs;
+    const e2eP99ForCombo = (g: ModelStats, m: ModelStats, s: ModelStats) =>
+      g.p99LatencyMs + m.p99LatencyMs + s.p99LatencyMs;
 
     const bestValG = bestByValue(guardrailStats);
     const bestValM = bestByValue(mealStats);
@@ -358,19 +376,21 @@ function main() {
     const bestBalM = bestByBalanced(mealStats);
     const bestBalS = bestByBalanced(safetyStats);
 
-    const compA = compositeForCombo(bestValG.models[0]!, bestValM.models[0]!, bestValS.models[0]!);
-    const e2eA = e2eForCombo(bestValG.models[0]!, bestValM.models[0]!, bestValS.models[0]!);
-    const compB = compositeForCombo(bestLatG.models[0]!, bestLatM.models[0]!, bestLatS.models[0]!);
-    const e2eB = e2eForCombo(bestLatG.models[0]!, bestLatM.models[0]!, bestLatS.models[0]!);
-    const compAB = compositeForCombo(bestBalG[0]!, bestBalM[0]!, bestBalS[0]!);
-    const e2eAB = e2eForCombo(bestBalG[0]!, bestBalM[0]!, bestBalS[0]!);
+    const g0 = bestGuardrails[0]!, m0 = bestMeals[0]!, s0 = bestSafeties[0]!;
+    const vg0 = bestValG.models[0]!, vm0 = bestValM.models[0]!, vs0 = bestValS.models[0]!;
+    const lg0 = bestLatG.models[0]!, lm0 = bestLatM.models[0]!, ls0 = bestLatS.models[0]!;
+    const bg0 = bestBalG[0]!, bm0 = bestBalM[0]!, bs0 = bestBalS[0]!;
 
-    const dmCols = ['Scenario', 'guardrailCheck', 'mealAnalysis', 'safetyChecks', 'Composite', 'E2E P50 (ms)'];
+    const compA = compositeForCombo(vg0, vm0, vs0);
+    const compB = compositeForCombo(lg0, lm0, ls0);
+    const compAB = compositeForCombo(bg0, bm0, bs0);
+
+    const dmCols = ['Scenario', 'guardrailCheck', 'mealAnalysis', 'safetyChecks', 'Composite', 'P50 (ms)', 'P75 (ms)', 'P95 (ms)', 'P99 (ms)'];
     const dmRows = [
-      ['Best accuracy', bestGuardrails.map((m) => m.label).join(', '), bestMeals.map((m) => m.label).join(', '), bestSafeties.map((m) => m.label).join(', '), `${fmt(composite)}/100`, `${fmt(allLatencies.reduce((s, v) => s + v, 0), 0)}`],
-      ['A: Best value', bestValG.models.map((m) => m.label).join(', '), bestValM.models.map((m) => m.label).join(', '), bestValS.models.map((m) => m.label).join(', '), `${fmt(compA)}/100`, `${fmt(e2eA, 0)}`],
-      ['B: Best latency', bestLatG.models.map((m) => m.label).join(', '), bestLatM.models.map((m) => m.label).join(', '), bestLatS.models.map((m) => m.label).join(', '), `${fmt(compB)}/100`, `${fmt(e2eB, 0)}`],
-      ['A+B: Balanced', bestBalG.map((m) => m.label).join(', '), bestBalM.map((m) => m.label).join(', '), bestBalS.map((m) => m.label).join(', '), `${fmt(compAB)}/100`, `${fmt(e2eAB, 0)}`],
+      ['Best accuracy', bestGuardrails.map((m) => m.label).join(', '), bestMeals.map((m) => m.label).join(', '), bestSafeties.map((m) => m.label).join(', '), `${fmt(composite)}/100`, `${fmt(e2eP50, 0)}`, `${fmt(e2eP75, 0)}`, `${fmt(e2eP95, 0)}`, `${fmt(e2eP99, 0)}`],
+      ['A: Best value', bestValG.models.map((m) => m.label).join(', '), bestValM.models.map((m) => m.label).join(', '), bestValS.models.map((m) => m.label).join(', '), `${fmt(compA)}/100`, `${fmt(e2eP50ForCombo(vg0, vm0, vs0), 0)}`, `${fmt(e2eP75ForCombo(vg0, vm0, vs0), 0)}`, `${fmt(e2eP95ForCombo(vg0, vm0, vs0), 0)}`, `${fmt(e2eP99ForCombo(vg0, vm0, vs0), 0)}`],
+      ['B: Best latency', bestLatG.models.map((m) => m.label).join(', '), bestLatM.models.map((m) => m.label).join(', '), bestLatS.models.map((m) => m.label).join(', '), `${fmt(compB)}/100`, `${fmt(e2eP50ForCombo(lg0, lm0, ls0), 0)}`, `${fmt(e2eP75ForCombo(lg0, lm0, ls0), 0)}`, `${fmt(e2eP95ForCombo(lg0, lm0, ls0), 0)}`, `${fmt(e2eP99ForCombo(lg0, lm0, ls0), 0)}`],
+      ['A+B: Balanced', bestBalG.map((m) => m.label).join(', '), bestBalM.map((m) => m.label).join(', '), bestBalS.map((m) => m.label).join(', '), `${fmt(compAB)}/100`, `${fmt(e2eP50ForCombo(bg0, bm0, bs0), 0)}`, `${fmt(e2eP75ForCombo(bg0, bm0, bs0), 0)}`, `${fmt(e2eP95ForCombo(bg0, bm0, bs0), 0)}`, `${fmt(e2eP99ForCombo(bg0, bm0, bs0), 0)}`],
     ];
     const dmWidths = dmCols.map((c, i) => Math.max(c.length, ...dmRows.map((r) => r[i]!.length)));
     const dmDivider = dmWidths.map((w) => '─'.repeat(w + 2)).join('┼');

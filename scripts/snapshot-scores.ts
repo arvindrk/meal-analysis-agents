@@ -41,7 +41,7 @@ function main() {
   const header = [
     `# Meal Analysis Evaluation Report (${version})`,
     '',
-    `**Baseline:** v1 | **Changes:** ${changes || '(see commit history)'}`,
+    `**Baseline:** v0 | **Changes:** ${changes || '(see commit history)'}`,
     '',
     `**Date:** ${date}`,
     '',

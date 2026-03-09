@@ -84,6 +84,53 @@ function modelsWithMaxScore(stats: ModelStats[]): { models: ModelStats[]; maxSco
   return { models, maxScore };
 }
 
+function bestByValue(stats: ModelStats[]): { models: ModelStats[]; metric: number } {
+  if (stats.length === 0) return { models: [], metric: 0 };
+  const withMetric = stats.map((s) => {
+    const tokens = s.avgInputTokens + s.avgOutputTokens;
+    const metric = tokens > 0 ? (s.evalScore / tokens) * 1000 : 0;
+    return { stats: s, metric };
+  });
+  const max = Math.max(...withMetric.map((x) => x.metric));
+  const models = withMetric.filter((x) => x.metric === max).map((x) => x.stats);
+  return { models, metric: max };
+}
+
+function bestByLatency(stats: ModelStats[]): { models: ModelStats[]; metric: number } {
+  if (stats.length === 0) return { models: [], metric: 0 };
+  const withMetric = stats.map((s) => {
+    const metric = s.p50LatencyMs > 0 ? s.evalScore / s.p50LatencyMs : 0;
+    return { stats: s, metric };
+  });
+  const max = Math.max(...withMetric.map((x) => x.metric));
+  const models = withMetric.filter((x) => x.metric === max).map((x) => x.stats);
+  return { models, metric: max };
+}
+
+function bestByBalanced(stats: ModelStats[]): ModelStats[] {
+  if (stats.length === 0) return [];
+  const valueMetrics = stats.map((s) => {
+    const tokens = s.avgInputTokens + s.avgOutputTokens;
+    return tokens > 0 ? (s.evalScore / tokens) * 1000 : 0;
+  });
+  const latencyMetrics = stats.map((s) =>
+    s.p50LatencyMs > 0 ? s.evalScore / s.p50LatencyMs : 0,
+  );
+  const maxV = Math.max(...valueMetrics);
+  const maxL = Math.max(...latencyMetrics);
+  const minV = Math.min(...valueMetrics);
+  const minL = Math.min(...latencyMetrics);
+  const rangeV = maxV - minV || 1;
+  const rangeL = maxL - minL || 1;
+  const combined = stats.map((s, i) => {
+    const normV = (valueMetrics[i]! - minV) / rangeV;
+    const normL = (latencyMetrics[i]! - minL) / rangeL;
+    return { stats: s, score: normV + normL };
+  });
+  const maxCombined = Math.max(...combined.map((x) => x.score));
+  return combined.filter((x) => x.score === maxCombined).map((x) => x.stats);
+}
+
 // ── Per-model stats ──────────────────────────────────────────────────────────
 
 interface ModelStats {
@@ -255,6 +302,48 @@ function main() {
     console.log(`  safetyChecks   → ${bestSafeties.map((m) => m.label).join(', ')} (${fmt(safetyMax)}/100)`);
     console.log(`\n  Composite eval score : ${fmt(composite)}/100`);
     console.log(`  P50 end-to-end latency: ${fmt(allLatencies.reduce((s, v) => s + v, 0), 0)} ms (sum of agent P50s)`);
+
+    const compositeForCombo = (g: ModelStats, m: ModelStats, s: ModelStats) =>
+      0.2 * g.evalScore + 0.5 * m.evalScore + 0.3 * s.evalScore;
+    const e2eForCombo = (g: ModelStats, m: ModelStats, s: ModelStats) =>
+      g.p50LatencyMs + m.p50LatencyMs + s.p50LatencyMs;
+
+    const bestValG = bestByValue(guardrailStats);
+    const bestValM = bestByValue(mealStats);
+    const bestValS = bestByValue(safetyStats);
+    const bestLatG = bestByLatency(guardrailStats);
+    const bestLatM = bestByLatency(mealStats);
+    const bestLatS = bestByLatency(safetyStats);
+    const bestBalG = bestByBalanced(guardrailStats);
+    const bestBalM = bestByBalanced(mealStats);
+    const bestBalS = bestByBalanced(safetyStats);
+
+    const compA = compositeForCombo(bestValG.models[0]!, bestValM.models[0]!, bestValS.models[0]!);
+    const e2eA = e2eForCombo(bestValG.models[0]!, bestValM.models[0]!, bestValS.models[0]!);
+    const compB = compositeForCombo(bestLatG.models[0]!, bestLatM.models[0]!, bestLatS.models[0]!);
+    const e2eB = e2eForCombo(bestLatG.models[0]!, bestLatM.models[0]!, bestLatS.models[0]!);
+    const compAB = compositeForCombo(bestBalG[0]!, bestBalM[0]!, bestBalS[0]!);
+    const e2eAB = e2eForCombo(bestBalG[0]!, bestBalM[0]!, bestBalS[0]!);
+
+    const dmCols = ['Scenario', 'guardrailCheck', 'mealAnalysis', 'safetyChecks', 'Composite', 'E2E P50 (ms)'];
+    const dmRows = [
+      ['Best accuracy', bestGuardrails.map((m) => m.label).join(', '), bestMeals.map((m) => m.label).join(', '), bestSafeties.map((m) => m.label).join(', '), `${fmt(composite)}/100`, `${fmt(allLatencies.reduce((s, v) => s + v, 0), 0)}`],
+      ['A: Best value', bestValG.models.map((m) => m.label).join(', '), bestValM.models.map((m) => m.label).join(', '), bestValS.models.map((m) => m.label).join(', '), `${fmt(compA)}/100`, `${fmt(e2eA, 0)}`],
+      ['B: Best latency', bestLatG.models.map((m) => m.label).join(', '), bestLatM.models.map((m) => m.label).join(', '), bestLatS.models.map((m) => m.label).join(', '), `${fmt(compB)}/100`, `${fmt(e2eB, 0)}`],
+      ['A+B: Balanced', bestBalG.map((m) => m.label).join(', '), bestBalM.map((m) => m.label).join(', '), bestBalS.map((m) => m.label).join(', '), `${fmt(compAB)}/100`, `${fmt(e2eAB, 0)}`],
+    ];
+    const dmWidths = dmCols.map((c, i) => Math.max(c.length, ...dmRows.map((r) => r[i]!.length)));
+    const dmDivider = dmWidths.map((w) => '-'.repeat(w + 2)).join('+');
+    const dmHeader = dmCols.map((c, i) => ` ${c.padEnd(dmWidths[i]!)} `).join('|');
+    console.log('\n### Decision Matrix');
+    console.log(dmDivider);
+    console.log(dmHeader);
+    console.log(dmDivider);
+    for (const row of dmRows) {
+      console.log(row.map((c, i) => ` ${c.padEnd(dmWidths[i]!)} `).join('|'));
+    }
+    console.log(dmDivider);
+    console.log('\n  A = composite per 1k tokens (cost)  |  B = composite per ms (latency)  |  A+B = normalized value + latency');
   }
 
   console.log('');

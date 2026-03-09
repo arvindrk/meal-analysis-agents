@@ -1,8 +1,9 @@
 import type { ApiProvider, ProviderOptions, ProviderResponse, CallApiContextParams } from 'promptfoo';
 import { run } from '@openai/agents';
 import { createMealAnalysisAgent } from '../../src/agents/mealAnalysis';
-import { imageToBase64 } from '../../src/dataset';
+import { buildImageInput } from '../../src/dataset';
 import { MealAnalysisEvalVarsSchema } from '../../src/schemas';
+import { computeTokenUsage } from './utils';
 
 export default class MealAnalysisProvider implements ApiProvider {
   private model: string;
@@ -25,25 +26,11 @@ export default class MealAnalysisProvider implements ApiProvider {
     const vars = parseResult.data;
     const agent = createMealAnalysisAgent(this.model);
 
-    const imageInput = [
-      {
-        role: 'user' as const,
-        content: [{ type: 'input_image' as const, image: imageToBase64(vars.imagePath) }],
-      },
-    ];
-
-    const runResult = await run(agent, imageInput);
-
-    const inputTokens = runResult.rawResponses.reduce((s: number, r) => s + (r.usage?.inputTokens ?? 0), 0);
-    const outputTokens = runResult.rawResponses.reduce((s: number, r) => s + (r.usage?.outputTokens ?? 0), 0);
+    const runResult = await run(agent, buildImageInput(vars.imagePath));
 
     return {
       output: JSON.stringify(runResult.finalOutput),
-      tokenUsage: {
-        total: inputTokens + outputTokens,
-        prompt: inputTokens,
-        completion: outputTokens,
-      },
+      tokenUsage: computeTokenUsage(runResult.rawResponses),
     };
   }
 }

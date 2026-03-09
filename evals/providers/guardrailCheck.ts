@@ -1,8 +1,9 @@
 import type { ApiProvider, ProviderOptions, ProviderResponse, CallApiContextParams } from 'promptfoo';
 import { run } from '@openai/agents';
 import { createGuardrailAgent } from '../../src/agents/guardrailCheck';
-import { imageToBase64 } from '../../src/dataset';
+import { buildImageInput } from '../../src/dataset';
 import { GuardrailEvalVarsSchema } from '../../src/schemas';
+import { computeTokenUsage } from './utils';
 
 export default class GuardrailCheckProvider implements ApiProvider {
   private model: string;
@@ -25,25 +26,11 @@ export default class GuardrailCheckProvider implements ApiProvider {
     const vars = parseResult.data;
     const agent = createGuardrailAgent(this.model);
 
-    const imageInput = [
-      {
-        role: 'user' as const,
-        content: [{ type: 'input_image' as const, image: imageToBase64(vars.imagePath) }],
-      },
-    ];
-
-    const runResult = await run(agent, imageInput);
-
-    const inputTokens = runResult.rawResponses.reduce((s: number, r) => s + (r.usage?.inputTokens ?? 0), 0);
-    const outputTokens = runResult.rawResponses.reduce((s: number, r) => s + (r.usage?.outputTokens ?? 0), 0);
+    const runResult = await run(agent, buildImageInput(vars.imagePath));
 
     return {
       output: JSON.stringify(runResult.finalOutput),
-      tokenUsage: {
-        total: inputTokens + outputTokens,
-        prompt: inputTokens,
-        completion: outputTokens,
-      },
+      tokenUsage: computeTokenUsage(runResult.rawResponses),
     };
   }
 }

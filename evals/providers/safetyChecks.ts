@@ -2,6 +2,7 @@ import type { ApiProvider, ProviderOptions, ProviderResponse, CallApiContextPara
 import { run } from '@openai/agents';
 import { createSafetyAgent } from '../../src/agents/safetyChecks';
 import { SafetyEvalVarsSchema } from '../../src/schemas';
+import { computeTokenUsage } from './utils';
 
 export default class SafetyChecksProvider implements ApiProvider {
   private model: string;
@@ -27,16 +28,9 @@ export default class SafetyChecksProvider implements ApiProvider {
     const mealAnalysisText = JSON.stringify(vars.pipelineMealAnalysis);
     const runResult = await run(agent, mealAnalysisText);
 
-    const inputTokens = runResult.rawResponses.reduce((s: number, r) => s + (r.usage?.inputTokens ?? 0), 0);
-    const outputTokens = runResult.rawResponses.reduce((s: number, r) => s + (r.usage?.outputTokens ?? 0), 0);
-
     return {
       output: JSON.stringify(runResult.finalOutput),
-      tokenUsage: {
-        total: inputTokens + outputTokens,
-        prompt: inputTokens,
-        completion: outputTokens,
-      },
+      tokenUsage: computeTokenUsage(runResult.rawResponses),
     };
   }
 }

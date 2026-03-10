@@ -46,7 +46,7 @@ export class MealAnalysisPipeline {
   }
 
   async runMealAnalysis(imagePath: string) {
-    const result = await run(this.analysisAgent, buildImageInput(imagePath));
+    const result = await run(this.analysisAgent, buildImageInput(imagePath, { detail: 'high' }));
     return {
       mealAnalysis: result.finalOutput as MealAnalysisOutput,
       rawResponses: result.rawResponses,

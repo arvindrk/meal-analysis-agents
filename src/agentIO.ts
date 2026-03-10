@@ -10,13 +10,17 @@ export function imageToBase64(imagePath: string): string {
   return `data:image/jpeg;base64,${buf.toString('base64')}`;
 }
 
-export function buildImageInput(imagePath: string) {
-  return [
-    {
-      role: 'user' as const,
-      content: [{ type: 'input_image' as const, image: imageToBase64(imagePath) }],
-    },
-  ];
+export interface ImageInputOptions {
+  detail?: 'low' | 'high' | 'auto' | 'original';
+}
+
+export function buildImageInput(imagePath: string, options?: ImageInputOptions) {
+  const imageContent: { type: 'input_image'; image: string; detail?: string } = {
+    type: 'input_image',
+    image: imageToBase64(imagePath),
+  };
+  if (options?.detail) imageContent.detail = options.detail;
+  return [{ role: 'user' as const, content: [imageContent] }];
 }
 
 export function writeAgentOutput(

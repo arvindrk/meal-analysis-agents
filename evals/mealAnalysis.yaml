@@ -19,10 +19,6 @@ providers:
     config:
       model: "gpt-5-mini"
   - id: "file://providers/mealAnalysis.ts"
-    label: "gpt-5-nano"
-    config:
-      model: "gpt-5-nano"
-  - id: "file://providers/mealAnalysis.ts"
     label: "gpt-4.1"
     config:
       model: "gpt-4.1"
@@ -31,10 +27,6 @@ providers:
     config:
       model: "gpt-4.1-mini"
   - id: "file://providers/mealAnalysis.ts"
-    label: "gpt-4.1-nano"
-    config:
-      model: "gpt-4.1-nano"
-  - id: "file://providers/mealAnalysis.ts"
     label: "gpt-4o"
     config:
       model: "gpt-4o"
@@ -42,10 +34,6 @@ providers:
     label: "gpt-4o-mini"
     config:
       model: "gpt-4o-mini"
-  - id: "file://providers/mealAnalysis.ts"
-    label: "o4-mini"
-    config:
-      model: "o4-mini"
 
 prompts:
   - "{{imageId}}"

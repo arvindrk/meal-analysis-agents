@@ -1,4 +1,4 @@
-import { writeAgentOutput, readAgentOutput } from "./agentIO";
+import { writeAgentOutput, readAgentOutput } from "./utils/agentIO";
 import { MealAnalysisPipeline } from "./pipeline";
 import type { MealAnalysisOutput } from "./types";
 

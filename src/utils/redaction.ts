@@ -1,4 +1,4 @@
-import type { MealAnalysisOutput, SafetyChecksOutput } from "./types";
+import type { MealAnalysisOutput, SafetyChecksOutput } from "../types";
 
 const PLACEHOLDER = "[Content removed for safety]";
 

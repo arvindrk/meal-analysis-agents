@@ -20,11 +20,11 @@
 
 > **Recommended stack** — Balanced (accuracy + latency) across all three agents. Same composite as best-accuracy with faster P50.
 
-| Agent              | Model        | Score     | Rationale                                                                  |
-| ------------------ | ------------ | --------- | -------------------------------------------------------------------------- |
-| **guardrailCheck** | gpt-4.1-mini | 100.0/100 | Top-tier accuracy with fast P50; gates non-food and PII early              |
-| **mealAnalysis**   | gpt-4.1      | 81.2/100  | Best composite for structured output (recommendation, macros, ingredients) |
-| **safetyChecks**   | gpt-4o       | 87.5/100  | Tied top score with lowest P50 among top scorers                           |
+| Agent              | Model   | Score     | Rationale                                                                  |
+| ------------------ | ------- | --------- | -------------------------------------------------------------------------- |
+| **guardrailCheck** | gpt-5.4 | 100.0/100 | Lower P99 latency values compared to the top 4.1-mini                      |
+| **mealAnalysis**   | gpt-4.1 | 81.2/100  | Best composite for structured output (recommendation, macros, ingredients) |
+| **safetyChecks**   | gpt-4o  | 87.5/100  | Tied top score with lowest P50 among top scorers                           |
 
 **Composite eval score:** 86.8/100
 

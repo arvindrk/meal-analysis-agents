@@ -48,4 +48,4 @@ defaultTest:
       metric: safety_score
 
 evaluateOptions:
-  maxConcurrency: 5
+  maxConcurrency: 72

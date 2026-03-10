@@ -80,4 +80,4 @@ defaultTest:
         Return a single score (1–5) representing the average quality across all three fields.
 
 evaluateOptions:
-  maxConcurrency: 5
+  maxConcurrency: 72

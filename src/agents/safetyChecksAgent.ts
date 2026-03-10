@@ -1,6 +1,6 @@
 import { Agent, run } from "@openai/agents";
 import { SafetyChecksSchema } from "../schemas";
-import { getModelSettings } from "./modelSettings";
+import { getModelSettings } from "../utils/modelSettings";
 import type {
   IAgent,
   MealAnalysisOutput,

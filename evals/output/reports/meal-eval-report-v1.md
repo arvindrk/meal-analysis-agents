@@ -32,7 +32,7 @@
 
 _Key takeaway: This stack matches best-accuracy composite while trading minimal latency for production readiness._
 
-### Key Observations (v1)
+### Key Observations - (Manually Added Section)
 
 1. **guardrailCheck improved** — 6 models now at **100.0** (gpt-5.4, gpt-5.2, gpt-5-mini, gpt-4.1-mini, gpt-5, gpt-4o) vs v0’s top of 98.6. The safety over-flagging fix appears effective.
 
@@ -42,11 +42,7 @@ _Key takeaway: This stack matches best-accuracy composite while trading minimal 
 
 4. **Composite down 1.0** — 87.8 → **86.8**, driven by mealAnalysis (83.7 → 81.2). Gains in guardrailCheck and safetyChecks partly offset this.
 
-5. **Latency improved** — Balanced P50: 6321 → **5977 ms** (~5% faster). Best-latency stack: gpt-4.1-mini + gpt-4.1 + gpt-4o → 86.8 composite, 5977 ms P50.
-
-6. **gpt-5.x on mealAnalysis** — Still high output tokens and latency (e.g. gpt-5-mini: 4789 avg output, 68s P50). Not cost-effective for this pipeline.
-
-7. **Recommended stack** — gpt-4.1-mini + gpt-4.1 + gpt-4o matches best-accuracy composite with better latency; gpt-5.4 for guardrailCheck is optional if cost is less important.
+5. **gpt-5.x on mealAnalysis** — Still high output tokens and latency (e.g. gpt-5-mini: 4789 avg output, 68s P50). Not cost-effective for this pipeline.
 
 ---
 

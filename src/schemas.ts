@@ -55,6 +55,13 @@ export const GroundTruthWithSafetySchema = GroundTruthSchema.extend({
   safetyChecks: SafetyChecksSchema,
 });
 
+export const PipelineResultSchema = z.object({
+  imageId: z.string(),
+  guardrailCheck: GuardrailCheckSchema,
+  mealAnalysis: MealAnalysisSchema.optional(),
+  safetyChecks: SafetyChecksSchema.optional(),
+});
+
 export const ImageEvalVarsSchema = z.object({
   imageId: z.string(),
   imagePath: z.string(),

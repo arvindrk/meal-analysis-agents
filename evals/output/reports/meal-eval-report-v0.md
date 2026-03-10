@@ -32,7 +32,7 @@
 
 _Key takeaway: This stack matches best-accuracy composite while trading minimal latency for production readiness._
 
-### Key Observations (Manually Added)
+### Key Observations - (Manually Added Section)
 
 1. **mealAnalysis is the bottleneck** — Lowest scores (61–84) and highest latency. Recommendation and macros/ingredients drive most failures; text quality (LLM-as-judge) is high across models.
 
@@ -40,14 +40,7 @@ _Key takeaway: This stack matches best-accuracy composite while trading minimal 
 
 3. **guardrailCheck and safetyChecks** — Most models score 85+. gpt-5.4/o4-mini for guardrails; gpt-4o for safety (chosen over gpt-4.1/gpt-5 for best P50 among top scorers).
 
-4. **Latency vs accuracy** —
-   Balanced (accuracy + latency): gpt-5.4 + gpt-4.1 + gpt-4o → 87.8 composite, ~6,321 ms P50 (≈7% faster).
-
-   Cost-optimized: gpt-5.2 + gpt-4.1 + gpt-4o → 87.5 composite, ~6,085 ms P50 (≈10% cheaper).
-
-   Best-latency combo (gpt-5.2 + gpt-4.1-nano + gpt-4o) drops to 76.6 composite at ~4,586 ms.
-
-5. **Nano/mini models** — Higher output tokens and latency for reasoning-heavy tasks; not cost-effective for this pipeline.
+4. **Nano/mini models** — Higher output tokens and latency for reasoning-heavy tasks; not cost-effective for this pipeline.
 
 ---
 

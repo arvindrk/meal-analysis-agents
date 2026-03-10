@@ -1,7 +1,7 @@
 import { Agent, run } from "@openai/agents";
 import { GuardrailCheckSchema } from "../schemas";
 import { buildImageInput } from "../utils/agentIO";
-import { getModelSettings } from "./modelSettings";
+import { getModelSettings } from "../utils/modelSettings";
 import type {
   GuardrailCheckAgentConfig,
   GuardrailCheckOutput,

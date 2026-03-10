@@ -1,7 +1,7 @@
 import { Agent, run } from "@openai/agents";
 import { MealAnalysisSchema } from "../schemas";
 import { buildImageInput } from "../utils/agentIO";
-import { getModelSettings } from "./modelSettings";
+import { getModelSettings } from "../utils/modelSettings";
 import type {
   IAgent,
   MealAnalysisAgentConfig,

@@ -1,26 +1,30 @@
-import { readFileSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
-import { join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { readFileSync, mkdirSync, writeFileSync, existsSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), '..', '..');
-const DEFAULT_OUTPUT_DIR = join(PROJECT_ROOT, 'output', 'pipeline');
+const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..");
+const DEFAULT_OUTPUT_DIR = join(PROJECT_ROOT, "output", "pipeline");
 
 export function imageToBase64(imagePath: string): string {
   const buf = readFileSync(imagePath);
-  return `data:image/jpeg;base64,${buf.toString('base64')}`;
+  return `data:image/jpeg;base64,${buf.toString("base64")}`;
 }
 
 export interface ImageInputOptions {
-  detail?: 'low' | 'high' | 'auto' | 'original';
+  detail?: "low" | "high" | "auto" | "original";
 }
 
-export function buildImageInput(imagePath: string, options?: ImageInputOptions) {
-  const imageContent: { type: 'input_image'; image: string; detail?: string } = {
-    type: 'input_image',
-    image: imageToBase64(imagePath),
-  };
+export function buildImageInput(
+  imagePath: string,
+  options?: ImageInputOptions,
+) {
+  const imageContent: { type: "input_image"; image: string; detail?: string } =
+    {
+      type: "input_image",
+      image: imageToBase64(imagePath),
+    };
   if (options?.detail) imageContent.detail = options.detail;
-  return [{ role: 'user' as const, content: [imageContent] }];
+  return [{ role: "user" as const, content: [imageContent] }];
 }
 
 export function writeAgentOutput(
@@ -45,5 +49,5 @@ export function readAgentOutput<T>(
       `Missing ${agentName} output for ${id}. Run --agent ${agentName} first.`,
     );
   }
-  return JSON.parse(readFileSync(filePath, 'utf-8')) as T;
+  return JSON.parse(readFileSync(filePath, "utf-8")) as T;
 }

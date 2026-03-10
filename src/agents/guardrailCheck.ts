@@ -1,6 +1,6 @@
-import { Agent } from '@openai/agents';
-import { GuardrailCheckSchema } from '../schemas';
-import { getModelSettings } from './modelSettings';
+import { Agent } from "@openai/agents";
+import { GuardrailCheckSchema } from "../schemas";
+import { getModelSettings } from "./modelSettings";
 
 const INSTRUCTIONS = `You are an image guardrail classifier for a health-tech meal analysis system.
 
@@ -13,12 +13,12 @@ Given an uploaded image, evaluate these four binary checks:
 
 Return ONLY the boolean classification. Do not explain your reasoning.`;
 
-export function createGuardrailAgent(model = 'gpt-4.1') {
+export function createGuardrailAgent(model = "gpt-4.1") {
   return new Agent({
-    name: 'guardrailCheck',
+    name: "guardrailCheck",
     model,
     instructions: INSTRUCTIONS,
     outputType: GuardrailCheckSchema,
-    modelSettings: getModelSettings(model, 'guardrail'),
+    modelSettings: getModelSettings(model, "guardrail"),
   });
 }

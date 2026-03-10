@@ -1,6 +1,6 @@
-import { Agent } from '@openai/agents';
-import { MealAnalysisSchema } from '../schemas';
-import { getModelSettings } from './modelSettings';
+import { Agent } from "@openai/agents";
+import { MealAnalysisSchema } from "../schemas";
+import { getModelSettings } from "./modelSettings";
 
 const INSTRUCTIONS = `## Role
 You are a meal analysis agent for a diabetes-focused health app. Analyze the image and output structured JSON.
@@ -25,12 +25,12 @@ Glycemic index (GI) measures how quickly carbohydrates raise blood sugar. Low GI
 - Never reference insulin, dosing, or medication.
 - Keep guidance informational only.`;
 
-export function createMealAnalysisAgent(model = 'gpt-4.1') {
+export function createMealAnalysisAgent(model = "gpt-4.1") {
   return new Agent({
-    name: 'mealAnalysis',
+    name: "mealAnalysis",
     model,
     instructions: INSTRUCTIONS,
     outputType: MealAnalysisSchema,
-    modelSettings: getModelSettings(model, 'mealAnalysis'),
+    modelSettings: getModelSettings(model, "mealAnalysis"),
   });
 }

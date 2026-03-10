@@ -1,4 +1,4 @@
-import { parseMealOutput } from './utils';
+import { parseMealOutput } from "./utils";
 
 export default function assertIsFood(
   output: string,
@@ -12,6 +12,8 @@ export default function assertIsFood(
   return {
     pass,
     score: pass ? 1 : 0,
-    reason: pass ? `is_food matches (${predicted.is_food})` : `Expected is_food ${expected}, got ${predicted.is_food}`,
+    reason: pass
+      ? `is_food matches (${predicted.is_food})`
+      : `Expected is_food ${expected}, got ${predicted.is_food}`,
   };
 }

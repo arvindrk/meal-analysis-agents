@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-export const GlycemicColor = z.enum(['green', 'yellow', 'orange', 'red']);
+export const GlycemicColor = z.enum(["green", "yellow", "orange", "red"]);
 
 export const GuardrailCheckSchema = z.object({
   is_food: z.boolean(),

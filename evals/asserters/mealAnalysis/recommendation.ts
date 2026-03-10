@@ -1,13 +1,15 @@
-import type { GlycemicColor } from '../../../src/types';
-import { parseMealOutput } from './utils';
+import type { GlycemicColor } from "../../../src/types";
+import { parseMealOutput } from "./utils";
 
 function normalize(color: GlycemicColor): string {
-  return color === 'orange' ? 'red' : color;
+  return color === "orange" ? "red" : color;
 }
 
 export default function assertRecommendation(
   output: string,
-  context: { vars: { groundTruth: { mealAnalysis: { recommendation: GlycemicColor } } } },
+  context: {
+    vars: { groundTruth: { mealAnalysis: { recommendation: GlycemicColor } } };
+  },
 ) {
   const parsed = parseMealOutput(output);
   if (!parsed.ok) return { pass: false, score: 0, reason: parsed.reason };
@@ -17,6 +19,8 @@ export default function assertRecommendation(
   return {
     pass,
     score: pass ? 1 : 0,
-    reason: pass ? `Recommendation matches (${predicted.recommendation})` : `Expected ${expected}, got ${predicted.recommendation}`,
+    reason: pass
+      ? `Recommendation matches (${predicted.recommendation})`
+      : `Expected ${expected}, got ${predicted.recommendation}`,
   };
 }

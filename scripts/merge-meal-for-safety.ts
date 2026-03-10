@@ -6,13 +6,13 @@
  *   MEAL_ANALYSIS_MODEL=gpt-5-mini tsx --env-file=.env scripts/merge-meal-for-safety.ts
  */
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
-import { EVALS_DATASETS_DIR, EVALS_RESULTS_DIR } from './constants';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
+import { join } from "node:path";
+import { EVALS_DATASETS_DIR, EVALS_RESULTS_DIR } from "./constants";
 
-const MEAL_RESULTS_PATH = join(EVALS_RESULTS_DIR, 'mealAnalysis-results.json');
-const TEST_CASES_PATH = join(EVALS_DATASETS_DIR, 'guardrail-meal.json');
-const OUT_PATH = join(EVALS_DATASETS_DIR, 'safety-checks.json');
+const MEAL_RESULTS_PATH = join(EVALS_RESULTS_DIR, "mealAnalysis-results.json");
+const TEST_CASES_PATH = join(EVALS_DATASETS_DIR, "guardrail-meal.json");
+const OUT_PATH = join(EVALS_DATASETS_DIR, "safety-checks.json");
 
 interface PromptfooResult {
   vars?: { imageId?: string };
@@ -25,12 +25,15 @@ function extractResults(raw: unknown): PromptfooResult[] {
   if (Array.isArray(raw)) return raw as PromptfooResult[];
   const obj = raw as Record<string, unknown>;
   const inner = obj.results as Record<string, unknown> | undefined;
-  const arr = (Array.isArray(inner) ? inner : (inner?.results as unknown[] | undefined)) ?? [];
+  const arr =
+    (Array.isArray(inner)
+      ? inner
+      : (inner?.results as unknown[] | undefined)) ?? [];
   return arr as PromptfooResult[];
 }
 
 function main() {
-  const model = process.env.MEAL_ANALYSIS_MODEL ?? 'gpt-5.4';
+  const model = process.env.MEAL_ANALYSIS_MODEL ?? "gpt-5.4";
 
   if (!existsSync(MEAL_RESULTS_PATH)) {
     console.error(`Missing ${MEAL_RESULTS_PATH}. Run eval:analysis first.`);
@@ -41,7 +44,7 @@ function main() {
     process.exit(1);
   }
 
-  const mealRaw = JSON.parse(readFileSync(MEAL_RESULTS_PATH, 'utf-8'));
+  const mealRaw = JSON.parse(readFileSync(MEAL_RESULTS_PATH, "utf-8"));
   const results = extractResults(mealRaw);
 
   const byImageAndModel = new Map<string, Record<string, unknown>>();
@@ -59,13 +62,17 @@ function main() {
     }
   }
 
-  const testCases = JSON.parse(readFileSync(TEST_CASES_PATH, 'utf-8')) as Array<{ vars: Record<string, unknown> }>;
+  const testCases = JSON.parse(
+    readFileSync(TEST_CASES_PATH, "utf-8"),
+  ) as Array<{ vars: Record<string, unknown> }>;
   const merged: typeof testCases = [];
   let skippedNoMeal = 0;
   let skippedNoSafety = 0;
 
   for (const tc of testCases) {
-    const groundTruth = tc.vars.groundTruth as { safetyChecks?: unknown } | undefined;
+    const groundTruth = tc.vars.groundTruth as
+      | { safetyChecks?: unknown }
+      | undefined;
     if (!groundTruth?.safetyChecks) {
       skippedNoSafety++;
       continue;
@@ -73,7 +80,9 @@ function main() {
 
     const imageId = tc.vars.imageId as string;
     const modelOutputs = byImageAndModel.get(imageId);
-    const pipelineMealAnalysis = modelOutputs?.[model] as Record<string, unknown> | undefined;
+    const pipelineMealAnalysis = modelOutputs?.[model] as
+      | Record<string, unknown>
+      | undefined;
 
     if (!pipelineMealAnalysis) {
       skippedNoMeal++;

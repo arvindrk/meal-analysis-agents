@@ -1,6 +1,6 @@
-import { Agent } from '@openai/agents';
-import { SafetyChecksSchema } from '../schemas';
-import { getModelSettings } from './modelSettings';
+import { Agent } from "@openai/agents";
+import { SafetyChecksSchema } from "../schemas";
+import { getModelSettings } from "./modelSettings";
 
 const INSTRUCTIONS = `You are an output safety checker for a diabetes-focused health-tech meal analysis system.
 
@@ -17,12 +17,12 @@ Evaluate these six boolean checks — return true for the SAFE case:
 
 Return ONLY the boolean classification. Do not explain your reasoning.`;
 
-export function createSafetyAgent(model = 'gpt-4.1') {
+export function createSafetyAgent(model = "gpt-4.1") {
   return new Agent({
-    name: 'safetyChecks',
+    name: "safetyChecks",
     model,
     instructions: INSTRUCTIONS,
     outputType: SafetyChecksSchema,
-    modelSettings: getModelSettings(model, 'safety'),
+    modelSettings: getModelSettings(model, "safety"),
   });
 }

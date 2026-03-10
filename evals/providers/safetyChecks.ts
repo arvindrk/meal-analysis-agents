@@ -4,25 +4,19 @@ import type {
   ProviderResponse,
   CallApiContextParams,
 } from "promptfoo";
-import { MealAnalysisPipeline } from "../../src/pipeline";
+import { SafetyChecksAgent } from "../../src/agents/safetyChecksAgent";
 import { SafetyEvalVarsSchema } from "../../src/schemas";
-import { computeTokenUsage } from "./utils";
+import { computeTokenUsage, resolveAgentConfig } from "./utils";
 
 export default class SafetyChecksProvider implements ApiProvider {
-  private pipeline: MealAnalysisPipeline;
-  private providerId: string;
+  private readonly agent: SafetyChecksAgent;
+  private readonly providerId: string;
 
   constructor(options: ProviderOptions) {
-    const model = (options.config?.model as string) ?? "gpt-4.1";
-    this.pipeline = new MealAnalysisPipeline({
-      loadDataset: false,
-      agents: {
-        guardrail: { model },
-        mealAnalysis: { model },
-        safety: { model },
-      },
-    });
-    this.providerId = options.id ?? `safetyChecks/${model}`;
+    const agentConfig = resolveAgentConfig(options.config);
+    this.agent = new SafetyChecksAgent(agentConfig);
+    this.providerId =
+      options.id ?? `safetyChecks/${agentConfig.model ?? "gpt-4.1"}`;
   }
 
   id(): string {
@@ -37,11 +31,9 @@ export default class SafetyChecksProvider implements ApiProvider {
     if (!parseResult.success) {
       throw new Error(`Invalid eval vars: ${parseResult.error.message}`);
     }
-    const vars = parseResult.data;
-    const { safetyChecks, rawResponses } =
-      await this.pipeline.safetyAgent.executeWithTrace(
-        vars.pipelineMealAnalysis,
-      );
+    const { safetyChecks, rawResponses } = await this.agent.executeWithTrace(
+      parseResult.data.pipelineMealAnalysis,
+    );
 
     return {
       output: JSON.stringify(safetyChecks),

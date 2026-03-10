@@ -4,25 +4,19 @@ import type {
   ProviderResponse,
   CallApiContextParams,
 } from "promptfoo";
-import { MealAnalysisPipeline } from "../../src/pipeline";
+import { GuardrailCheckAgent } from "../../src/agents/guardrailCheckAgent";
 import { GuardrailEvalVarsSchema } from "../../src/schemas";
-import { computeTokenUsage } from "./utils";
+import { computeTokenUsage, resolveAgentConfig } from "./utils";
 
 export default class GuardrailCheckProvider implements ApiProvider {
-  private pipeline: MealAnalysisPipeline;
-  private providerId: string;
+  private readonly agent: GuardrailCheckAgent;
+  private readonly providerId: string;
 
   constructor(options: ProviderOptions) {
-    const model = (options.config?.model as string) ?? "gpt-4.1";
-    this.pipeline = new MealAnalysisPipeline({
-      loadDataset: false,
-      agents: {
-        guardrail: { model },
-        mealAnalysis: { model },
-        safety: { model },
-      },
-    });
-    this.providerId = options.id ?? `guardrailCheck/${model}`;
+    const agentConfig = resolveAgentConfig(options.config);
+    this.agent = new GuardrailCheckAgent(agentConfig);
+    this.providerId =
+      options.id ?? `guardrailCheck/${agentConfig.model ?? "gpt-4.1"}`;
   }
 
   id(): string {
@@ -37,9 +31,9 @@ export default class GuardrailCheckProvider implements ApiProvider {
     if (!parseResult.success) {
       throw new Error(`Invalid eval vars: ${parseResult.error.message}`);
     }
-    const vars = parseResult.data;
-    const { guardrailCheck, rawResponses } =
-      await this.pipeline.guardrailAgent.executeWithTrace(vars.imagePath);
+    const { guardrailCheck, rawResponses } = await this.agent.executeWithTrace(
+      parseResult.data.imagePath,
+    );
 
     return {
       output: JSON.stringify(guardrailCheck),

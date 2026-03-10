@@ -11,9 +11,9 @@ import type {
   IAgent,
 } from "./types";
 import { loadDataset } from "./dataset";
-import { GuardrailCheckAgent } from "./agents/guardrailCheck";
-import { MealAnalysisAgent } from "./agents/mealAnalysis";
-import { SafetyChecksAgent } from "./agents/safetyChecks";
+import { GuardrailCheckAgent } from "./agents/guardrailCheckAgent";
+import { MealAnalysisAgent } from "./agents/mealAnalysisAgent";
+import { SafetyChecksAgent } from "./agents/safetyChecksAgent";
 import { applyRedaction } from "./redaction";
 
 function guardrailsPassed(output: GuardrailCheckOutput): boolean {

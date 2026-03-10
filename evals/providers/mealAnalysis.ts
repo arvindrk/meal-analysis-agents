@@ -4,25 +4,19 @@ import type {
   ProviderResponse,
   CallApiContextParams,
 } from "promptfoo";
-import { MealAnalysisPipeline } from "../../src/pipeline";
+import { MealAnalysisAgent } from "../../src/agents/mealAnalysisAgent";
 import { MealAnalysisEvalVarsSchema } from "../../src/schemas";
-import { computeTokenUsage } from "./utils";
+import { computeTokenUsage, resolveAgentConfig } from "./utils";
 
 export default class MealAnalysisProvider implements ApiProvider {
-  private pipeline: MealAnalysisPipeline;
-  private providerId: string;
+  private readonly agent: MealAnalysisAgent;
+  private readonly providerId: string;
 
   constructor(options: ProviderOptions) {
-    const model = (options.config?.model as string) ?? "gpt-4.1";
-    this.pipeline = new MealAnalysisPipeline({
-      loadDataset: false,
-      agents: {
-        guardrail: { model },
-        mealAnalysis: { model },
-        safety: { model },
-      },
-    });
-    this.providerId = options.id ?? `mealAnalysis/${model}`;
+    const agentConfig = resolveAgentConfig(options.config);
+    this.agent = new MealAnalysisAgent(agentConfig);
+    this.providerId =
+      options.id ?? `mealAnalysis/${agentConfig.model ?? "gpt-4.1"}`;
   }
 
   id(): string {
@@ -37,9 +31,9 @@ export default class MealAnalysisProvider implements ApiProvider {
     if (!parseResult.success) {
       throw new Error(`Invalid eval vars: ${parseResult.error.message}`);
     }
-    const vars = parseResult.data;
-    const { mealAnalysis, rawResponses } =
-      await this.pipeline.mealAnalysisAgent.executeWithTrace(vars.imagePath);
+    const { mealAnalysis, rawResponses } = await this.agent.executeWithTrace(
+      parseResult.data.imagePath,
+    );
 
     return {
       output: JSON.stringify(mealAnalysis),

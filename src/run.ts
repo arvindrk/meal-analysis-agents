@@ -1,30 +1,36 @@
-import { writeAgentOutput, readAgentOutput } from './agentIO';
-import { MealAnalysisPipeline } from './pipeline';
-import type { MealAnalysisOutput } from './types';
+import { writeAgentOutput, readAgentOutput } from "./agentIO";
+import { MealAnalysisPipeline } from "./pipeline";
+import type { MealAnalysisOutput } from "./types";
 
-const AGENT_NAMES = ['guardrail', 'analysis', 'safety'] as const;
+const AGENT_NAMES = ["guardrail", "analysis", "safety"] as const;
 type AgentName = (typeof AGENT_NAMES)[number];
 
 const OUTPUT_DIRS: Record<AgentName, string> = {
-  guardrail: 'guardrailCheck',
-  analysis: 'mealAnalysis',
-  safety: 'safetyChecks',
+  guardrail: "guardrailCheck",
+  analysis: "mealAnalysis",
+  safety: "safetyChecks",
 };
 
 function parseArgs(argv: string[]) {
   const args = argv.slice(2);
   let n: number | undefined;
   let agent: string | undefined;
+  let parallel = false;
 
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === '--n' && args[i + 1]) n = parseInt(args[i + 1], 10);
-    if (args[i] === '--agent' && args[i + 1]) agent = args[i + 1];
+    if (args[i] === "--n" && args[i + 1]) n = parseInt(args[i + 1], 10);
+    if (args[i] === "--agent" && args[i + 1]) agent = args[i + 1];
+    if (args[i] === "--parallel") parallel = true;
   }
 
-  return { n, agent };
+  return { n, agent, parallel };
 }
 
-async function runSingleAgent(pipeline: MealAnalysisPipeline, agentName: AgentName, n?: number) {
+async function runSingleAgent(
+  pipeline: MealAnalysisPipeline,
+  agentName: AgentName,
+  n?: number,
+) {
   const entries = n ? pipeline.dataset.slice(0, n) : pipeline.dataset;
   const outputKey = OUTPUT_DIRS[agentName];
 
@@ -34,14 +40,18 @@ async function runSingleAgent(pipeline: MealAnalysisPipeline, agentName: AgentNa
 
     let output: unknown;
     switch (agentName) {
-      case 'guardrail':
-        output = (await pipeline.runGuardrailCheck(entry.imagePath)).guardrailCheck;
+      case "guardrail":
+        output = (await pipeline.runGuardrailCheck(entry.imagePath))
+          .guardrailCheck;
         break;
-      case 'analysis':
+      case "analysis":
         output = (await pipeline.runMealAnalysis(entry.imagePath)).mealAnalysis;
         break;
-      case 'safety': {
-        const mealAnalysis = readAgentOutput<MealAnalysisOutput>('mealAnalysis', entry.id);
+      case "safety": {
+        const mealAnalysis = readAgentOutput<MealAnalysisOutput>(
+          "mealAnalysis",
+          entry.id,
+        );
         output = (await pipeline.runSafetyChecks(mealAnalysis)).safetyChecks;
         break;
       }
@@ -56,21 +66,23 @@ async function runFullPipeline(pipeline: MealAnalysisPipeline, n?: number) {
   const results = await pipeline.analyzeAll(n);
 
   for (const result of results) {
-    writeAgentOutput('guardrailCheck', result.imageId, result.guardrailCheck);
-    if (result.mealAnalysis) writeAgentOutput('mealAnalysis', result.imageId, result.mealAnalysis);
-    if (result.safetyChecks) writeAgentOutput('safetyChecks', result.imageId, result.safetyChecks);
+    writeAgentOutput("guardrailCheck", result.imageId, result.guardrailCheck);
+    if (result.mealAnalysis)
+      writeAgentOutput("mealAnalysis", result.imageId, result.mealAnalysis);
+    if (result.safetyChecks)
+      writeAgentOutput("safetyChecks", result.imageId, result.safetyChecks);
   }
 
   console.log(JSON.stringify(results, null, 2));
 }
 
 async function main() {
-  const { n, agent } = parseArgs(process.argv);
-  const pipeline = new MealAnalysisPipeline();
+  const { n, agent, parallel } = parseArgs(process.argv);
+  const pipeline = new MealAnalysisPipeline({ parallel });
 
   if (agent) {
     if (!AGENT_NAMES.includes(agent as AgentName)) {
-      console.error(`Unknown agent: ${agent}. Use: ${AGENT_NAMES.join(', ')}`);
+      console.error(`Unknown agent: ${agent}. Use: ${AGENT_NAMES.join(", ")}`);
       process.exit(1);
     }
     await runSingleAgent(pipeline, agent as AgentName, n);

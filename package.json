@@ -18,17 +18,22 @@
     "eval:all": "npm run eval:generate && npm run eval:guardrail && npm run eval:analysis && npm run eval:merge-meal && npm run eval:safety && npm run eval:score",
     "eval:view": "promptfoo view",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf output dist"
+    "clean": "rm -rf output dist",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@openai/agents": "^0.5.4",
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "boxen": "^8.0.1",
     "chalk": "^5.3.0",
+    "eslint": "^10.0.3",
+    "globals": "^17.4.0",
     "promptfoo": "^0.120.27",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.0"
   }
 }

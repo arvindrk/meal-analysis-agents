@@ -235,7 +235,11 @@ function groupByModel(results: EvalResult[]): ModelStats[] {
 }
 
 function sortByScoreDesc(stats: ModelStats[]): ModelStats[] {
-  return [...stats].sort((a, b) => b.evalScore - a.evalScore);
+  return [...stats].sort((a, b) => {
+    const scoreDiff = b.evalScore - a.evalScore;
+    if (scoreDiff !== 0) return scoreDiff;
+    return a.p50LatencyMs - b.p50LatencyMs;
+  });
 }
 
 // 50% rec + 30% text + 20% avg(macros, ingredients); normalize if components missing

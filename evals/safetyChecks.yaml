@@ -39,7 +39,7 @@ providers:
 prompts:
   - "{{imageId}}"
 
-tests: file://../output/evals/datasets/safety-checks.json
+tests: file://datasets/safety-checks.json
 
 defaultTest:
   assert:

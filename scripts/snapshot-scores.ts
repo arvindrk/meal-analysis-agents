@@ -6,7 +6,7 @@
 import { spawnSync } from "node:child_process";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { ROOT } from "./constants.js";
+import { EVALS_REPORTS_DIR, ROOT } from "./constants";
 
 const ANSI_REGEX = /\x1b\[[0-9;]*m/g;
 
@@ -60,9 +60,8 @@ function main() {
   ].join("\n");
 
   const body = stripAnsi(output);
-  const reportsDir = join(ROOT, "output", "reports");
-  mkdirSync(reportsDir, { recursive: true });
-  const reportPath = join(reportsDir, `meal-eval-report-${version}.md`);
+  mkdirSync(EVALS_REPORTS_DIR, { recursive: true });
+  const reportPath = join(EVALS_REPORTS_DIR, `meal-eval-report-${version}.md`);
   writeFileSync(reportPath, header + body, "utf-8");
   console.log(`Wrote ${reportPath}`);
 }

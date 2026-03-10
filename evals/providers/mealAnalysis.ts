@@ -16,7 +16,11 @@ export default class MealAnalysisProvider implements ApiProvider {
     const model = (options.config?.model as string) ?? "gpt-4.1";
     this.pipeline = new MealAnalysisPipeline({
       loadDataset: false,
-      models: { guardrail: model, mealAnalysis: model, safety: model },
+      agents: {
+        guardrail: { model },
+        mealAnalysis: { model },
+        safety: { model },
+      },
     });
     this.providerId = options.id ?? `mealAnalysis/${model}`;
   }
@@ -34,9 +38,8 @@ export default class MealAnalysisProvider implements ApiProvider {
       throw new Error(`Invalid eval vars: ${parseResult.error.message}`);
     }
     const vars = parseResult.data;
-    const { mealAnalysis, rawResponses } = await this.pipeline.runMealAnalysis(
-      vars.imagePath,
-    );
+    const { mealAnalysis, rawResponses } =
+      await this.pipeline.mealAnalysisAgent.executeWithTrace(vars.imagePath);
 
     return {
       output: JSON.stringify(mealAnalysis),

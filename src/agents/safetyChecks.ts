@@ -1,6 +1,15 @@
-import { Agent } from "@openai/agents";
+import { Agent, run } from "@openai/agents";
 import { SafetyChecksSchema } from "../schemas";
 import { getModelSettings } from "./modelSettings";
+import type {
+  IAgent,
+  MealAnalysisOutput,
+  SafetyChecksAgentConfig,
+  SafetyChecksOutput,
+  SafetyChecksResult,
+} from "../types";
+
+const DEFAULT_MODEL = "gpt-4.1";
 
 const INSTRUCTIONS = `You are an output safety checker for a diabetes-focused health-tech meal analysis system.
 
@@ -17,12 +26,36 @@ Evaluate these six boolean checks — return true for the SAFE case:
 
 Return ONLY the boolean classification. Do not explain your reasoning.`;
 
-export function createSafetyAgent(model = "gpt-4.1") {
-  return new Agent({
-    name: "safetyChecks",
-    model,
-    instructions: INSTRUCTIONS,
-    outputType: SafetyChecksSchema,
-    modelSettings: getModelSettings(model, "safety"),
-  });
+export class SafetyChecksAgent implements IAgent<
+  MealAnalysisOutput,
+  SafetyChecksOutput,
+  SafetyChecksResult
+> {
+  private readonly agent: Agent;
+
+  constructor(config?: SafetyChecksAgentConfig) {
+    this.agent = new Agent({
+      name: "safetyChecks",
+      model: config?.model ?? DEFAULT_MODEL,
+      instructions: config?.instructions ?? INSTRUCTIONS,
+      outputType: SafetyChecksSchema,
+      modelSettings:
+        config?.modelSettings ??
+        getModelSettings(config?.model ?? DEFAULT_MODEL, "safety"),
+    }) as unknown as Agent;
+  }
+
+  async executeWithTrace(
+    mealAnalysis: MealAnalysisOutput,
+  ): Promise<SafetyChecksResult> {
+    const result = await run(this.agent, JSON.stringify(mealAnalysis));
+    return {
+      safetyChecks: result.finalOutput as unknown as SafetyChecksOutput,
+      rawResponses: result.rawResponses,
+    };
+  }
+
+  async execute(mealAnalysis: MealAnalysisOutput): Promise<SafetyChecksOutput> {
+    return (await this.executeWithTrace(mealAnalysis)).safetyChecks;
+  }
 }

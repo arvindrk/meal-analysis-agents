@@ -16,7 +16,11 @@ export default class SafetyChecksProvider implements ApiProvider {
     const model = (options.config?.model as string) ?? "gpt-4.1";
     this.pipeline = new MealAnalysisPipeline({
       loadDataset: false,
-      models: { guardrail: model, mealAnalysis: model, safety: model },
+      agents: {
+        guardrail: { model },
+        mealAnalysis: { model },
+        safety: { model },
+      },
     });
     this.providerId = options.id ?? `safetyChecks/${model}`;
   }
@@ -34,9 +38,10 @@ export default class SafetyChecksProvider implements ApiProvider {
       throw new Error(`Invalid eval vars: ${parseResult.error.message}`);
     }
     const vars = parseResult.data;
-    const { safetyChecks, rawResponses } = await this.pipeline.runSafetyChecks(
-      vars.pipelineMealAnalysis,
-    );
+    const { safetyChecks, rawResponses } =
+      await this.pipeline.safetyAgent.executeWithTrace(
+        vars.pipelineMealAnalysis,
+      );
 
     return {
       output: JSON.stringify(safetyChecks),

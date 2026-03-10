@@ -1,20 +1,20 @@
-import { run } from "@openai/agents";
 import type {
   GuardrailCheckOutput,
+  GuardrailCheckResult,
   MealAnalysisOutput,
+  MealAnalysisResult,
   SafetyChecksOutput,
+  SafetyChecksResult,
   DatasetEntry,
   PipelineResult,
   PipelineOptions,
+  IAgent,
 } from "./types";
 import { loadDataset } from "./dataset";
-import { buildImageInput } from "./agentIO";
-import { createGuardrailAgent } from "./agents/guardrailCheck";
-import { createMealAnalysisAgent } from "./agents/mealAnalysis";
-import { createSafetyAgent } from "./agents/safetyChecks";
+import { GuardrailCheckAgent } from "./agents/guardrailCheck";
+import { MealAnalysisAgent } from "./agents/mealAnalysis";
+import { SafetyChecksAgent } from "./agents/safetyChecks";
 import { applyRedaction } from "./redaction";
-
-const DEFAULT_MODEL = "gpt-4.1";
 
 function guardrailsPassed(output: GuardrailCheckOutput): boolean {
   return (
@@ -24,50 +24,31 @@ function guardrailsPassed(output: GuardrailCheckOutput): boolean {
 
 export class MealAnalysisPipeline {
   readonly dataset: DatasetEntry[];
+  readonly guardrailAgent: IAgent<
+    string,
+    GuardrailCheckOutput,
+    GuardrailCheckResult
+  >;
+  readonly mealAnalysisAgent: IAgent<
+    string,
+    MealAnalysisOutput,
+    MealAnalysisResult
+  >;
+  readonly safetyAgent: IAgent<
+    MealAnalysisOutput,
+    SafetyChecksOutput,
+    SafetyChecksResult
+  >;
   private readonly parallel: boolean;
-  private guardrailAgent;
-  private analysisAgent;
-  private safetyAgent;
 
   constructor(options?: PipelineOptions) {
-    const models = options?.models ?? {};
-    const guardrailModel = models.guardrail ?? DEFAULT_MODEL;
-    const mealAnalysisModel = models.mealAnalysis ?? DEFAULT_MODEL;
-    const safetyModel = models.safety ?? DEFAULT_MODEL;
-
+    const agentConfigs = options?.agents ?? {};
     this.parallel = options?.parallel ?? false;
     this.dataset =
       options?.loadDataset === false ? [] : loadDataset(options?.dataDir);
-    this.guardrailAgent = createGuardrailAgent(guardrailModel);
-    this.analysisAgent = createMealAnalysisAgent(mealAnalysisModel);
-    this.safetyAgent = createSafetyAgent(safetyModel);
-  }
-
-  async runGuardrailCheck(imagePath: string) {
-    const result = await run(this.guardrailAgent, buildImageInput(imagePath));
-    return {
-      guardrailCheck: result.finalOutput as GuardrailCheckOutput,
-      rawResponses: result.rawResponses,
-    };
-  }
-
-  async runMealAnalysis(imagePath: string) {
-    const result = await run(
-      this.analysisAgent,
-      buildImageInput(imagePath, { detail: "high" }),
-    );
-    return {
-      mealAnalysis: result.finalOutput as MealAnalysisOutput,
-      rawResponses: result.rawResponses,
-    };
-  }
-
-  async runSafetyChecks(mealAnalysis: MealAnalysisOutput) {
-    const result = await run(this.safetyAgent, JSON.stringify(mealAnalysis));
-    return {
-      safetyChecks: result.finalOutput as SafetyChecksOutput,
-      rawResponses: result.rawResponses,
-    };
+    this.guardrailAgent = new GuardrailCheckAgent(agentConfigs.guardrail);
+    this.mealAnalysisAgent = new MealAnalysisAgent(agentConfigs.mealAnalysis);
+    this.safetyAgent = new SafetyChecksAgent(agentConfigs.safety);
   }
 
   async analyze(entry: DatasetEntry): Promise<PipelineResult> {
@@ -75,26 +56,23 @@ export class MealAnalysisPipeline {
     let mealAnalysis: MealAnalysisOutput;
 
     if (this.parallel) {
-      const [guardrailResult, mealResult] = await Promise.all([
-        this.runGuardrailCheck(entry.imagePath),
-        this.runMealAnalysis(entry.imagePath),
+      [guardrailCheck, mealAnalysis] = await Promise.all([
+        this.guardrailAgent.execute(entry.imagePath),
+        this.mealAnalysisAgent.execute(entry.imagePath),
       ]);
-      guardrailCheck = guardrailResult.guardrailCheck;
-      mealAnalysis = mealResult.mealAnalysis;
     } else {
-      const guardrailResult = await this.runGuardrailCheck(entry.imagePath);
-      guardrailCheck = guardrailResult.guardrailCheck;
+      guardrailCheck = await this.guardrailAgent.execute(entry.imagePath);
       if (!guardrailsPassed(guardrailCheck)) {
         return { imageId: entry.id, guardrailCheck };
       }
-      mealAnalysis = (await this.runMealAnalysis(entry.imagePath)).mealAnalysis;
+      mealAnalysis = await this.mealAnalysisAgent.execute(entry.imagePath);
     }
 
     if (!guardrailsPassed(guardrailCheck)) {
       return { imageId: entry.id, guardrailCheck };
     }
 
-    const { safetyChecks } = await this.runSafetyChecks(mealAnalysis);
+    const safetyChecks = await this.safetyAgent.execute(mealAnalysis);
     const redactedMeal = applyRedaction(mealAnalysis, safetyChecks);
 
     return {

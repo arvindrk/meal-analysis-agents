@@ -1,6 +1,15 @@
-import { Agent } from "@openai/agents";
+import { Agent, run } from "@openai/agents";
 import { MealAnalysisSchema } from "../schemas";
+import { buildImageInput } from "../agentIO";
 import { getModelSettings } from "./modelSettings";
+import type {
+  IAgent,
+  MealAnalysisAgentConfig,
+  MealAnalysisOutput,
+  MealAnalysisResult,
+} from "../types";
+
+const DEFAULT_MODEL = "gpt-4.1";
 
 const INSTRUCTIONS = `## Role
 You are a meal analysis agent for a diabetes-focused health app. Analyze the image and output structured JSON.
@@ -25,12 +34,37 @@ Glycemic index (GI) measures how quickly carbohydrates raise blood sugar. Low GI
 - Never reference insulin, dosing, or medication.
 - Keep guidance informational only.`;
 
-export function createMealAnalysisAgent(model = "gpt-4.1") {
-  return new Agent({
-    name: "mealAnalysis",
-    model,
-    instructions: INSTRUCTIONS,
-    outputType: MealAnalysisSchema,
-    modelSettings: getModelSettings(model, "mealAnalysis"),
-  });
+export class MealAnalysisAgent implements IAgent<
+  string,
+  MealAnalysisOutput,
+  MealAnalysisResult
+> {
+  private readonly agent: Agent;
+
+  constructor(config?: MealAnalysisAgentConfig) {
+    this.agent = new Agent({
+      name: "mealAnalysis",
+      model: config?.model ?? DEFAULT_MODEL,
+      instructions: config?.instructions ?? INSTRUCTIONS,
+      outputType: MealAnalysisSchema,
+      modelSettings:
+        config?.modelSettings ??
+        getModelSettings(config?.model ?? DEFAULT_MODEL, "mealAnalysis"),
+    }) as unknown as Agent;
+  }
+
+  async executeWithTrace(imagePath: string): Promise<MealAnalysisResult> {
+    const result = await run(
+      this.agent,
+      buildImageInput(imagePath, { detail: "high" }),
+    );
+    return {
+      mealAnalysis: result.finalOutput as unknown as MealAnalysisOutput,
+      rawResponses: result.rawResponses,
+    };
+  }
+
+  async execute(imagePath: string): Promise<MealAnalysisOutput> {
+    return (await this.executeWithTrace(imagePath)).mealAnalysis;
+  }
 }

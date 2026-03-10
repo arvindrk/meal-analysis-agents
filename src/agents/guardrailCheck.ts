@@ -1,6 +1,15 @@
-import { Agent } from "@openai/agents";
+import { Agent, run } from "@openai/agents";
 import { GuardrailCheckSchema } from "../schemas";
+import { buildImageInput } from "../agentIO";
 import { getModelSettings } from "./modelSettings";
+import type {
+  GuardrailCheckAgentConfig,
+  GuardrailCheckOutput,
+  GuardrailCheckResult,
+  IAgent,
+} from "../types";
+
+const DEFAULT_MODEL = "gpt-4.1";
 
 const INSTRUCTIONS = `You are an image guardrail classifier for a health-tech meal analysis system.
 
@@ -13,12 +22,34 @@ Given an uploaded image, evaluate these four binary checks:
 
 Return ONLY the boolean classification. Do not explain your reasoning.`;
 
-export function createGuardrailAgent(model = "gpt-4.1") {
-  return new Agent({
-    name: "guardrailCheck",
-    model,
-    instructions: INSTRUCTIONS,
-    outputType: GuardrailCheckSchema,
-    modelSettings: getModelSettings(model, "guardrail"),
-  });
+export class GuardrailCheckAgent implements IAgent<
+  string,
+  GuardrailCheckOutput,
+  GuardrailCheckResult
+> {
+  private readonly agent: Agent;
+
+  constructor(config?: GuardrailCheckAgentConfig) {
+    this.agent = new Agent({
+      name: "guardrailCheck",
+      model: config?.model ?? DEFAULT_MODEL,
+      instructions: config?.instructions ?? INSTRUCTIONS,
+      outputType: GuardrailCheckSchema,
+      modelSettings:
+        config?.modelSettings ??
+        getModelSettings(config?.model ?? DEFAULT_MODEL, "guardrail"),
+    }) as unknown as Agent;
+  }
+
+  async executeWithTrace(imagePath: string): Promise<GuardrailCheckResult> {
+    const result = await run(this.agent, buildImageInput(imagePath));
+    return {
+      guardrailCheck: result.finalOutput as unknown as GuardrailCheckOutput,
+      rawResponses: result.rawResponses,
+    };
+  }
+
+  async execute(imagePath: string): Promise<GuardrailCheckOutput> {
+    return (await this.executeWithTrace(imagePath)).guardrailCheck;
+  }
 }

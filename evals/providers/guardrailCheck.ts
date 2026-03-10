@@ -16,7 +16,11 @@ export default class GuardrailCheckProvider implements ApiProvider {
     const model = (options.config?.model as string) ?? "gpt-4.1";
     this.pipeline = new MealAnalysisPipeline({
       loadDataset: false,
-      models: { guardrail: model, mealAnalysis: model, safety: model },
+      agents: {
+        guardrail: { model },
+        mealAnalysis: { model },
+        safety: { model },
+      },
     });
     this.providerId = options.id ?? `guardrailCheck/${model}`;
   }
@@ -35,7 +39,7 @@ export default class GuardrailCheckProvider implements ApiProvider {
     }
     const vars = parseResult.data;
     const { guardrailCheck, rawResponses } =
-      await this.pipeline.runGuardrailCheck(vars.imagePath);
+      await this.pipeline.guardrailAgent.executeWithTrace(vars.imagePath);
 
     return {
       output: JSON.stringify(guardrailCheck),

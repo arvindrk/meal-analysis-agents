@@ -10,10 +10,10 @@ Three-agent AI pipeline for glycemic meal analysis. A meal image enters as base6
 
 The pipeline runs in two modes:
 
-| Mode | Flow |
-|---|---|
-| **Sequential** (default) | `guardrailCheck` → *(short-circuit if fail)* → `mealAnalysis` → `safetyChecks` → redaction |
-| **Parallel** (`--parallel`) | `guardrailCheck` + `mealAnalysis` concurrently → `safetyChecks` → redaction |
+| Mode                        | Flow                                                                                                                   |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Sequential** (default)    | `guardrailCheck` → _(short-circuit if fail)_ → `mealAnalysis` → `safetyChecks` → redaction                             |
+| **Parallel** (`--parallel`) | `guardrailCheck` + `mealAnalysis` concurrently → _(short-circuit if guardrailCheck fail)_ → `safetyChecks` → redaction |
 
 **Short-circuit:** if `guardrailCheck` fails (not food, PII, human, captcha), the pipeline returns immediately — no LLM calls for `mealAnalysis` or `safetyChecks`.
 
@@ -114,11 +114,11 @@ Runs the recommended stack (`gpt-5.4` / `gpt-4.1` / `gpt-4o`) in both sequential
 npm run eval:pipeline
 ```
 
-| Mode | Score | Tests Passed | P50 (ms) | P75 (ms) | P95 (ms) |
-|---|---|---|---|---|---|
-| Sequential | 71.5 / 72 (99.3%) | 71 / 72 | 6,703 | 8,069 | 9,496 |
-| Parallel | 71.5 / 72 (99.3%) | 71 / 72 | 4,987 | 5,439 | 6,858 |
-| **Δ Parallel gain** | — | — | **−1,716 (−26%)** | **−2,630 (−33%)** | **−2,638 (−28%)** |
+| Mode                | Score             | Tests Passed | P50 (ms)          | P75 (ms)          | P95 (ms)          |
+| ------------------- | ----------------- | ------------ | ----------------- | ----------------- | ----------------- |
+| Sequential          | 71.5 / 72 (99.3%) | 71 / 72      | 6,703             | 8,069             | 9,496             |
+| Parallel            | 71.5 / 72 (99.3%) | 71 / 72      | 4,987             | 5,439             | 6,858             |
+| **Δ Parallel gain** | —                 | —            | **−1,716 (−26%)** | **−2,630 (−33%)** | **−2,638 (−28%)** |
 
 Identical scores across both modes confirm correctness parity. Parallel scheduling delivers a consistent 26–33% latency reduction with no accuracy trade-off.
 
@@ -128,69 +128,69 @@ Identical scores across both modes confirm correctness parity. Parallel scheduli
 
 > **Recommended stack: guardrailCheck → `gpt-5.4` | mealAnalysis → `gpt-4.1` | safetyChecks → `gpt-4o`**
 >
-> **Composite: 86.8 / 100 | End-to-end P50: 5,977 ms**
+> **Composite: 88.2 / 100 | End-to-end P50: 9,798 ms**
 
 Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md) | [v1 — Current](evals/output/reports/meal-eval-report-v1.md)
 
 ### Decision Matrix
 
-| Scenario | guardrailCheck | mealAnalysis | safetyChecks | Composite | P50 (ms) |
-|---|---|---|---|---|---|
-| Best accuracy | gpt-5.4, gpt-5.2, gpt-5-mini, gpt-4.1-mini, gpt-5, gpt-4o | gpt-4.1 | gpt-4.1, gpt-5.2, gpt-5-mini, gpt-5.4, gpt-4.1-mini, gpt-4o, gpt-5 | 86.8 | 6,324 |
-| Best value (score / 1k tokens) | gpt-4o | gpt-4o | gpt-4.1-mini, gpt-4o | 85.8 | 7,877 |
-| Best latency | gpt-4.1-mini | gpt-4.1 | gpt-4o | 86.8 | 5,977 |
-| **Balanced (accuracy + latency)** ✓ | **gpt-5.4** | **gpt-4.1** | **gpt-4o** | **86.8** | **5,977** |
+| Scenario                            | guardrailCheck                                            | mealAnalysis | safetyChecks                                                       | Composite | P50 (ms)  |
+| ----------------------------------- | --------------------------------------------------------- | ------------ | ------------------------------------------------------------------ | --------- | --------- |
+| Best accuracy                       | gpt-5.4, gpt-5.2, gpt-5-mini, gpt-4.1-mini, gpt-5, gpt-4o | gpt-4.1      | gpt-4.1, gpt-5.2, gpt-5-mini, gpt-5.4, gpt-4.1-mini, gpt-4o, gpt-5 | 88.2      | 9,798     |
+| Best value (score / 1k tokens)      | gpt-4o                                                    | gpt-4o       | gpt-4.1-mini, gpt-4o                                               | 84.4      | 11,373    |
+| Best latency                        | gpt-4.1-mini                                              | gpt-4.1      | gpt-4o                                                             | 88.2      | 9,788     |
+| **Balanced (accuracy + latency)** ✓ | **gpt-5.4**                                               | **gpt-4.1**  | **gpt-4o**                                                         | **88.2**  | **9,798** |
 
 > Multiple models in a single cell indicate a tie at that score for that agent. The per-agent tables below list all tested models ranked by score, with the recommended model at the top.
 
 ### guardrailCheck
 
-| Model | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) |
-|---|---|---|---|---|
-| **gpt-5.4** ✓ | 100.0 / 100 | 560 | 61 | 1,414 |
-| gpt-4.1-mini | 100.0 / 100 | 669 | 26 | 1,404 |
-| gpt-5.2 | 100.0 / 100 | 560 | 52 | 1,469 |
-| gpt-4o | 100.0 / 100 | 508 | 26 | 1,770 |
-| gpt-5-mini | 100.0 / 100 | 560 | 102 | 2,593 |
-| gpt-5 | 100.0 / 100 | 462 | 120 | 3,754 |
-| gpt-4.1 | 98.6 / 100 | 508 | 29 | 1,621 |
-| gpt-4o-mini | 97.2 / 100 | 8,753 | 26 | 1,661 |
+| Model         | Eval Score  | Avg Input Tokens | Avg Output Tokens | P50 (ms) |
+| ------------- | ----------- | ---------------- | ----------------- | -------- |
+| **gpt-5.4** ✓ | 100.0 / 100 | 560              | 61                | 1,414    |
+| gpt-4.1-mini  | 100.0 / 100 | 669              | 26                | 1,404    |
+| gpt-5.2       | 100.0 / 100 | 560              | 52                | 1,469    |
+| gpt-4o        | 100.0 / 100 | 508              | 26                | 1,770    |
+| gpt-5-mini    | 100.0 / 100 | 560              | 102               | 2,593    |
+| gpt-5         | 100.0 / 100 | 462              | 120               | 3,754    |
+| gpt-4.1       | 98.6 / 100  | 508              | 29                | 1,621    |
+| gpt-4o-mini   | 97.2 / 100  | 8,753            | 26                | 1,661    |
 
 ### mealAnalysis
 
-| Model | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) |
-|---|---|---|---|---|
-| **gpt-4.1** ✓ | 81.2 / 100 | 876 | 233 | 3,660 |
-| gpt-4o | 79.2 / 100 | 876 | 132 | 4,691 |
-| gpt-4o-mini | 76.4 / 100 | 9,121 | 139 | 3,726 |
-| gpt-4.1-mini | 75.7 / 100 | 1,037 | 154 | 3,494 |
-| gpt-5.4 | 70.8 / 100 | 928 | 1,286 | 16,680 |
-| gpt-5.2 | 69.0 / 100 | 928 | 540 | 9,367 |
-| gpt-5-mini | 67.8 / 100 | 928 | 4,789 | 68,372 |
-| gpt-5 | 67.3 / 100 | 830 | 3,478 | 71,060 |
+| Model         | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) |
+| ------------- | ---------- | ---------------- | ----------------- | -------- |
+| **gpt-4.1** ✓ | 83.8 / 100 | 655              | 220               | 6,621    |
+| gpt-4o-mini   | 77.1 / 100 | 8,900            | 138               | 7,311    |
+| gpt-4.1-mini  | 76.5 / 100 | 816              | 153               | 6,844    |
+| gpt-4o        | 76.3 / 100 | 655              | 129               | 7,840    |
+| gpt-5.4       | 73.0 / 100 | 707              | 446               | 11,009   |
+| gpt-5.2       | 70.7 / 100 | 707              | 390               | 10,779   |
+| gpt-5-mini    | 70.0 / 100 | 707              | 1,087             | 25,876   |
+| gpt-5         | 67.2 / 100 | 609              | 1,432             | 26,663   |
 
 **Component breakdown (gpt-4.1):**
 
-| Component | Score | Weight in composite |
-|---|---|---|
-| is_food | 100.0 / 100 | — |
-| text_quality (LLM-as-judge) | 95.6 / 100 | 30% |
-| macros (MAPE-based) | 77.2 / 100 | 10% |
-| recommendation (3-class) | 80.6 / 100 | 50% |
-| ingredients (name + impact match) | 45.2 / 100 | 10% |
+| Component                         | Score       | Weight in composite |
+| --------------------------------- | ----------- | ------------------- |
+| is_food                           | 100.0 / 100 | —                   |
+| text_quality (LLM-as-judge)       | 97.2 / 100  | 30%                 |
+| macros (MAPE-based)               | 78.8 / 100  | 10%                 |
+| recommendation (3-class)          | 81.9 / 100  | 50%                 |
+| ingredients (name + impact match) | 58.2 / 100  | 10%                 |
 
 ### safetyChecks
 
-| Model | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) |
-|---|---|---|---|---|
-| **gpt-4o** ✓ | 87.5 / 100 | 620 | 58 | 913 |
-| gpt-4.1 | 87.5 / 100 | 620 | 63 | 1,250 |
-| gpt-4.1-mini | 87.5 / 100 | 620 | 58 | 1,416 |
-| gpt-5.2 | 87.5 / 100 | 618 | 96 | 1,885 |
-| gpt-5.4 | 87.5 / 100 | 618 | 109 | 1,967 |
-| gpt-5-mini | 87.5 / 100 | 618 | 197 | 2,932 |
-| gpt-5 | 87.5 / 100 | 618 | 282 | 5,522 |
-| gpt-4o-mini | 84.4 / 100 | 620 | 58 | 1,560 |
+| Model        | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) |
+| ------------ | ---------- | ---------------- | ----------------- | -------- |
+| **gpt-4o** ✓ | 87.5 / 100 | 621              | 58                | 1,763    |
+| gpt-4.1      | 87.5 / 100 | 621              | 63                | 1,855    |
+| gpt-4.1-mini | 87.5 / 100 | 621              | 58                | 2,107    |
+| gpt-5.2      | 87.5 / 100 | 619              | 94                | 2,815    |
+| gpt-5.4      | 87.5 / 100 | 619              | 112               | 3,043    |
+| gpt-5-mini   | 87.5 / 100 | 619              | 192               | 4,555    |
+| gpt-5        | 87.5 / 100 | 619              | 266               | 6,190    |
+| gpt-4o-mini  | 82.8 / 100 | 621              | 58                | 2,289    |
 
 ---
 
@@ -198,11 +198,11 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 1. **guardrailCheck is a solved problem** — 6 of 8 models hit 100.0. Chosen `gpt-5.4` for its tight P99 tail (2,230 ms vs 3,392 ms for next-best `gpt-4.1-mini`), which matters for production p99 SLAs.
 
-2. **mealAnalysis is the accuracy and latency bottleneck** — lowest scores (67–81) and highest latency. `gpt-5.x` models produce massive output tokens (up to 4,789 avg) with P50 latencies 4–20× higher than `gpt-4.1`, yielding *worse* scores. `gpt-4.1` is the clear winner.
+2. **mealAnalysis is the accuracy and latency bottleneck** — lowest scores (67–84) and highest latency. `gpt-5.x` models produce excessive output tokens (up to 1,432 avg) with P50 latencies 4–20× higher than `gpt-4.1`, yielding _worse_ scores. `gpt-4.1` is the clear winner.
 
-3. **ingredients accuracy (45.2) is the primary accuracy gap** — recommendation (80.6), macros (77.2), and text quality (95.6) are strong. Ingredient name normalization and impact classification are the next improvement target.
+3. **ingredients accuracy (58.2) is the primary accuracy gap** — recommendation (81.9), macros (78.8), and text quality (97.2) are strong. Ingredient name normalization and impact classification are the next improvement target.
 
-4. **safetyChecks is efficient and consistent** — 7 of 8 models tie at 87.5. `gpt-4o` chosen for lowest P50 (913 ms). The remaining 12.5-point gap is consistent across models, pointing to prompt-level ambiguity in edge cases rather than model capability.
+4. **safetyChecks is efficient and consistent** — 7 of 8 models tie at 87.5. `gpt-4o` chosen for lowest P50 (1,763 ms). The remaining 12.5-point gap is consistent across models, pointing to prompt-level ambiguity in edge cases rather than model capability.
 
 5. **Parallel mode reduces P50 by 1,716 ms (26%)** — from 6,703 ms to 4,987 ms — with no accuracy trade-off (both modes score 71.5/72 on the integration eval). The P75 and P95 gains are larger still (33% and 28%), meaning tail latency improves disproportionately. The pipeline short-circuit also means non-food images incur near-zero extra cost.
 
@@ -228,24 +228,24 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 **Changes made:**
 
 - Dropped `gpt-5-nano`, `gpt-4.1-nano`, `o4-mini` from all eval configs — narrowed model matrix from 11 → 8
-- Prompt improvements across all three agents
+- Prompt improvements across all three agents. View [commit 3bcb472](https://github.com/arvindrk/meal-analysis-agents/commit/3bcb472ae9c32072b93bbed562d96086dfec0307) for prompt updates
 - `temperature: 0` set for non-gpt-5 models for deterministic structured output
 - `detail: high` for mealAnalysis image input
 - Safety over-flagging fix applied to safetyChecks prompt
 
 **Results:**
 
-| Metric | v0 | v1 | Δ |
-|---|---|---|---|
-| Composite | 87.8 | 86.8 | −1.0 |
-| P50 (ms) | 6,321 | 5,977 | −344 (−5%) |
-| guardrailCheck top score | 98.6 | **100.0** | +1.4 |
-| Models at guardrail 100.0 | 0 | **6** | +6 |
-| safetyChecks models at 87.5 | 3 | **7** | +4 |
-| `gpt-4.1-mini` safety score | 71.9 | **87.5** | +15.6 |
-| ingredients_score | 58.9 | 45.2 | −13.7 |
+| Metric                      | v0    | v1        | Δ          |
+| --------------------------- | ----- | --------- | ---------- |
+| Composite                   | 87.8  | 88.2      | +0.4       |
+| P50 (ms)                    | 6,321 | 9,798     | +3,477 (+55%) |
+| guardrailCheck top score    | 98.6  | **100.0** | +1.4       |
+| Models at guardrail 100.0   | 0     | **6**     | +6         |
+| safetyChecks models at 87.5 | 3     | **7**     | +4         |
+| `gpt-4.1-mini` safety score | 71.9  | **87.5**  | +15.6      |
+| ingredients_score           | 58.9  | 58.2      | −0.7       |
 
-guardrailCheck and safetyChecks improved significantly. mealAnalysis composite regressed slightly (83.7 → 81.2), driven by a drop in ingredients accuracy — likely a side effect of prompt changes tightening output constraints. The composite net −1.0 is attributable to this regression; all other dimensions improved.
+guardrailCheck and safetyChecks improved significantly. mealAnalysis composite held roughly flat (83.7 → 83.8); ingredients accuracy barely moved (58.9 → 58.2). The composite improved +0.4 to 88.2, driven by guardrailCheck and safetyChecks gains. P50 increased (+55%) as mealAnalysis latency grew with the ‘detail: high’ image prompt change.
 
 ---
 
@@ -253,15 +253,15 @@ guardrailCheck and safetyChecks improved significantly. mealAnalysis composite r
 
 - **guardrailCheck → `gpt-5.4`:** Tied for 100.0 with five other models. Selected for best P99 tail latency (2,230 ms) — important since this gate runs on every request. `gpt-4.1-mini` ties on accuracy but has 52% higher P99.
 
-- **mealAnalysis → `gpt-4.1`:** Best composite score (81.2) by 2 points over `gpt-4o`. `gpt-5.x` models score lower (67–71) due to verbose, unconstrained structured-output behavior — high token counts without accuracy gains.
+- **mealAnalysis → `gpt-4.1`:** Best composite score (83.8) by 7.5 points over `gpt-4o`. `gpt-5.x` models score lower (67–73) due to verbose, unconstrained structured-output behavior — high token counts without accuracy gains.
 
-- **safetyChecks → `gpt-4o`:** 7 models tie at 87.5. `gpt-4o` is fastest (P50 913 ms), and since this agent runs after `mealAnalysis`, minimizing its tail latency maximises end-to-end throughput.
+- **safetyChecks → `gpt-4o`:** 7 models tie at 87.5. `gpt-4o` is fastest (P50 1,763 ms), and since this agent runs after `mealAnalysis`, minimizing its tail latency maximises end-to-end throughput.
 
 ---
 
 ## Next Steps
 
-- **Ingredients accuracy** — primary gap (45.2/100). Candidates: few-shot examples with canonical ingredient names, retrieval-augmented ingredient lookup, or a dedicated normalization step post-inference.
-- **Macros calibration** — 77.2/100 with high variance on dense/complex meals. Structured chain-of-thought or portion-estimation prompting may help.
+- **Ingredients accuracy** — primary gap (58.2/100). Candidates: few-shot examples with canonical ingredient names, retrieval-augmented ingredient lookup, or a dedicated normalization step post-inference.
+- **Macros calibration** — 78.8/100 with high variance on dense/complex meals. Structured chain-of-thought or portion-estimation prompting may help.
 - **Safety false positive rate** — 87.5 ceiling is consistent across models; audit the 12.5% miss cases to determine if they are ambiguous prompt scope or labeling issues in ground truth.
 - **Parallel vs sequential latency in production** — validate P50 improvement from parallel mode under real load; ensure `guardrailCheck` short-circuit savings offset concurrent API cost.

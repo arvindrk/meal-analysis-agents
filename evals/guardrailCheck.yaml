@@ -47,4 +47,4 @@ defaultTest:
       metric: guardrail_score
 
 evaluateOptions:
-  maxConcurrency: 72
+  maxConcurrency: 576

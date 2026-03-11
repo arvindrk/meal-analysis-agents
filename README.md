@@ -144,12 +144,11 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 ### Decision Matrix
 
-| Scenario                            | guardrailCheck                                            | mealAnalysis | safetyChecks                                                       | Composite | P50 (ms)  |
-| ----------------------------------- | --------------------------------------------------------- | ------------ | ------------------------------------------------------------------ | --------- | --------- |
-| Best accuracy                       | gpt-5.4, gpt-5.2, gpt-5-mini, gpt-4.1-mini, gpt-5, gpt-4o | gpt-4.1      | gpt-4.1, gpt-5.2, gpt-5-mini, gpt-5.4, gpt-4.1-mini, gpt-4o, gpt-5 | 88.2      | 9,798     |
-| Best value (score / 1k tokens)      | gpt-4o                                                    | gpt-4o       | gpt-4.1-mini, gpt-4o                                               | 84.4      | 11,373    |
-| Best latency                        | gpt-4.1-mini                                              | gpt-4.1      | gpt-4o                                                             | 88.2      | 9,788     |
-| **Balanced (accuracy + latency)** ✓ | **gpt-5.4**                                               | **gpt-4.1**  | **gpt-4.1**                                                        | **88.2**  | **9,798** |
+| Scenario                            | guardrailCheck | mealAnalysis | safetyChecks | Composite | P50 (ms)  |
+| ----------------------------------- | -------------- | ------------ | ------------ | --------- | --------- |
+| Best accuracy                       | gpt-5.4        | gpt-4.1      | gpt-4.1      | 88.2      | 9,798     |
+| Best latency                        | gpt-4.1-mini   | gpt-4.1      | gpt-4o       | 88.2      | 9,788     |
+| **Balanced (accuracy + latency)** ✓ | **gpt-5.4**    | **gpt-4.1**  | **gpt-4.1**  | **88.2**  | **9,798** |
 
 > Multiple models in a single cell indicate a tie at that score for that agent. The per-agent tables below list all tested models ranked by score, with the recommended model at the top.
 
@@ -193,8 +192,8 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 | Model         | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) | P99 (ms) |
 | ------------- | ---------- | ---------------- | ----------------- | -------- | -------- |
-| gpt-4o        | 87.5 / 100 | 621              | 58                | 1,763    | 4,702    |
 | **gpt-4.1** ✓ | 87.5 / 100 | 621              | 63                | 1,855    | 3,185    |
+| gpt-4o        | 87.5 / 100 | 621              | 58                | 1,763    | 4,702    |
 | gpt-4.1-mini  | 87.5 / 100 | 621              | 58                | 2,107    | 3,547    |
 | gpt-5.2       | 87.5 / 100 | 619              | 94                | 2,815    | 4,573    |
 | gpt-5.4       | 87.5 / 100 | 619              | 112               | 3,043    | 4,714    |

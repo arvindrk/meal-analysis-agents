@@ -47,10 +47,16 @@ async function runSingleAgent(
         output = await pipeline.mealAnalysisAgent.execute(entry.imagePath);
         break;
       case "safety": {
-        const mealAnalysis = readAgentOutput<MealAnalysisOutput>(
-          "mealAnalysis",
-          entry.id,
-        );
+        let mealAnalysis: MealAnalysisOutput;
+        try {
+          mealAnalysis = readAgentOutput<MealAnalysisOutput>(
+            "mealAnalysis",
+            entry.id,
+          );
+        } catch (err) {
+          console.warn(`\n[skip] ${entry.id}: ${(err as Error).message}`);
+          continue;
+        }
         output = await pipeline.safetyAgent.execute(mealAnalysis);
         break;
       }

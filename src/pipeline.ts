@@ -62,12 +62,19 @@ export class MealAnalysisPipeline {
   ): Promise<PipelineResult> {
     const guardrailCheck = await this.guardrailAgent.execute(entry.imagePath);
     if (!guardrailsPassed(guardrailCheck)) {
+      console.log(`\tguardrail: fail → short-circuited`);
       return { imageId: entry.id, guardrailCheck };
     }
+    console.log(`\tguardrail: pass`);
 
     const mealAnalysis = await this.mealAnalysisAgent.execute(entry.imagePath);
+    console.log(`\tmealAnalysis: done`);
+
     const safetyChecks = await this.safetyAgent.execute(mealAnalysis);
     const redactedMeal = applyRedaction(mealAnalysis, safetyChecks);
+    console.log(
+      `\tsafety: ${redactedMeal !== mealAnalysis ? "fail → redacted" : "pass"}`,
+    );
 
     return {
       imageId: entry.id,
@@ -84,11 +91,17 @@ export class MealAnalysisPipeline {
     ]);
 
     if (!guardrailsPassed(guardrailCheck)) {
+      console.log(`\tguardrail: fail → short-circuited`);
       return { imageId: entry.id, guardrailCheck };
     }
+    console.log(`\tguardrail: pass`);
+    console.log(`\tmealAnalysis: done`);
 
     const safetyChecks = await this.safetyAgent.execute(mealAnalysis);
     const redactedMeal = applyRedaction(mealAnalysis, safetyChecks);
+    console.log(
+      `\tsafety: ${redactedMeal !== mealAnalysis ? "fail → redacted" : "pass"}`,
+    );
 
     return {
       imageId: entry.id,
@@ -101,9 +114,12 @@ export class MealAnalysisPipeline {
   async analyzeAll(n?: number): Promise<PipelineResult[]> {
     const entries = n ? this.dataset.slice(0, n) : this.dataset;
     const results: PipelineResult[] = [];
+    console.log(
+      `\n[mode: ${this.parallel ? "parallel" : "sequential"}] running ${entries.length} entries`,
+    );
 
     for (const entry of entries) {
-      console.log(`[${results.length + 1}/${entries.length}] ${entry.id}`);
+      console.log(`\n[${results.length + 1}/${entries.length}] ${entry.id}`);
       results.push(await this.analyze(entry));
     }
 

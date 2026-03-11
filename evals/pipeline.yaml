@@ -3,7 +3,7 @@ description: "MealAnalysisPipeline — integration eval"
 
 providers:
   - id: "file://providers/pipeline.ts"
-    label: "sequential | guardrail:gpt-5.4 | meal:gpt-4.1 | safety:gpt-4o"
+    label: "sequential | guardrail:gpt-5.4 | meal:gpt-4.1 | safety:gpt-4.1"
     config:
       parallel: false
       guardrail:
@@ -11,10 +11,10 @@ providers:
       mealAnalysis:
         model: "gpt-4.1"
       safety:
-        model: "gpt-4o"
+        model: "gpt-4.1"
 
   - id: "file://providers/pipeline.ts"
-    label: "parallel | guardrail:gpt-5.4 | meal:gpt-4.1 | safety:gpt-4o"
+    label: "parallel | guardrail:gpt-5.4 | meal:gpt-4.1 | safety:gpt-4.1"
     config:
       parallel: true
       guardrail:
@@ -22,7 +22,7 @@ providers:
       mealAnalysis:
         model: "gpt-4.1"
       safety:
-        model: "gpt-4o"
+        model: "gpt-4.1"
 
 prompts:
   - "{{imageId}}"

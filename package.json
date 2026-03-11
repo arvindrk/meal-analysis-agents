@@ -16,7 +16,6 @@
     "eval:pipeline": "NODE_ENV=test NODE_OPTIONS='--import tsx/esm' promptfoo eval -c evals/pipeline.yaml --output evals/output/results/pipeline-results.json",
     "eval:score": "tsx --env-file=.env scripts/score-composite.ts",
     "eval:score:snapshot": "tsx --env-file=.env scripts/snapshot-scores.ts",
-    "eval:all": "npm run eval:generate && npm run eval:guardrail && npm run eval:analysis && npm run eval:merge-meal && npm run eval:safety && npm run eval:score",
     "eval:view": "promptfoo view",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf evals/output dist",

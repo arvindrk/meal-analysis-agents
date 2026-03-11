@@ -19,13 +19,15 @@ export default class PipelineProvider implements ApiProvider {
       mealAnalysis: resolveAgentConfig(config.mealAnalysis ?? config),
       safety: resolveAgentConfig(config.safety ?? config),
     };
+    const mode = config.parallel ? "parallel" : "sequential";
     this.pipeline = new MealAnalysisPipeline({
       loadDataset: false,
+      parallel: config.parallel ?? false,
       agents,
     });
     this.providerId =
       options.id ??
-      `pipeline/${agents.guardrail.model ?? "gpt-4.1"}-${agents.mealAnalysis.model ?? "gpt-4.1"}-${agents.safety.model ?? "gpt-4.1"}`;
+      `pipeline/${mode}/${agents.guardrail.model ?? "gpt-4.1"}-${agents.mealAnalysis.model ?? "gpt-4.1"}-${agents.safety.model ?? "gpt-4.1"}`;
   }
 
   id(): string {

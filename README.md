@@ -53,17 +53,28 @@ data/
 
 ## Running the Pipeline
 
+### Individual Agents
+
 ```bash
-npm run execute:pipeline              # sequential, n=3 samples
-npm run execute:pipeline:parallel     # parallel guardrail+analysis, n=3 samples
-npm run execute:guardrail             # guardrailCheck agent only
-npm run execute:analysis              # mealAnalysis agent only
-npm run execute:safety                # safetyChecks agent only
+npm run execute:guardrail      # guardrailCheck agent only
+npm run execute:analysis       # mealAnalysis agent only
+npm run execute:safety         # safetyChecks agent only
 ```
+
+### Full Pipeline
+
+```bash
+npm run execute:pipeline              # sequential mode
+npm run execute:pipeline:parallel     # parallel guardrail+analysis
+```
+
+> Append `-- --n <count>` to run on a smaller sample for quick validation (e.g. `npm run execute:pipeline -- --n 5`).
 
 ---
 
 ## Running Evals
+
+### Agent Evals
 
 Each step depends on the previous output. Run in order:
 
@@ -86,14 +97,30 @@ npm run eval:safety
 # 6. Compute composite scores from all three result files
 npm run eval:score
 
-# Optional: snapshot scores to evals/output/reports/
+# Snapshot scores and write a timestamped Markdown report to evals/output/reports/
 npm run eval:score:snapshot
 
-# Optional: open Promptfoo UI
+# Open Promptfoo UI to browse results
 npm run eval:view
 ```
 
 > Results are written to `evals/output/results/*.json`.
+
+### Pipeline Eval (Integration)
+
+Runs the recommended stack (`gpt-5.4` / `gpt-4.1` / `gpt-4o`) in both sequential and parallel modes against all 72 test cases. Validates that both modes produce identical correctness scores (short-circuit logic, redaction) and surfaces the latency delta between modes — confirming whether parallel scheduling is worth the added orchestration complexity in production.
+
+```bash
+npm run eval:pipeline
+```
+
+| Mode | Score | Tests Passed | P50 (ms) | P75 (ms) | P95 (ms) |
+|---|---|---|---|---|---|
+| Sequential | 71.5 / 72 (99.3%) | 71 / 72 | 6,703 | 8,069 | 9,496 |
+| Parallel | 71.5 / 72 (99.3%) | 71 / 72 | 4,987 | 5,439 | 6,858 |
+| **Δ Parallel gain** | — | — | **−1,716 (−26%)** | **−2,630 (−33%)** | **−2,638 (−28%)** |
+
+Identical scores across both modes confirm correctness parity. Parallel scheduling delivers a consistent 26–33% latency reduction with no accuracy trade-off.
 
 ---
 
@@ -103,6 +130,8 @@ npm run eval:view
 >
 > **Composite: 86.8 / 100 | End-to-end P50: 5,977 ms**
 
+Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md) | [v1 — Current](evals/output/reports/meal-eval-report-v1.md)
+
 ### Decision Matrix
 
 | Scenario | guardrailCheck | mealAnalysis | safetyChecks | Composite | P50 (ms) |
@@ -111,6 +140,8 @@ npm run eval:view
 | Best value (score / 1k tokens) | gpt-4o | gpt-4o | gpt-4.1-mini, gpt-4o | 85.8 | 7,877 |
 | Best latency | gpt-4.1-mini | gpt-4.1 | gpt-4o | 86.8 | 5,977 |
 | **Balanced (accuracy + latency)** ✓ | **gpt-5.4** | **gpt-4.1** | **gpt-4o** | **86.8** | **5,977** |
+
+> Multiple models in a single cell indicate a tie at that score for that agent. The per-agent tables below list all tested models ranked by score, with the recommended model at the top.
 
 ### guardrailCheck
 
@@ -173,7 +204,7 @@ npm run eval:view
 
 4. **safetyChecks is efficient and consistent** — 7 of 8 models tie at 87.5. `gpt-4o` chosen for lowest P50 (913 ms). The remaining 12.5-point gap is consistent across models, pointing to prompt-level ambiguity in edge cases rather than model capability.
 
-5. **Parallel mode reduces perceived latency** — running `guardrailCheck` and `mealAnalysis` concurrently removes sequential wait time. The pipeline short-circuit also means non-food images incur near-zero extra cost.
+5. **Parallel mode reduces P50 by 1,716 ms (26%)** — from 6,703 ms to 4,987 ms — with no accuracy trade-off (both modes score 71.5/72 on the integration eval). The P75 and P95 gains are larger still (33% and 28%), meaning tail latency improves disproportionately. The pipeline short-circuit also means non-food images incur near-zero extra cost.
 
 ---
 

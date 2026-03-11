@@ -208,6 +208,47 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 ---
 
+## Iteration History
+
+### v0 — Baseline
+
+[meal-eval-report-v0](evals/output/reports/meal-eval-report-v0.md) | Composite: 87.8 / 100 | P50: 6,321 ms | 11 models tested per agent (incl. nano, o4-mini variants)
+
+**Key findings that drove Phase 1:**
+
+- guardrailCheck peaked at **98.6** — not 100; prompt ambiguity suspected on edge-case images
+- safetyChecks over-flagging on mini models: `gpt-4.1-mini` scored 71.9, `gpt-4o-mini` scored 75.0
+- Nano models (`gpt-5-nano`, `gpt-4.1-nano`) consistently poor across all agents — not worth evaluating further
+- `o4-mini` verbose and slow (144 output tokens on guardrail, 962 on meal) with no accuracy gain over cheaper models
+
+### v1 — Phase 1
+
+[meal-eval-report-v1](evals/output/reports/meal-eval-report-v1.md) | [commit 3bcb472](https://github.com/arvindrk/meal-analysis-agents/commit/3bcb472ae9c32072b93bbed562d96086dfec0307)
+
+**Changes made:**
+
+- Dropped `gpt-5-nano`, `gpt-4.1-nano`, `o4-mini` from all eval configs — narrowed model matrix from 11 → 8
+- Prompt improvements across all three agents
+- `temperature: 0` set for non-gpt-5 models for deterministic structured output
+- `detail: high` for mealAnalysis image input
+- Safety over-flagging fix applied to safetyChecks prompt
+
+**Results:**
+
+| Metric | v0 | v1 | Δ |
+|---|---|---|---|
+| Composite | 87.8 | 86.8 | −1.0 |
+| P50 (ms) | 6,321 | 5,977 | −344 (−5%) |
+| guardrailCheck top score | 98.6 | **100.0** | +1.4 |
+| Models at guardrail 100.0 | 0 | **6** | +6 |
+| safetyChecks models at 87.5 | 3 | **7** | +4 |
+| `gpt-4.1-mini` safety score | 71.9 | **87.5** | +15.6 |
+| ingredients_score | 58.9 | 45.2 | −13.7 |
+
+guardrailCheck and safetyChecks improved significantly. mealAnalysis composite regressed slightly (83.7 → 81.2), driven by a drop in ingredients accuracy — likely a side effect of prompt changes tightening output constraints. The composite net −1.0 is attributable to this regression; all other dimensions improved.
+
+---
+
 ## Model Rationale
 
 - **guardrailCheck → `gpt-5.4`:** Tied for 100.0 with five other models. Selected for best P99 tail latency (2,230 ms) — important since this gate runs on every request. `gpt-4.1-mini` ties on accuracy but has 52% higher P99.

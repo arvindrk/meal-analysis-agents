@@ -13,51 +13,51 @@
 | Best accuracy                        | gpt-5.4, gpt-5.2, gpt-5-mini, gpt-4.1-mini, gpt-5, gpt-4o | gpt-4.1      | gpt-4o, gpt-4.1, gpt-4.1-mini, gpt-5.2, gpt-5.4, gpt-5-mini, gpt-5 | 88.2/100  | 9798     |
 | Best value (score per 1k tokens)     | gpt-4o                                                    | gpt-4o       | gpt-4o, gpt-4.1-mini                                               | 84.4/100  | 11373    |
 | Best latency                         | gpt-4.1-mini                                              | gpt-4.1      | gpt-4o                                                             | 88.2/100  | 9788     |
-| **Balanced (accuracy + latency)**    | gpt-5.4                                                   | gpt-4.1      | gpt-4.1                                                            | 88.2/100  | 9798     |
-| Balanced (accuracy + latency + cost) | gpt-5.4                                                   | gpt-4.1      | gpt-4.1                                                            | 88.2/100  | 9798     |
+| **Balanced (accuracy + latency)**    | gpt-5.4                                                   | gpt-4.1      | gpt-4.1                                                            | 88.2/100  | 9890     |
+| Balanced (accuracy + latency + cost) | gpt-5.4                                                   | gpt-4.1      | gpt-4o                                                             | 88.2/100  | 9798     |
 
 ## 1.2 Recommended Architecture
 
-> **Recommended stack** — Balanced (accuracy + latency) across all three agents. Same composite as best-accuracy; guardrailCheck model chosen for P99 SLA over pure P50.
+> **Recommended stack** — Balanced (accuracy + latency) using top-score selection, with P99 tail latency as the tie-breaker for guardrailCheck and safetyChecks.
 
-| Agent              | Model   | Score     | Rationale                                                                                                          |
-| ------------------ | ------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
-| **guardrailCheck** | gpt-5.4 | 100.0/100 | Tied top accuracy; chosen for best P99 tail (2,230 ms vs 3,392 ms for gpt-4.1-mini) — critical for production SLAs |
-| **mealAnalysis**   | gpt-4.1 | 83.8/100  | Best composite for structured output (recommendation, macros, ingredients)                                         |
-| **safetyChecks**   | gpt-4.1 | 87.5/100  | Tied top score; best P99 tail latency (3,185 ms vs 4,702 ms for gpt-4o) — 32% improvement at cost of 92 ms P50     |
+| Agent              | Model   | Score     | Rationale                                                                  |
+| ------------------ | ------- | --------- | -------------------------------------------------------------------------- |
+| **guardrailCheck** | gpt-5.4 | 100.0/100 | Tied top accuracy; chosen for best P99 tail latency among top scorers      |
+| **mealAnalysis**   | gpt-4.1 | 83.8/100  | Best composite for structured output (recommendation, macros, ingredients) |
+| **safetyChecks**   | gpt-4.1 | 87.5/100  | Tied top score; chosen for best P99 tail latency among top scorers         |
 
 **Composite eval score:** 88.2/100
 
-**End-to-end latency:** P50 9798 ms | P75 11122 ms | P95 14046 ms | P99 17564 ms
+**End-to-end latency:** P50 9890 ms | P75 11289 ms | P95 13989 ms | P99 16047 ms
 
-_Key takeaway: This stack matches best-accuracy composite. guardrailCheck: gpt-5.4 over gpt-4.1-mini for 52% better P99 (2,230 ms vs 3,392 ms) at near-identical P50. safetyChecks: gpt-4.1 over gpt-4o for 32% better P99 (3,185 ms vs 4,702 ms) at cost of 92 ms P50._
+_Key takeaway: This stack preserves best-accuracy composite while optimizing production tail-latency trade-offs where the top score is tied._
 
 ### Key Observations - (Manually Added Section)
 
-1. **guardrailCheck improved** — 6 models now at **100.0** (gpt-5.4, gpt-5.2, gpt-5-mini, gpt-4.1-mini, gpt-5, gpt-4o) vs v0’s top of 98.6. gpt-5.4 chosen over gpt-4.1-mini: both tied at 100.0 but gpt-5.4 P99 is 2,230 ms vs 3,392 ms — a 52% tail improvement that matters for production SLAs.
+1. **guardrailCheck improved** — 6 models now at **100.0** (gpt-5.4, gpt-5.2, gpt-5-mini, gpt-4.1-mini, gpt-5, gpt-4o) vs v0's top of 98.6. gpt-5.4 chosen over gpt-4.1-mini: both tied at 100.0 but gpt-5.4 P99 is 2,230 ms vs 3,392 ms — a 52% tail improvement that matters for production SLAs.
 
-2. **mealAnalysis is still the bottleneck** — Lowest scores (67–84) and highest latency. ingredients_score: 58.9 → **58.2** (marginal change); recommendation and macros improved slightly. gpt-4.1 remains best for structured output.
+2. **mealAnalysis is still the bottleneck** — Lowest scores (67-84) and highest latency. ingredients_score: 58.9 -> **58.2** (marginal change); recommendation and macros improved slightly. gpt-4.1 remains best for structured output.
 
-3. **safetyChecks improved** — 7 models at **87.5** (vs 3 in v0). gpt-4.1-mini: 71.9 → 87.5; gpt-4o-mini: 75.0 → 82.8. Over-flagging fix helped. gpt-4.1 chosen over gpt-4o: 32% better P99 (3,185 ms vs 4,702 ms) at cost of 92 ms P50 — better tail behaviour for production SLAs.
+3. **safetyChecks improved** — 7 models at **87.5** (vs 3 in v0). gpt-4.1-mini: 71.9 -> 87.5; gpt-4o-mini: 75.0 -> 82.8. Over-flagging fix helped. gpt-4.1 chosen over gpt-4o: 32% better P99 (3,185 ms vs 4,702 ms) at cost of 92 ms P50 — better tail behaviour for production SLAs.
 
-4. **Composite up 0.4** — 87.8 → **88.2**, driven by guardrailCheck and safetyChecks gains. mealAnalysis composite held roughly flat (83.7 → 83.8).
+4. **Agent-level composite up 0.4** — 87.8 -> **88.2**, driven by guardrailCheck and safetyChecks gains. mealAnalysis composite held roughly flat (83.7 -> 83.8).
 
-5. **gpt-5.x on mealAnalysis** — Still high output tokens and latency (e.g. gpt-5-mini: 1,087 avg output, 26s P50). Not cost-effective for this pipeline.
+5. **Parallel mode reduces P50 by 1,829 ms (26%)** — from 7,048 ms to 5,219 ms — with no accuracy trade-off (both modes score 71.5/72 on the integration eval). The P75 and P95 gains are also substantial (30% and 28%), meaning tail latency improves disproportionately.
 
 ---
 
 ## 1.3 guardrailCheck
 
-| Model            | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) | P75 (ms) | P95 (ms) | P99 (ms) |
-| ---------------- | ---------- | ---------------- | ----------------- | -------- | -------- | -------- | -------- |
-| **gpt-4.1-mini** | 100.0/100  | 669              | 26                | 1404     | 1774     | 2304     | 3392     |
-| **gpt-5.4**      | 100.0/100  | 560              | 61                | 1414     | 1540     | 1685     | 2230     |
-| **gpt-5.2**      | 100.0/100  | 560              | 52                | 1469     | 1706     | 2202     | 3129     |
-| **gpt-4o**       | 100.0/100  | 508              | 26                | 1770     | 2065     | 2612     | 2921     |
-| **gpt-5-mini**   | 100.0/100  | 560              | 102               | 2593     | 3010     | 4187     | 5256     |
-| **gpt-5**        | 100.0/100  | 462              | 120               | 3754     | 4387     | 6175     | 10718    |
-| gpt-4.1          | 98.6/100   | 508              | 29                | 1621     | 2065     | 2373     | 3414     |
-| gpt-4o-mini      | 97.2/100   | 8753             | 26                | 1661     | 1970     | 2820     | 4531     |
+| Model        | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) | P75 (ms) | P95 (ms) | P99 (ms) |
+| ------------ | ---------- | ---------------- | ----------------- | -------- | -------- | -------- | -------- |
+| **gpt-5.4**  | 100.0/100  | 560              | 61                | 1414     | 1540     | 1685     | 2230     |
+| gpt-4.1-mini | 100.0/100  | 669              | 26                | 1404     | 1774     | 2304     | 3392     |
+| gpt-5.2      | 100.0/100  | 560              | 52                | 1469     | 1706     | 2202     | 3129     |
+| gpt-4o       | 100.0/100  | 508              | 26                | 1770     | 2065     | 2612     | 2921     |
+| gpt-5-mini   | 100.0/100  | 560              | 102               | 2593     | 3010     | 4187     | 5256     |
+| gpt-5        | 100.0/100  | 462              | 120               | 3754     | 4387     | 6175     | 10718    |
+| gpt-4.1      | 98.6/100   | 508              | 29                | 1621     | 2065     | 2373     | 3414     |
+| gpt-4o-mini  | 97.2/100   | 8753             | 26                | 1661     | 1970     | 2820     | 4531     |
 
 ## 1.4 mealAnalysis (weighted composite)
 
@@ -82,13 +82,13 @@ _Key takeaway: This stack matches best-accuracy composite. guardrailCheck: gpt-5
 
 ## 1.5 safetyChecks
 
-| Model            | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) | P75 (ms) | P95 (ms) | P99 (ms) |
-| ---------------- | ---------- | ---------------- | ----------------- | -------- | -------- | -------- | -------- |
-| **gpt-4o**       | 87.5/100   | 621              | 58                | 1763     | 2061     | 2831     | 4702     |
-| **gpt-4.1**      | 87.5/100   | 621              | 63                | 1855     | 2228     | 2774     | 3185     |
-| **gpt-4.1-mini** | 87.5/100   | 621              | 58                | 2107     | 2515     | 3008     | 3547     |
-| **gpt-5.2**      | 87.5/100   | 619              | 94                | 2815     | 3208     | 4092     | 4573     |
-| **gpt-5.4**      | 87.5/100   | 619              | 112               | 3043     | 3317     | 3891     | 4714     |
-| **gpt-5-mini**   | 87.5/100   | 619              | 192               | 4555     | 5209     | 6623     | 6940     |
-| **gpt-5**        | 87.5/100   | 619              | 266               | 6190     | 7397     | 8350     | 11450    |
-| gpt-4o-mini      | 82.8/100   | 621              | 58                | 2289     | 2638     | 3527     | 6245     |
+| Model        | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) | P75 (ms) | P95 (ms) | P99 (ms) |
+| ------------ | ---------- | ---------------- | ----------------- | -------- | -------- | -------- | -------- |
+| **gpt-4.1**  | 87.5/100   | 621              | 63                | 1855     | 2228     | 2774     | 3185     |
+| gpt-4o       | 87.5/100   | 621              | 58                | 1763     | 2061     | 2831     | 4702     |
+| gpt-4.1-mini | 87.5/100   | 621              | 58                | 2107     | 2515     | 3008     | 3547     |
+| gpt-5.2      | 87.5/100   | 619              | 94                | 2815     | 3208     | 4092     | 4573     |
+| gpt-5.4      | 87.5/100   | 619              | 112               | 3043     | 3317     | 3891     | 4714     |
+| gpt-5-mini   | 87.5/100   | 619              | 192               | 4555     | 5209     | 6623     | 6940     |
+| gpt-5        | 87.5/100   | 619              | 266               | 6190     | 7397     | 8350     | 11450    |
+| gpt-4o-mini  | 82.8/100   | 621              | 58                | 2289     | 2638     | 3527     | 6245     |

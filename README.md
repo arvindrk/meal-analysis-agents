@@ -6,7 +6,7 @@ Three-agent AI pipeline for glycemic meal analysis. A meal image enters as base6
 
 ## Architecture
 
-![Agent Pipeline Architecture](architechture.png)
+![Agent Pipeline Architecture](architecture.png)
 
 The pipeline runs in two modes:
 
@@ -116,11 +116,11 @@ npm run eval:pipeline
 
 | Mode                | Score             | Tests Passed | P50 (ms)          | P75 (ms)          | P95 (ms)          |
 | ------------------- | ----------------- | ------------ | ----------------- | ----------------- | ----------------- |
-| Sequential          | 71.5 / 72 (99.3%) | 71 / 72      | 6,703             | 8,069             | 9,496             |
-| Parallel            | 71.5 / 72 (99.3%) | 71 / 72      | 4,987             | 5,439             | 6,858             |
-| **Δ Parallel gain** | —                 | —            | **−1,716 (−26%)** | **−2,630 (−33%)** | **−2,638 (−28%)** |
+| Sequential          | 71.5 / 72 (99.3%) | 71 / 72      | 7,048             | 8,217             | 10,639            |
+| Parallel            | 71.5 / 72 (99.3%) | 71 / 72      | 5,219             | 5,781             | 7,703             |
+| **Δ Parallel gain** | —                 | —            | **−1,829 (−26%)** | **−2,436 (−30%)** | **−2,936 (−28%)** |
 
-Identical scores across both modes confirm correctness parity. Parallel scheduling delivers a consistent 26–33% latency reduction with no accuracy trade-off.
+Identical scores across both modes confirm correctness parity. Parallel scheduling reduces measured end-to-end latency by 26% at P50, 30% at P75, and 28% at P95 with no accuracy trade-off.
 
 ---
 
@@ -136,21 +136,27 @@ Identical scores across both modes confirm correctness parity. Parallel scheduli
 
 ## Evaluation Results
 
-> **Recommended stack: guardrailCheck → `gpt-5.4` | mealAnalysis → `gpt-4.1` | safetyChecks → `gpt-4.1`**
+> **Recommended architecture: parallel `guardrailCheck` → `gpt-5.4` | `mealAnalysis` → `gpt-4.1` | `safetyChecks` → `gpt-4.1`**
 >
-> **Composite: 88.2 / 100 | End-to-end P50: 9,798 ms**
+> **Measured end-to-end latency:** P50 `5,219 ms` | P75 `5,781 ms` | P95 `7,703 ms`
+>
+> **Integration eval:** `71.5 / 72 (99.3%)`
+>
+> **Agent-level composite:** `88.2 / 100`
+>
+> **Safety eval coverage:** `64 / 72` labeled cases
 
 Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md) | [v1 — Current](evals/output/reports/meal-eval-report-v1.md)
 
 ### Decision Matrix
 
-| Scenario                            | guardrailCheck | mealAnalysis | safetyChecks | Composite | P50 (ms)  |
-| ----------------------------------- | -------------- | ------------ | ------------ | --------- | --------- |
-| Best accuracy                       | gpt-5.4        | gpt-4.1      | gpt-4.1      | 88.2      | 9,798     |
-| Best latency                        | gpt-4.1-mini   | gpt-4.1      | gpt-4o       | 88.2      | 9,788     |
-| **Balanced (accuracy + latency)** ✓ | **gpt-5.4**    | **gpt-4.1**  | **gpt-4.1**  | **88.2**  | **9,798** |
+| Scenario                            | guardrailCheck | mealAnalysis | safetyChecks | Composite | Estimated P50 (ms) |
+| ----------------------------------- | -------------- | ------------ | ------------ | --------- | ------------------ |
+| Best accuracy                       | gpt-5.4        | gpt-4.1      | gpt-4.1      | 88.2      | 9,890              |
+| Best latency                        | gpt-4.1-mini   | gpt-4.1      | gpt-4o       | 88.2      | 9,788              |
+| **Balanced (accuracy + latency)** ✓ | **gpt-5.4**    | **gpt-4.1**  | **gpt-4.1**  | **88.2**  | **9,890**          |
 
-> Multiple models in a single cell indicate a tie at that score for that agent. The per-agent tables below list all tested models ranked by score, with the recommended model at the top.
+> The decision matrix is derived from agent-level evals, and `Estimated P50` is the sum of per-agent P50s rather than measured pipeline latency. The measured end-to-end latency for the recommended parallel architecture is reported above from `eval:pipeline`.
 
 ### guardrailCheck
 
@@ -203,6 +209,8 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 | gpt-5         | 87.5 / 100 | 619              | 266               | 6,190    | 11,450   |
 | gpt-4o-mini   | 82.8 / 100 | 621              | 58                | 2,289    | 6,245    |
 
+> Safety eval scores are based on the `64 / 72` images with ground-truth `safetyChecks` labels.
+
 ---
 
 ## Key Observations
@@ -213,9 +221,9 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 3. **ingredients accuracy (58.2) is the primary accuracy gap** — recommendation (81.9), macros (78.8), and text quality (97.2) are strong. Ingredient name normalization and impact classification are the next improvement target.
 
-4. **safetyChecks is efficient and consistent** — 7 of 8 models tie at 87.5. `gpt-4.1` chosen over `gpt-4o` for 32% better P99 tail latency (3,185 ms vs 4,702 ms) at the cost of 92 ms P50 — the better production trade-off. The remaining 12.5-point gap is consistent across models, pointing to prompt-level ambiguity in edge cases rather than model capability.
+4. **safetyChecks is efficient and consistent** — 7 of 8 models tie at 87.5 on the `64` labeled safety cases. `gpt-4.1` chosen over `gpt-4o` for 32% better P99 tail latency (3,185 ms vs 4,702 ms) at the cost of 92 ms P50 — the better production trade-off. The remaining 12.5-point gap is consistent across models, pointing to prompt-level ambiguity in edge cases rather than model capability.
 
-5. **Parallel mode reduces P50 by 1,716 ms (26%)** — from 6,703 ms to 4,987 ms — with no accuracy trade-off (both modes score 71.5/72 on the integration eval). The P75 and P95 gains are larger still (33% and 28%), meaning tail latency improves disproportionately. The pipeline short-circuit also means non-food images incur near-zero extra cost.
+5. **Parallel mode reduces P50 by 1,829 ms (26%)** — from 7,048 ms to 5,219 ms — with no accuracy trade-off (both modes score 71.5/72 on the integration eval). The P75 and P95 gains are also substantial (30% and 28%), meaning tail latency improves disproportionately. The pipeline short-circuit also means non-food images incur near-zero extra cost.
 
 ---
 

@@ -51,22 +51,37 @@ export class MealAnalysisPipeline {
     this.safetyAgent = new SafetyChecksAgent(agentConfigs.safety);
   }
 
-  async analyze(entry: DatasetEntry): Promise<PipelineResult> {
-    let guardrailCheck: GuardrailCheckOutput;
-    let mealAnalysis: MealAnalysisOutput;
+  analyze(entry: DatasetEntry): Promise<PipelineResult> {
+    return this.parallel
+      ? this.analyzeParallel(entry)
+      : this.analyzeSequential(entry);
+  }
 
-    if (this.parallel) {
-      [guardrailCheck, mealAnalysis] = await Promise.all([
-        this.guardrailAgent.execute(entry.imagePath),
-        this.mealAnalysisAgent.execute(entry.imagePath),
-      ]);
-    } else {
-      guardrailCheck = await this.guardrailAgent.execute(entry.imagePath);
-      if (!guardrailsPassed(guardrailCheck)) {
-        return { imageId: entry.id, guardrailCheck };
-      }
-      mealAnalysis = await this.mealAnalysisAgent.execute(entry.imagePath);
+  private async analyzeSequential(
+    entry: DatasetEntry,
+  ): Promise<PipelineResult> {
+    const guardrailCheck = await this.guardrailAgent.execute(entry.imagePath);
+    if (!guardrailsPassed(guardrailCheck)) {
+      return { imageId: entry.id, guardrailCheck };
     }
+
+    const mealAnalysis = await this.mealAnalysisAgent.execute(entry.imagePath);
+    const safetyChecks = await this.safetyAgent.execute(mealAnalysis);
+    const redactedMeal = applyRedaction(mealAnalysis, safetyChecks);
+
+    return {
+      imageId: entry.id,
+      guardrailCheck,
+      mealAnalysis: redactedMeal,
+      safetyChecks,
+    };
+  }
+
+  private async analyzeParallel(entry: DatasetEntry): Promise<PipelineResult> {
+    const [guardrailCheck, mealAnalysis] = await Promise.all([
+      this.guardrailAgent.execute(entry.imagePath),
+      this.mealAnalysisAgent.execute(entry.imagePath),
+    ]);
 
     if (!guardrailsPassed(guardrailCheck)) {
       return { imageId: entry.id, guardrailCheck };

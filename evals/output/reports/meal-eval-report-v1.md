@@ -13,24 +13,24 @@
 | Best accuracy                        | gpt-5.4, gpt-5.2, gpt-5-mini, gpt-4.1-mini, gpt-5, gpt-4o | gpt-4.1      | gpt-4o, gpt-4.1, gpt-4.1-mini, gpt-5.2, gpt-5.4, gpt-5-mini, gpt-5 | 88.2/100  | 9798     |
 | Best value (score per 1k tokens)     | gpt-4o                                                    | gpt-4o       | gpt-4o, gpt-4.1-mini                                               | 84.4/100  | 11373    |
 | Best latency                         | gpt-4.1-mini                                              | gpt-4.1      | gpt-4o                                                             | 88.2/100  | 9788     |
-| **Balanced (accuracy + latency)**    | gpt-5.4                                                   | gpt-4.1      | gpt-4o                                                             | 88.2/100  | 9798     |
-| Balanced (accuracy + latency + cost) | gpt-5.4                                                   | gpt-4.1      | gpt-4o                                                             | 88.2/100  | 9798     |
+| **Balanced (accuracy + latency)**    | gpt-5.4                                                   | gpt-4.1      | gpt-4.1                                                            | 88.2/100  | 9798     |
+| Balanced (accuracy + latency + cost) | gpt-5.4                                                   | gpt-4.1      | gpt-4.1                                                            | 88.2/100  | 9798     |
 
 ## 1.2 Recommended Architecture
 
 > **Recommended stack** — Balanced (accuracy + latency) across all three agents. Same composite as best-accuracy; guardrailCheck model chosen for P99 SLA over pure P50.
 
-| Agent              | Model        | Score     | Rationale                                                                  |
-| ------------------ | ------------ | --------- | -------------------------------------------------------------------------- |
-| **guardrailCheck** | gpt-5.4      | 100.0/100 | Tied top accuracy; chosen for best P99 tail (2,230 ms vs 3,392 ms for gpt-4.1-mini) — critical for production SLAs |
-| **mealAnalysis**   | gpt-4.1      | 83.8/100  | Best composite for structured output (recommendation, macros, ingredients) |
-| **safetyChecks**   | gpt-4o       | 87.5/100  | Tied top score with lowest P50 among top scorers                           |
+| Agent              | Model   | Score     | Rationale                                                                                                          |
+| ------------------ | ------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
+| **guardrailCheck** | gpt-5.4 | 100.0/100 | Tied top accuracy; chosen for best P99 tail (2,230 ms vs 3,392 ms for gpt-4.1-mini) — critical for production SLAs |
+| **mealAnalysis**   | gpt-4.1 | 83.8/100  | Best composite for structured output (recommendation, macros, ingredients)                                         |
+| **safetyChecks**   | gpt-4.1 | 87.5/100  | Tied top score; best P99 tail latency (3,185 ms vs 4,702 ms for gpt-4o) — 32% improvement at cost of 92 ms P50     |
 
 **Composite eval score:** 88.2/100
 
 **End-to-end latency:** P50 9798 ms | P75 11122 ms | P95 14046 ms | P99 17564 ms
 
-_Key takeaway: This stack matches best-accuracy composite. guardrailCheck: gpt-5.4 over gpt-4.1-mini for 52% better P99 (2,230 ms vs 3,392 ms) at near-identical P50._
+_Key takeaway: This stack matches best-accuracy composite. guardrailCheck: gpt-5.4 over gpt-4.1-mini for 52% better P99 (2,230 ms vs 3,392 ms) at near-identical P50. safetyChecks: gpt-4.1 over gpt-4o for 32% better P99 (3,185 ms vs 4,702 ms) at cost of 92 ms P50._
 
 ### Key Observations - (Manually Added Section)
 
@@ -38,7 +38,7 @@ _Key takeaway: This stack matches best-accuracy composite. guardrailCheck: gpt-5
 
 2. **mealAnalysis is still the bottleneck** — Lowest scores (67–84) and highest latency. ingredients_score: 58.9 → **58.2** (marginal change); recommendation and macros improved slightly. gpt-4.1 remains best for structured output.
 
-3. **safetyChecks improved** — 7 models at **87.5** (vs 3 in v0). gpt-4.1-mini: 71.9 → 87.5; gpt-4o-mini: 75.0 → 82.8. Over-flagging fix helped.
+3. **safetyChecks improved** — 7 models at **87.5** (vs 3 in v0). gpt-4.1-mini: 71.9 → 87.5; gpt-4o-mini: 75.0 → 82.8. Over-flagging fix helped. gpt-4.1 chosen over gpt-4o: 32% better P99 (3,185 ms vs 4,702 ms) at cost of 92 ms P50 — better tail behaviour for production SLAs.
 
 4. **Composite up 0.4** — 87.8 → **88.2**, driven by guardrailCheck and safetyChecks gains. mealAnalysis composite held roughly flat (83.7 → 83.8).
 

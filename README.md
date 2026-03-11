@@ -108,7 +108,7 @@ npm run eval:view
 
 ### Pipeline Eval (Integration)
 
-Runs the recommended stack (`gpt-5.4` / `gpt-4.1` / `gpt-4o`) in both sequential and parallel modes against all 72 test cases. Validates that both modes produce identical correctness scores (short-circuit logic, redaction) and surfaces the latency delta between modes — confirming whether parallel scheduling is worth the added orchestration complexity in production.
+Runs the recommended stack (`gpt-5.4` / `gpt-4.1` / `gpt-4.1`) in both sequential and parallel modes against all 72 test cases. Validates that both modes produce identical correctness scores (short-circuit logic, redaction) and surfaces the latency delta between modes — confirming whether parallel scheduling is worth the added orchestration complexity in production.
 
 ```bash
 npm run eval:pipeline
@@ -126,7 +126,7 @@ Identical scores across both modes confirm correctness parity. Parallel scheduli
 
 ## Evaluation Results
 
-> **Recommended stack: guardrailCheck → `gpt-5.4` | mealAnalysis → `gpt-4.1` | safetyChecks → `gpt-4o`**
+> **Recommended stack: guardrailCheck → `gpt-5.4` | mealAnalysis → `gpt-4.1` | safetyChecks → `gpt-4.1`**
 >
 > **Composite: 88.2 / 100 | End-to-end P50: 9,798 ms**
 
@@ -139,7 +139,7 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 | Best accuracy                       | gpt-5.4, gpt-5.2, gpt-5-mini, gpt-4.1-mini, gpt-5, gpt-4o | gpt-4.1      | gpt-4.1, gpt-5.2, gpt-5-mini, gpt-5.4, gpt-4.1-mini, gpt-4o, gpt-5 | 88.2      | 9,798     |
 | Best value (score / 1k tokens)      | gpt-4o                                                    | gpt-4o       | gpt-4.1-mini, gpt-4o                                               | 84.4      | 11,373    |
 | Best latency                        | gpt-4.1-mini                                              | gpt-4.1      | gpt-4o                                                             | 88.2      | 9,788     |
-| **Balanced (accuracy + latency)** ✓ | **gpt-5.4**                                               | **gpt-4.1**  | **gpt-4o**                                                         | **88.2**  | **9,798** |
+| **Balanced (accuracy + latency)** ✓ | **gpt-5.4**                                               | **gpt-4.1**  | **gpt-4.1**                                                        | **88.2**  | **9,798** |
 
 > Multiple models in a single cell indicate a tie at that score for that agent. The per-agent tables below list all tested models ranked by score, with the recommended model at the top.
 
@@ -183,8 +183,8 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 | Model        | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) |
 | ------------ | ---------- | ---------------- | ----------------- | -------- |
-| **gpt-4o** ✓ | 87.5 / 100 | 621              | 58                | 1,763    |
-| gpt-4.1      | 87.5 / 100 | 621              | 63                | 1,855    |
+| gpt-4o           | 87.5 / 100 | 621              | 58                | 1,763    |
+| **gpt-4.1** ✓    | 87.5 / 100 | 621              | 63                | 1,855    |
 | gpt-4.1-mini | 87.5 / 100 | 621              | 58                | 2,107    |
 | gpt-5.2      | 87.5 / 100 | 619              | 94                | 2,815    |
 | gpt-5.4      | 87.5 / 100 | 619              | 112               | 3,043    |
@@ -202,7 +202,7 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 3. **ingredients accuracy (58.2) is the primary accuracy gap** — recommendation (81.9), macros (78.8), and text quality (97.2) are strong. Ingredient name normalization and impact classification are the next improvement target.
 
-4. **safetyChecks is efficient and consistent** — 7 of 8 models tie at 87.5. `gpt-4o` chosen for lowest P50 (1,763 ms). The remaining 12.5-point gap is consistent across models, pointing to prompt-level ambiguity in edge cases rather than model capability.
+4. **safetyChecks is efficient and consistent** — 7 of 8 models tie at 87.5. `gpt-4.1` chosen over `gpt-4o` for 32% better P99 tail latency (3,185 ms vs 4,702 ms) at the cost of 92 ms P50 — the better production trade-off. The remaining 12.5-point gap is consistent across models, pointing to prompt-level ambiguity in edge cases rather than model capability.
 
 5. **Parallel mode reduces P50 by 1,716 ms (26%)** — from 6,703 ms to 4,987 ms — with no accuracy trade-off (both modes score 71.5/72 on the integration eval). The P75 and P95 gains are larger still (33% and 28%), meaning tail latency improves disproportionately. The pipeline short-circuit also means non-food images incur near-zero extra cost.
 
@@ -255,7 +255,7 @@ guardrailCheck and safetyChecks improved significantly. mealAnalysis composite h
 
 - **mealAnalysis → `gpt-4.1`:** Best composite score (83.8) by 7.5 points over `gpt-4o`. `gpt-5.x` models score lower (67–73) due to verbose, unconstrained structured-output behavior — high token counts without accuracy gains.
 
-- **safetyChecks → `gpt-4o`:** 7 models tie at 87.5. `gpt-4o` is fastest (P50 1,763 ms), and since this agent runs after `mealAnalysis`, minimizing its tail latency maximises end-to-end throughput.
+- **safetyChecks → `gpt-4.1`:** 7 models tie at 87.5. `gpt-4.1` chosen over `gpt-4o` for 32% better P99 tail latency (3,185 ms vs 4,702 ms) at the cost of 92 ms P50. Since this agent runs last, P99 tail directly impacts end-to-end worst-case latency — making tail improvement more valuable than marginal P50 gains.
 
 ---
 

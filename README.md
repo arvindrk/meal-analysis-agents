@@ -124,6 +124,16 @@ Identical scores across both modes confirm correctness parity. Parallel scheduli
 
 ---
 
+## Model Rationale
+
+- **guardrailCheck → `gpt-5.4`:** Tied for 100.0 with five other models. Selected for best P99 tail latency (2,230 ms) — important since this gate runs on every request. `gpt-4.1-mini` ties on accuracy but has 52% higher P99.
+
+- **mealAnalysis → `gpt-4.1`:** Best composite score (83.8) by 7.5 points over `gpt-4o`. `gpt-5.x` models score lower (67–73) due to verbose, unconstrained structured-output behavior — high token counts without accuracy gains.
+
+- **safetyChecks → `gpt-4.1`:** 7 models tie at 87.5. `gpt-4.1` chosen over `gpt-4o` for 32% better P99 tail latency (3,185 ms vs 4,702 ms) at the cost of 92 ms P50. Since this agent runs last, P99 tail directly impacts end-to-end worst-case latency — making tail improvement more valuable than marginal P50 gains.
+
+---
+
 ## Evaluation Results
 
 > **Recommended stack: guardrailCheck → `gpt-5.4` | mealAnalysis → `gpt-4.1` | safetyChecks → `gpt-4.1`**
@@ -208,6 +218,14 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 ---
 
+## Known Gaps & Open Questions
+
+- **Ingredients accuracy (58.2) is the primary eval gap** — few-shot examples would help calibrate name normalization and glycemic impact classification. The current prompt treats all ingredients generically; domain-specific examples (e.g. canonical ingredient names with known glycemic impact) would likely close most of this gap. Risk: overfitting the prompt to the training set; needs held-out validation before shipping.
+- **safetyChecks hard ceiling at 87.5 across all models** — root cause is `no_carb_content`: the model flags any carb mention regardless of context or quantity. This is a prompt precision problem, not a model capability limit. The fix is tightening the property definition — distinguishing incidental carb references from actionable carb content.
+- **8 ground truth records are missing safetyChecks labels** — skipped silently by the pipeline today, which slightly reduces the effective eval sample size. Backfill strategy TBD; until resolved, the 87.5 ceiling may be marginally understated.
+
+---
+
 ## Iteration History
 
 ### v0 — Baseline
@@ -245,16 +263,6 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 | ingredients_score           | 58.9 | 58.2      | −0.7  |
 
 guardrailCheck and safetyChecks improved significantly. mealAnalysis composite held roughly flat (83.7 → 83.8); ingredients accuracy barely moved (58.9 → 58.2). The composite improved +0.4 to 88.2, driven by guardrailCheck and safetyChecks gains. P50 increased (+55%) as mealAnalysis latency grew with the ‘detail: high’ image prompt change.
-
----
-
-## Model Rationale
-
-- **guardrailCheck → `gpt-5.4`:** Tied for 100.0 with five other models. Selected for best P99 tail latency (2,230 ms) — important since this gate runs on every request. `gpt-4.1-mini` ties on accuracy but has 52% higher P99.
-
-- **mealAnalysis → `gpt-4.1`:** Best composite score (83.8) by 7.5 points over `gpt-4o`. `gpt-5.x` models score lower (67–73) due to verbose, unconstrained structured-output behavior — high token counts without accuracy gains.
-
-- **safetyChecks → `gpt-4.1`:** 7 models tie at 87.5. `gpt-4.1` chosen over `gpt-4o` for 32% better P99 tail latency (3,185 ms vs 4,702 ms) at the cost of 92 ms P50. Since this agent runs last, P99 tail directly impacts end-to-end worst-case latency — making tail improvement more valuable than marginal P50 gains.
 
 ---
 

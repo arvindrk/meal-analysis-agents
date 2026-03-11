@@ -8,7 +8,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { EVALS_REPORTS_DIR, ROOT } from "./constants";
 
-const ANSI_REGEX = /\x1b\[[0-9;]*m/g;
+const ANSI_REGEX = /\x1b\[[0-9;]*m/g; // eslint-disable-line no-control-regex
 
 function stripAnsi(s: string): string {
   return s.replace(ANSI_REGEX, "");

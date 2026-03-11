@@ -145,29 +145,29 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 ### guardrailCheck
 
-| Model         | Eval Score  | Avg Input Tokens | Avg Output Tokens | P50 (ms) |
-| ------------- | ----------- | ---------------- | ----------------- | -------- |
-| **gpt-5.4** ✓ | 100.0 / 100 | 560              | 61                | 1,414    |
-| gpt-4.1-mini  | 100.0 / 100 | 669              | 26                | 1,404    |
-| gpt-5.2       | 100.0 / 100 | 560              | 52                | 1,469    |
-| gpt-4o        | 100.0 / 100 | 508              | 26                | 1,770    |
-| gpt-5-mini    | 100.0 / 100 | 560              | 102               | 2,593    |
-| gpt-5         | 100.0 / 100 | 462              | 120               | 3,754    |
-| gpt-4.1       | 98.6 / 100  | 508              | 29                | 1,621    |
-| gpt-4o-mini   | 97.2 / 100  | 8,753            | 26                | 1,661    |
+| Model         | Eval Score  | Avg Input Tokens | Avg Output Tokens | P50 (ms) | P99 (ms) |
+| ------------- | ----------- | ---------------- | ----------------- | -------- | -------- |
+| **gpt-5.4** ✓ | 100.0 / 100 | 560              | 61                | 1,414    | 2,230    |
+| gpt-4.1-mini  | 100.0 / 100 | 669              | 26                | 1,404    | 3,392    |
+| gpt-5.2       | 100.0 / 100 | 560              | 52                | 1,469    | 3,129    |
+| gpt-4o        | 100.0 / 100 | 508              | 26                | 1,770    | 2,921    |
+| gpt-5-mini    | 100.0 / 100 | 560              | 102               | 2,593    | 5,256    |
+| gpt-5         | 100.0 / 100 | 462              | 120               | 3,754    | 10,718   |
+| gpt-4.1       | 98.6 / 100  | 508              | 29                | 1,621    | 3,414    |
+| gpt-4o-mini   | 97.2 / 100  | 8,753            | 26                | 1,661    | 4,531    |
 
 ### mealAnalysis
 
-| Model         | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) |
-| ------------- | ---------- | ---------------- | ----------------- | -------- |
-| **gpt-4.1** ✓ | 83.8 / 100 | 655              | 220               | 6,621    |
-| gpt-4o-mini   | 77.1 / 100 | 8,900            | 138               | 7,311    |
-| gpt-4.1-mini  | 76.5 / 100 | 816              | 153               | 6,844    |
-| gpt-4o        | 76.3 / 100 | 655              | 129               | 7,840    |
-| gpt-5.4       | 73.0 / 100 | 707              | 446               | 11,009   |
-| gpt-5.2       | 70.7 / 100 | 707              | 390               | 10,779   |
-| gpt-5-mini    | 70.0 / 100 | 707              | 1,087             | 25,876   |
-| gpt-5         | 67.2 / 100 | 609              | 1,432             | 26,663   |
+| Model         | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) | P99 (ms) |
+| ------------- | ---------- | ---------------- | ----------------- | -------- | -------- |
+| **gpt-4.1** ✓ | 83.8 / 100 | 655              | 220               | 6,621    | 10,632   |
+| gpt-4o-mini   | 77.1 / 100 | 8,900            | 138               | 7,311    | 11,614   |
+| gpt-4.1-mini  | 76.5 / 100 | 816              | 153               | 6,844    | 10,161   |
+| gpt-4o        | 76.3 / 100 | 655              | 129               | 7,840    | 11,851   |
+| gpt-5.4       | 73.0 / 100 | 707              | 446               | 11,009   | 22,486   |
+| gpt-5.2       | 70.7 / 100 | 707              | 390               | 10,779   | 16,244   |
+| gpt-5-mini    | 70.0 / 100 | 707              | 1,087             | 25,876   | 45,957   |
+| gpt-5         | 67.2 / 100 | 609              | 1,432             | 26,663   | 58,359   |
 
 **Component breakdown (gpt-4.1):**
 
@@ -181,16 +181,16 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 ### safetyChecks
 
-| Model        | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) |
-| ------------ | ---------- | ---------------- | ----------------- | -------- |
-| gpt-4o           | 87.5 / 100 | 621              | 58                | 1,763    |
-| **gpt-4.1** ✓    | 87.5 / 100 | 621              | 63                | 1,855    |
-| gpt-4.1-mini | 87.5 / 100 | 621              | 58                | 2,107    |
-| gpt-5.2      | 87.5 / 100 | 619              | 94                | 2,815    |
-| gpt-5.4      | 87.5 / 100 | 619              | 112               | 3,043    |
-| gpt-5-mini   | 87.5 / 100 | 619              | 192               | 4,555    |
-| gpt-5        | 87.5 / 100 | 619              | 266               | 6,190    |
-| gpt-4o-mini  | 82.8 / 100 | 621              | 58                | 2,289    |
+| Model         | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) | P99 (ms) |
+| ------------- | ---------- | ---------------- | ----------------- | -------- | -------- |
+| gpt-4o        | 87.5 / 100 | 621              | 58                | 1,763    | 4,702    |
+| **gpt-4.1** ✓ | 87.5 / 100 | 621              | 63                | 1,855    | 3,185    |
+| gpt-4.1-mini  | 87.5 / 100 | 621              | 58                | 2,107    | 3,547    |
+| gpt-5.2       | 87.5 / 100 | 619              | 94                | 2,815    | 4,573    |
+| gpt-5.4       | 87.5 / 100 | 619              | 112               | 3,043    | 4,714    |
+| gpt-5-mini    | 87.5 / 100 | 619              | 192               | 4,555    | 6,940    |
+| gpt-5         | 87.5 / 100 | 619              | 266               | 6,190    | 11,450   |
+| gpt-4o-mini   | 82.8 / 100 | 621              | 58                | 2,289    | 6,245    |
 
 ---
 
@@ -235,15 +235,14 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 
 **Results:**
 
-| Metric                      | v0    | v1        | Δ          |
-| --------------------------- | ----- | --------- | ---------- |
-| Composite                   | 87.8  | 88.2      | +0.4       |
-| P50 (ms)                    | 6,321 | 9,798     | +3,477 (+55%) |
-| guardrailCheck top score    | 98.6  | **100.0** | +1.4       |
-| Models at guardrail 100.0   | 0     | **6**     | +6         |
-| safetyChecks models at 87.5 | 3     | **7**     | +4         |
-| `gpt-4.1-mini` safety score | 71.9  | **87.5**  | +15.6      |
-| ingredients_score           | 58.9  | 58.2      | −0.7       |
+| Metric                      | v0   | v1        | Δ     |
+| --------------------------- | ---- | --------- | ----- |
+| Composite                   | 87.8 | 88.2      | +0.4  |
+| guardrailCheck top score    | 98.6 | **100.0** | +1.4  |
+| Models at guardrail 100.0   | 0    | **6**     | +6    |
+| safetyChecks models at 87.5 | 3    | **7**     | +4    |
+| `gpt-4.1-mini` safety score | 71.9 | **87.5**  | +15.6 |
+| ingredients_score           | 58.9 | 58.2      | −0.7  |
 
 guardrailCheck and safetyChecks improved significantly. mealAnalysis composite held roughly flat (83.7 → 83.8); ingredients accuracy barely moved (58.9 → 58.2). The composite improved +0.4 to 88.2, driven by guardrailCheck and safetyChecks gains. P50 increased (+55%) as mealAnalysis latency grew with the ‘detail: high’ image prompt change.
 

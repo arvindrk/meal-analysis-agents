@@ -52,7 +52,18 @@ function scoreRedaction(
 }
 
 export default function assertPipeline(output: string, context: Ctx) {
-  const parseResult = PipelineResultSchema.safeParse(JSON.parse(output));
+  let rawParsed: unknown;
+  try {
+    rawParsed = JSON.parse(output);
+  } catch {
+    return {
+      pass: false,
+      score: 0,
+      reason: "Invalid JSON output",
+      namedScores: { short_circuit_score: 0, redaction_score: 0 },
+    };
+  }
+  const parseResult = PipelineResultSchema.safeParse(rawParsed);
   if (!parseResult.success) {
     return {
       pass: false,

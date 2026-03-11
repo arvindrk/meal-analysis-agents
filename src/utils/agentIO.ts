@@ -49,5 +49,9 @@ export function readAgentOutput<T>(
       `Missing ${agentName} output for ${id}. Run --agent ${agentName} first.`,
     );
   }
-  return JSON.parse(readFileSync(filePath, "utf-8")) as T;
+  try {
+    return JSON.parse(readFileSync(filePath, "utf-8")) as T;
+  } catch {
+    throw new Error(`Corrupt agent output file: ${filePath}`);
+  }
 }

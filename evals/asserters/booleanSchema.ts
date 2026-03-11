@@ -9,7 +9,12 @@ export function createBooleanAsserter<T extends Record<string, boolean>>(
     : null;
 
   return (output: string, context: { vars: Record<string, unknown> }) => {
-    const parsed = JSON.parse(output);
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(output);
+    } catch {
+      return { pass: false, score: 0, reason: `Invalid JSON: ${output.slice(0, 100)}` };
+    }
     const result = schema.safeParse(parsed);
     if (!result.success)
       return {

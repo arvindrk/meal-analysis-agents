@@ -44,7 +44,13 @@ function main() {
     process.exit(1);
   }
 
-  const mealRaw = JSON.parse(readFileSync(MEAL_RESULTS_PATH, "utf-8"));
+  let mealRaw: unknown;
+  try {
+    mealRaw = JSON.parse(readFileSync(MEAL_RESULTS_PATH, "utf-8"));
+  } catch {
+    console.error(`Failed to parse ${MEAL_RESULTS_PATH}: invalid JSON`);
+    process.exit(1);
+  }
   const results = extractResults(mealRaw);
 
   const byImageAndModel = new Map<string, Record<string, unknown>>();
@@ -62,9 +68,15 @@ function main() {
     }
   }
 
-  const testCases = JSON.parse(
-    readFileSync(TEST_CASES_PATH, "utf-8"),
-  ) as Array<{ vars: Record<string, unknown> }>;
+  let testCases: Array<{ vars: Record<string, unknown> }>;
+  try {
+    testCases = JSON.parse(
+      readFileSync(TEST_CASES_PATH, "utf-8"),
+    ) as Array<{ vars: Record<string, unknown> }>;
+  } catch {
+    console.error(`Failed to parse ${TEST_CASES_PATH}: invalid JSON`);
+    process.exit(1);
+  }
   const merged: typeof testCases = [];
   let skippedNoMeal = 0;
   let skippedNoSafety = 0;

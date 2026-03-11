@@ -22,7 +22,13 @@ export function loadDatasetWithStats(
 
   for (const f of files) {
     const id = basename(f, ".json");
-    const raw = JSON.parse(readFileSync(join(jsonDir, f), "utf-8"));
+    let raw: unknown;
+    try {
+      raw = JSON.parse(readFileSync(join(jsonDir, f), "utf-8"));
+    } catch {
+      console.warn(`[dataset] Skipping ${f}: invalid JSON`);
+      continue;
+    }
     const result = GroundTruthSchema.safeParse(raw);
     if (!result.success) {
       console.warn(`[dataset] Skipping ${f}: ${result.error.message}`);

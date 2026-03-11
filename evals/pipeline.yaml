@@ -36,4 +36,4 @@ defaultTest:
       metric: pipeline_score
 
 evaluateOptions:
-  maxConcurrency: 72
+  maxConcurrency: 1000

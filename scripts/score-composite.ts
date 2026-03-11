@@ -70,9 +70,13 @@ function loadResults(filename: string): EvalResult[] {
     console.warn(chalk.yellow(`  [warn] ${filename} not found — skipping`));
     return [];
   }
-  const raw = JSON.parse(readFileSync(path, "utf-8")) as
-    | PromptfooOutput
-    | EvalResult[];
+  let raw: PromptfooOutput | EvalResult[];
+  try {
+    raw = JSON.parse(readFileSync(path, "utf-8")) as PromptfooOutput | EvalResult[];
+  } catch {
+    console.warn(chalk.yellow(`  [warn] ${filename} — invalid JSON, skipping`));
+    return [];
+  }
   if (Array.isArray(raw)) return raw;
   const inner = raw.results;
   if (Array.isArray(inner)) return inner;

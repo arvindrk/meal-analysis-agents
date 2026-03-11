@@ -188,6 +188,8 @@ Detailed reports: [v0 — Baseline](evals/output/reports/meal-eval-report-v0.md)
 | recommendation (3-class)          | 81.9 / 100  | 50%                 |
 | ingredients (name + impact match) | 58.2 / 100  | 10%                 |
 
+> `text_quality` is evaluated with a single LLM-as-judge call that scores `meal_title`, `meal_description`, and `guidance_message` together on a 0–5 rubric, returning one score representing the average quality across all three fields. This score is then scaled to 0–100 in the composite calculation.
+
 ### safetyChecks
 
 | Model         | Eval Score | Avg Input Tokens | Avg Output Tokens | P50 (ms) | P99 (ms) |

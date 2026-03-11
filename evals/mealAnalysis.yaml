@@ -52,12 +52,12 @@ defaultTest:
       value: file://asserters/mealAnalysis/recommendation.ts
       metric: recommendation_score
 
-    # Weight 20% — macro MAPE score (0–100)
+    # Weight 10% (half of 20% combined macros+ingredients bucket) — macro MAPE score (0–100)
     - type: javascript
       value: file://asserters/mealAnalysis/macros.ts
       metric: macros_score
 
-    # Weight 20% — ingredient name + impact match (0–100)
+    # Weight 10% (half of 20% combined macros+ingredients bucket) — ingredient name + impact match (0–100)
     - type: javascript
       value: file://asserters/mealAnalysis/ingredients.ts
       metric: ingredients_score
